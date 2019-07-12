@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row page-header">
+        <h1>User index</h1>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Active</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.isActive }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% for role in user.roles %}
+                        <span class="badge badge-info">{{ role }}</span>
+                    {% endfor %}
+                </td>
+                <td>
+                    <form method="post" action="{{ path('user_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        {% if user.isActive %}
+                        <a href="{{ path('user_deactivate', {'id': user.id}) }}" class="btn btn-light btn-sm">deactivate</a>
+                        {% else %}
+                        <a href="{{ path('user_activate', {'id': user.id}) }}" class="btn btn-light btn-sm">activate</a>
+                        {% endif %}
+                        <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-light btn-sm">edit</a>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_new') }}" class="btn btn-primary">Create new</a>
+</div>
+{% endblock %}

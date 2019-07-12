@@ -19,6 +19,18 @@ Download latest Version from GitHub.
 $ composer install
 ```
 
+### test your environment
+To test your environment symfony has a requirements-checker. You can install it with.
+```bash
+$ composer require symfony/requirements-checker
+```
+
+After installing the package you will find a __check.php__ in your public folder. Open it with 
+your browser to see results. If you are done, remove the package with
+```bash
+$ composer remove symfony/requirements-checker
+```
+
 ### Cron
 ```text
 * * * * php bin/console app:get-printer-infos

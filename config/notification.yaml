@@ -1,0 +1,9 @@
+web:
+    enabled: true
+    tonerlevel: { warning: 30, danger: 10 }
+slack:
+    enabled: true
+    tonerlevel: { warning: 30, danger: 10 }
+email:
+    enabled: true
+    tonerlevel: { warning: 30, danger: 10 }

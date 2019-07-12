@@ -1,0 +1,40 @@
+<div class="offset-1 col-10">
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Serial</th>
+            <th>Location</th>
+            <th>Total Pages</th>
+            <th>Toner</th>
+            <th>Last check</th>
+        </tr>
+        {% for printer in printerList  %}
+            <tr class="{{ getCardColor(printer) }}">
+                <td>{{ printer.name }}</td>
+                <td>{{ printer.type }}</td>
+                <td>{{ printer.serialNumber }}</td>
+                <td>{{ printer.location }}</td>
+                <td>{{ printer.totalpages }}</td>
+                <td>
+                    <div class="progress" style="height: 6px;">
+                        <div class="progress-bar bg-black" role="progressbar" style="width: {{ printer.tonerblack }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    {% if printer.iscolorprinter %}
+                        <div class="progress" style="height: 6px; margin-top: 3px;">
+                            <div class="progress-bar bg-yellow" role="progressbar" style="width: {{ printer.toneryellow }}%" aria-valuenow="{{ printer.toneryellow }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="progress" style="height: 6px; margin-top: 3px;">
+                            <div class="progress-bar bg-magenta" role="progressbar" style="width: {{ printer.tonermagenta }}%" aria-valuenow="{{ printer.tonermagenta }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="progress" style="height: 6px; margin-top: 3px;">
+                            <div class="progress-bar bg-cyan" role="progressbar" style="width: {{ printer.tonercyan }}%" aria-valuenow="{{ printer.tonercyan }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    {% endif %}
+                </td>
+                <td>{{ printer.lastcheck|date("d.m.Y H:i:s") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

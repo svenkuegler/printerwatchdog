@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notification{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row page-header">
+        <h1>Notification Settings</h1>
+    </div>
+
+    <form method="post">
+        <div class="row">
+
+            <!-- Web -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <h4><i class="fab fa-internet-explorer"></i> Web</h4>
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td class="bg-warning p-2">
+                                Warning
+                                <input type="text" name="webWarning" placeholder="0 - 100" value="{{ notificationConfig.web.tonerlevel.warning }}" class="form-control form-control-sm" />
+                            </td>
+                            <td class="bg-danger text-white p-2">
+                                Danger
+                                <input type="text" name="webDanger" placeholder="0 - 100" value="{{ notificationConfig.web.tonerlevel.danger }}" class="form-control form-control-sm" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--// Web -->
+
+            <!-- E-Mail -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <h4><i class="fas fa-envelope-open-text"></i> E-Mail</h4>
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td class="bg-warning p-2">
+                                Warning
+                                <input type="text" name="emailWarning" placeholder="0 - 100" value="{{ notificationConfig.email.tonerlevel.warning }}" class="form-control form-control-sm" />
+                            </td>
+                            <td class="bg-danger text-white p-2">
+                                Danger
+                                <input type="text" name="emailDanger" placeholder="0 - 100" value="{{ notificationConfig.email.tonerlevel.danger }}" class="form-control form-control-sm" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--// E-Mail -->
+
+            <!-- Slack -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <h4><i class="fab fa-slack"></i> Slack</h4>
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td class="bg-warning p-2">
+                                Warning
+                                <input type="text" name="slackWarning" placeholder="0 - 100" value="{{ notificationConfig.slack.tonerlevel.warning }}" class="form-control form-control-sm" />
+                            </td>
+                            <td class="bg-danger text-white p-2">
+                                Danger
+                                <input type="text" name="slackDanger" placeholder="0 - 100" value="{{ notificationConfig.slack.tonerlevel.danger }}" class="form-control form-control-sm" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--// Slack -->
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div>
+                    <small class="text-muted">* to disable a notification channel set both values to 0</small>
+                </div>
+                <input type="submit" value="save changes" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

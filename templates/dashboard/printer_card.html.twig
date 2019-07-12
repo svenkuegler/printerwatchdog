@@ -1,0 +1,44 @@
+{% for printer in printerList  %}
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ">
+        <div class="card printercard {{ getCardColor(printer) }}">
+            <div class="card-body">
+                <h5><i class="fas fa-print"></i> {{ printer.name }}</h5>
+                <table class="table ts">
+                    <tr>
+                        <th>Type</th>
+                        <td>{{ printer.type }}</td>
+                    </tr>
+                    <tr>
+                        <th>Serial</th>
+                        <td>{{ printer.serialNumber }}</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>{{ printer.location }}</td>
+                    </tr>
+                    <tr>
+                        <th>Toner</th>
+                        <td style="vertical-align: middle; height: 40px;">
+                            <div class="progress" style="height: 6px;">
+                                <div class="progress-bar bg-black" role="progressbar" style="width: {{ printer.tonerblack }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            {% if printer.iscolorprinter %}
+                                <div class="progress" style="height: 6px; margin-top: 3px;">
+                                    <div class="progress-bar bg-yellow" role="progressbar" style="width: {{ printer.toneryellow }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress" style="height: 6px; margin-top: 3px;">
+                                    <div class="progress-bar bg-magenta" role="progressbar" style="width: {{ printer.tonermagenta }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress" style="height: 6px; margin-top: 3px;">
+                                    <div class="progress-bar bg-cyan" role="progressbar" style="width: {{ printer.tonercyan }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+
+                <small>last check: {{ printer.lastcheck|date("d.m.Y H:i:s") }}</small>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Printer{% endblock %}
+
+{% block body %}
+    <h1>Edit Printer</h1>
+
+    {{ include('printer/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('printer_index') }}">back to list</a>
+
+    {{ include('printer/_delete_form.html.twig') }}
+{% endblock %}
