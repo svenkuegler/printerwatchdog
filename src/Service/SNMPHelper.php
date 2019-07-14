@@ -265,7 +265,11 @@ class SNMPHelper
      * @return bool
      */
     public function isReachable($ip) {
-        exec(sprintf('ping -n 1 %s', escapeshellarg($ip)), $res, $rval);
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            exec(sprintf('ping -n 1 %s', escapeshellarg($ip)), $res, $rval);
+        } else {
+            exec(sprintf('ping -c 1 %s', escapeshellarg($ip)), $res, $rval);
+        }
         return $rval === 0;
     }
 }
