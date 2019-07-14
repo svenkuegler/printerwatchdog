@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\PrinterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
@@ -16,8 +17,19 @@ class DashboardController extends AbstractController
     {
         return $this->render('dashboard/index.html.twig', [
             'view' => $this->_validateViewParam($view),
-            'controller_name' => 'DashboardController',
             'printerList' => $printerRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/dashboard/{id}/detail", name="dashboard_details")
+     */
+    public function details(Request $request, PrinterRepository $printerRepository)
+    {
+        $id = $request->get("id");
+
+        return $this->render('dashboard/detail.html.twig', [
+            'printer' => $printerRepository->findOneBy(['id' => $id])
         ]);
     }
 
@@ -27,7 +39,7 @@ class DashboardController extends AbstractController
      */
     private function _validateViewParam(string $view)
     {
-        $availableViews = ['card', 'table', "row"];
+        $availableViews = ['card', 'table'];
         return (!in_array($view, $availableViews)) ? $availableViews[0] : $view;
     }
 }

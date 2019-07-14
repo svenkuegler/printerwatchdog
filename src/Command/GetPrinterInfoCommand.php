@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Printer;
+use App\Entity\PrinterHistory;
 use App\Repository\PrinterRepository;
 use App\Service\SNMPHelper;
 use Psr\Log\LoggerInterface;
@@ -46,6 +47,7 @@ class GetPrinterInfoCommand extends Command
 
         $io = new SymfonyStyle($input, $output);
         $snmpHelper = new SNMPHelper($this->logger, $this->container);
+        $historyData = new PrinterHistory();
 
         if(!is_null($ip))
         {
@@ -53,42 +55,63 @@ class GetPrinterInfoCommand extends Command
             $printer = $this->printerRepository->findOneBy(["Ip" => $ip]);
             $printerInformation = $snmpHelper->getPrinterInfo($ip);
 
-            if($printer) {
-                $io->success(sprintf("%s found in DB.", $ip));
-
-                $printer->setLocation($printerInformation->sysLocation);
-                $printer->setLastCheck(new \DateTime("now"));
-                $printer->setSerialNumber($printerInformation->serialNumber);
-                $printer->setIsColorPrinter($printerInformation->isColorPrinter);
-                $printer->setTonerBlack($printerInformation->tonerBlack);
-                $printer->setType((isset($printerInformation->printerType)) ? $printerInformation->printerType:"");
-                $printer->setTotalPages($printerInformation->totalPages);
-
-                $em->persist($printer);
-                $em->flush();
-
+            if(is_null($printerInformation)) {
+                $this->logger->error(sprintf("Could not get information for IP %s", $printer->getIp()));
+                if($printer) {
+                    // increase counter
+                    $printer->setUnreachableCount($printer->getUnreachableCount()+1);
+                    $em->persist($printer);
+                    $em->flush();
+                }
             } else {
-                $q = new Question(sprintf("Cant find IP %s in DB. Do you want to add? [y/N]", $ip));
-                $a = $io->askQuestion($q);
-                if($a == "yes" || $a == "y") {
-                    $printer = new Printer();
-                    $printer->setName($ip);
-                    $printer->setIp($ip);
+                $historyData->setTotalPages($printerInformation->totalPages);
+                $historyData->setTonerBlack($printerInformation->tonerBlack);
+                $historyData->setTimestamp(new \DateTime("now"));
+
+                if($printer) {
+                    $io->success(sprintf("%s found in DB.", $ip));
+
                     $printer->setLocation($printerInformation->sysLocation);
                     $printer->setLastCheck(new \DateTime("now"));
                     $printer->setSerialNumber($printerInformation->serialNumber);
                     $printer->setIsColorPrinter($printerInformation->isColorPrinter);
                     $printer->setTonerBlack($printerInformation->tonerBlack);
-                    $printer->setTonerYellow(0);
-                    $printer->setTonerCyan(0);
-                    $printer->setTonerMagenta(0);
-                    $printer->setType($printerInformation->printerType);
+                    $printer->setType((isset($printerInformation->printerType)) ? $printerInformation->printerType:"");
                     $printer->setTotalPages($printerInformation->totalPages);
+                    $printer->setUnreachableCount(0);
+                    $historyData->setPrinter($printer);
 
                     $em->persist($printer);
+                    $em->persist($historyData);
                     $em->flush();
+
+                } else {
+                    $q = new Question(sprintf("Cant find IP %s in DB. Do you want to add? [y/N]", $ip));
+                    $a = $io->askQuestion($q);
+                    if($a == "yes" || $a == "y") {
+                        $printer = new Printer();
+                        $printer->setName($ip);
+                        $printer->setIp($ip);
+                        $printer->setLocation($printerInformation->sysLocation);
+                        $printer->setLastCheck(new \DateTime("now"));
+                        $printer->setSerialNumber($printerInformation->serialNumber);
+                        $printer->setIsColorPrinter($printerInformation->isColorPrinter);
+                        $printer->setTonerBlack($printerInformation->tonerBlack);
+                        $printer->setTonerYellow(0);
+                        $printer->setTonerCyan(0);
+                        $printer->setTonerMagenta(0);
+                        $printer->setType($printerInformation->printerType);
+                        $printer->setTotalPages($printerInformation->totalPages);
+                        $printer->setUnreachableCount(0);
+                        $historyData->setPrinter($printer);
+
+                        $em->persist($printer);
+                        $em->persist($historyData);
+                        $em->flush();
+                    }
                 }
             }
+
         }
         else
         {
@@ -99,17 +122,32 @@ class GetPrinterInfoCommand extends Command
 
                 $this->logger->notice(sprintf("Get information for IP %s", $printer->getIp()));
                 $printerInformation = $snmpHelper->getPrinterInfo($printer->getIp());
+                if(is_null($printerInformation)) {
+                    $this->logger->error(sprintf("Could not get information for IP %s", $printer->getIp()));
+                    $printer->setUnreachableCount($printer->getUnreachableCount()+1);
+                    $em->persist($printer);
 
-                $printer->setLocation((isset($printerInformation->sysLocation)) ? $printerInformation->sysLocation : "");
-                $printer->setSerialNumber((isset($printerInformation->serialNumber)) ? $printerInformation->serialNumber : "");
-                $printer->setIsColorPrinter((isset($printerInformation->isColorPrinter)) ? $printerInformation->isColorPrinter : "");
-                $printer->setTonerBlack((isset($printerInformation->tonerBlack)) ? $printerInformation->tonerBlack : "");
-                $printer->setType((isset($printerInformation->printerType)) ? $printerInformation->printerType : "");
-                $printer->setTotalPages((isset($printerInformation->totalPages)) ? $printerInformation->totalPages : "");
-                $printer->setLastCheck(new \DateTime("now"));
+                } else {
+                    $printer->setLocation((isset($printerInformation->sysLocation)) ? $printerInformation->sysLocation : "");
+                    $printer->setSerialNumber((isset($printerInformation->serialNumber)) ? $printerInformation->serialNumber : "");
+                    $printer->setIsColorPrinter((isset($printerInformation->isColorPrinter)) ? $printerInformation->isColorPrinter : false);
+                    $printer->setTonerBlack((isset($printerInformation->tonerBlack)) ? $printerInformation->tonerBlack : 0);
+                    $printer->setType((isset($printerInformation->printerType)) ? $printerInformation->printerType : "");
+                    $printer->setTotalPages((isset($printerInformation->totalPages)) ? (int)$printerInformation->totalPages : 0);
+                    $printer->setLastCheck(new \DateTime("now"));
+                    $printer->setUnreachableCount(0);
 
-                $this->logger->notice(sprintf("Save actual information for IP %s", $printer->getIp()));
-                $em->persist($printer);
+                    $this->logger->notice(sprintf("Save actual information for IP %s", $printer->getIp()));
+                    $em->persist($printer);
+
+                    $historyData = new PrinterHistory();
+                    $historyData->setTotalPages((isset($printerInformation->totalPages)) ? (int)$printerInformation->totalPages : 0);
+                    $historyData->setTonerBlack((isset($printerInformation->tonerBlack)) ? (int)$printerInformation->tonerBlack : 0);
+                    $historyData->setTimestamp(new \DateTime("now"));
+                    $historyData->setPrinter($printer);
+                    $em->persist($historyData);
+                }
+
                 $em->flush();
             }
         }

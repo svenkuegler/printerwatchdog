@@ -49,13 +49,24 @@ class SNMPHelper
      */
     private function _connect(string $ip, int $version = \SNMP::VERSION_1, $community = "public")
     {
+        if(!$this->isReachable($ip)) {
+            return false;
+        }
+
         try {
             $this->SNMPConnection = new \SNMP($version, $ip, $community);
             $this->SNMPConnection->oid_output_format = SNMP_OID_OUTPUT_NUMERIC;
             $this->SNMPConnection->oid_increasing_check = false;
+
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+            return false;
         } catch (\SNMPException $se) {
             $this->logger->error($se->getMessage());
+            return false;
         }
+
+        return true;
     }
 
     /**
@@ -195,11 +206,14 @@ class SNMPHelper
 
     /**
      * @param String $ip
-     * @return object
+     * @return object|null
      */
     public function getPrinterInfo(String $ip)
     {
-        $this->_connect($ip);
+        if(!$this->_connect($ip)) {
+            return null;
+        }
+
         $results = [];
 
         if(!$this->isDevicePrinter($ip)) {
@@ -244,5 +258,14 @@ class SNMPHelper
     public function isDevicePrinter($ip) {
         $result = $this->_getValue(".1.3.6.1.2.1.25.3.2.1.2.1");
         return ($result == ".1.3.6.1.2.1.25.3.1.5") ? true : false;
+    }
+
+    /**
+     * @param $ip
+     * @return bool
+     */
+    public function isReachable($ip) {
+        exec(sprintf('ping -n 1 %s', escapeshellarg($ip)), $res, $rval);
+        return $rval === 0;
     }
 }

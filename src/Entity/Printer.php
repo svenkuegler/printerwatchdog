@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -75,6 +77,21 @@ class Printer
      * @ORM\Column(type="integer")
      */
     private $TotalPages;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PrinterHistory", mappedBy="Printer", orphanRemoval=true)
+     */
+    private $printerHistories;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $unreachableCount;
+
+    public function __construct()
+    {
+        $this->printerHistories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -249,6 +266,49 @@ class Printer
     public function setTotalPages(int $TotalPages): self
     {
         $this->TotalPages = $TotalPages;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PrinterHistory[]
+     */
+    public function getPrinterHistories(): Collection
+    {
+        return $this->printerHistories;
+    }
+
+    public function addPrinterHistory(PrinterHistory $printerHistory): self
+    {
+        if (!$this->printerHistories->contains($printerHistory)) {
+            $this->printerHistories[] = $printerHistory;
+            $printerHistory->setPrinter($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrinterHistory(PrinterHistory $printerHistory): self
+    {
+        if ($this->printerHistories->contains($printerHistory)) {
+            $this->printerHistories->removeElement($printerHistory);
+            // set the owning side to null (unless already changed)
+            if ($printerHistory->getPrinter() === $this) {
+                $printerHistory->setPrinter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUnreachableCount(): int
+    {
+        return intval($this->unreachableCount);
+    }
+
+    public function setUnreachableCount(?int $unreachableCount): self
+    {
+        $this->unreachableCount = $unreachableCount;
 
         return $this;
     }

@@ -57,6 +57,7 @@ List of used frameworks and libraries.
  * Bootstrap v4.3.1
  * Font Awesome Free v5.9.0
  * jQuery v3.4.1
+ * Chart.js v2.8
 
 ## ToDo
  * Full Documentation

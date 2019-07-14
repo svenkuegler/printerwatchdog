@@ -4,7 +4,10 @@
 /.env.local
 /.env.*.local
 /public/bundles/
-/var/
+/var/cache/
+!/var/cache/.gitignore
+/var/log
+!/var/log/.gitignore
 /vendor/
 ###< symfony/framework-bundle ###
 

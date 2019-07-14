@@ -21,17 +21,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "dashboard") %} active{% endif %}" href="{{ path("dashboard") }}">Dashboard <span class="sr-only">(current)</span></a>
+                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "dashboard") %} active{% endif %}" href="{{ path("dashboard") }}">{% trans %}Dashboard{% endtrans %} <span class="sr-only">(current)</span></a>
                     </li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item">
-                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "printer") %} active{% endif %}" href="{{ path("printer_index") }}">Printer</a>
+                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "printer") %} active{% endif %}" href="{{ path("printer_index") }}">{% trans %}Printer{% endtrans %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "notification") %} active{% endif %}" href="{{ path("notification") }}">Notification</a>
+                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "notification") %} active{% endif %}" href="{{ path("notification") }}">{% trans %}Notification{% endtrans %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "user") %} active{% endif %}" href="{{ path("user_index") }}">User</a>
+                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "user") %} active{% endif %}" href="{{ path("user_index") }}">{% trans %}User{% endtrans %}</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -39,16 +39,16 @@
                     <li class="nav-item dropdown">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a class="nav-link dropdown-toggle" href="#" id="navbarProfileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ app.user.username }}
+                            <i class="far fa-user-circle"></i> {{ app.user.username }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarProfileDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{{ path('profile') }}">{% trans %}Profile{% endtrans %}</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path("app_logout") }}">Logout</a>
+                            <a class="dropdown-item" href="{{ path("app_logout") }}">{% trans %}Logout{% endtrans %}</a>
                         </div>
                         {% else %}
                             <a class="nav-link" href="{{ path("app_login") }}">
-                                Login
+                                {% trans %}Login{% endtrans %}
                             </a>
                         {% endif %}
                     </li>
@@ -69,7 +69,7 @@
 
         <footer>
             <div class="container">
-                <div class="small text-center text-muted"><a href="#">PrinterWatchdog</a> made with <i class="fas fa-heart" style="color: red;"></i> in Berlin</div>
+                <div class="small text-center text-muted"><a href="https://github.com/svenkuegler/printerwatchdog">PrinterWatchdog</a> made with <i class="fas fa-heart" style="color: red;"></i> in Berlin</div>
             </div>
         </footer>
 

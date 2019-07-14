@@ -45,6 +45,11 @@ class User implements UserInterface
      */
     private $username;
 
+    /**
+     * @ORM\Column(type="string", length=6, nullable=true)
+     */
+    private $locale;
+
 
     public function getId(): ?int
     {
@@ -139,6 +144,18 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return (is_null($this->locale)) ? 'en' : $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
 
         return $this;
     }

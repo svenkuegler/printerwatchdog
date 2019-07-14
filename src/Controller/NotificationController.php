@@ -46,8 +46,6 @@ class NotificationController extends AbstractController
             }
         }
 
-        dump((object) $config);
-
         return $this->render('notification/index.html.twig', [
             'notificationConfig' => $config,
         ]);

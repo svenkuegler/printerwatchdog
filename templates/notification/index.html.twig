@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Notification{% endblock %}
+{% block title %}{% trans %}Notification Settings{% endtrans %}{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row page-header">
-        <h1>Notification Settings</h1>
+        <h1>{% trans %}Notification Settings{% endtrans %}</h1>
     </div>
 
     <form method="post">
@@ -18,11 +18,11 @@
                     <table>
                         <tr>
                             <td class="bg-warning p-2">
-                                Warning
+                                {% trans %}Warning{% endtrans %}
                                 <input type="text" name="webWarning" placeholder="0 - 100" value="{{ notificationConfig.web.tonerlevel.warning }}" class="form-control form-control-sm" />
                             </td>
                             <td class="bg-danger text-white p-2">
-                                Danger
+                                {% trans %}Danger{% endtrans %}
                                 <input type="text" name="webDanger" placeholder="0 - 100" value="{{ notificationConfig.web.tonerlevel.danger }}" class="form-control form-control-sm" />
                             </td>
                         </tr>
@@ -38,11 +38,11 @@
                     <table>
                         <tr>
                             <td class="bg-warning p-2">
-                                Warning
+                                {% trans %}Warning{% endtrans %}
                                 <input type="text" name="emailWarning" placeholder="0 - 100" value="{{ notificationConfig.email.tonerlevel.warning }}" class="form-control form-control-sm" />
                             </td>
                             <td class="bg-danger text-white p-2">
-                                Danger
+                                {% trans %}Danger{% endtrans %}
                                 <input type="text" name="emailDanger" placeholder="0 - 100" value="{{ notificationConfig.email.tonerlevel.danger }}" class="form-control form-control-sm" />
                             </td>
                         </tr>
@@ -58,11 +58,11 @@
                     <table>
                         <tr>
                             <td class="bg-warning p-2">
-                                Warning
+                                {% trans %}Warning{% endtrans %}
                                 <input type="text" name="slackWarning" placeholder="0 - 100" value="{{ notificationConfig.slack.tonerlevel.warning }}" class="form-control form-control-sm" />
                             </td>
                             <td class="bg-danger text-white p-2">
-                                Danger
+                                {% trans %}Danger{% endtrans %}
                                 <input type="text" name="slackDanger" placeholder="0 - 100" value="{{ notificationConfig.slack.tonerlevel.danger }}" class="form-control form-control-sm" />
                             </td>
                         </tr>
@@ -75,9 +75,9 @@
         <div class="row">
             <div class="col">
                 <div>
-                    <small class="text-muted">* to disable a notification channel set both values to 0</small>
+                    <small class="text-muted">{% trans %}* to disable a notification channel set both values to 0{% endtrans %}</small>
                 </div>
-                <input type="submit" value="save changes" class="btn btn-primary">
+                <input type="submit" value="{% trans %}save changes{% endtrans %}" class="btn btn-primary">
             </div>
         </div>
     </form>

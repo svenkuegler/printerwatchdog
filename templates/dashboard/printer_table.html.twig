@@ -2,17 +2,17 @@
 
     <table class="table table-bordered table-striped">
         <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Serial</th>
-            <th>Location</th>
-            <th>Total Pages</th>
-            <th>Toner</th>
-            <th>Last check</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Type{% endtrans %}</th>
+            <th>{% trans %}Serial{% endtrans %}</th>
+            <th>{% trans %}Location{% endtrans %}</th>
+            <th>{% trans %}Total Pages{% endtrans %}</th>
+            <th>{% trans %}Toner{% endtrans %}</th>
+            <th>{% trans %}Last check{% endtrans %}</th>
         </tr>
         {% for printer in printerList  %}
             <tr class="{{ getCardColor(printer) }}">
-                <td>{{ printer.name }}</td>
+                <td><a href="{{ path('dashboard_details', {'id': printer.id }) }}">{{ printer.name }}</a></td>
                 <td>{{ printer.type }}</td>
                 <td>{{ printer.serialNumber }}</td>
                 <td>{{ printer.location }}</td>
