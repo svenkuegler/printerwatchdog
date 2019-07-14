@@ -14,16 +14,7 @@ class PrinterType extends AbstractType
         $builder
             ->add('Name')
             ->add('Ip')
-            ->add('SerialNumber')
-            ->add('Location')
-            ->add('lastCheck')
-            ->add('isColorPrinter')
-            ->add('TonerBlack')
-            ->add('TonerYellow')
-            ->add('TonerMagenta')
-            ->add('TonerCyan')
-            ->add('Type')
-            ->add('TotalPages');
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

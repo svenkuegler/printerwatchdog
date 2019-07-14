@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Printer{% endblock %}
+{% block title %}{% trans %}New Printer{% endtrans %}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Create new Printers</h1>
-        {{ include('printer/_form.html.twig') }}
+<div class="container">
+    <div class="row page-header">
+        <h1>{% trans %}Create new Printers{% endtrans %}</h1>
     </div>
+    {{ include('printer/_form.html.twig') }}
+</div>
 {% endblock %}

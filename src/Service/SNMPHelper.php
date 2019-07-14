@@ -46,6 +46,8 @@ class SNMPHelper
      * @param string $ip
      * @param int $version
      * @param string $community
+     *
+     * @return bool
      */
     private function _connect(string $ip, int $version = \SNMP::VERSION_1, $community = "public")
     {
@@ -149,6 +151,10 @@ class SNMPHelper
         return $table;
     }
 
+    /**
+     * @param $idx
+     * @return string
+     */
     private function _colNames($idx) : string
     {
         $arr = [
@@ -164,7 +170,6 @@ class SNMPHelper
         ];
         return $arr[$idx];
     }
-
 
     private function _close() : void
     {
@@ -211,6 +216,7 @@ class SNMPHelper
     public function getPrinterInfo(String $ip)
     {
         if(!$this->_connect($ip)) {
+            $this->_close();
             return null;
         }
 

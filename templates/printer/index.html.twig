@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Printer index{% endblock %}
+{% block title %}{% trans %}Printer List{% endtrans %}{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row page-header">
-        <h1>Printer List</h1>
+        <h1>{% trans %}Printer List{% endtrans %}</h1>
     </div>
 
 
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th width="10%">Id</th>
-                    <th>Name</th>
-                    <th width="20%">Ip</th>
-                    <th width="20%">SerialNumber</th>
-                    <th width="20%">actions</th>
+                    <th width="10%">{% trans %}Id{% endtrans %}</th>
+                    <th>{% trans %}Name{% endtrans %}</th>
+                    <th width="20%">{% trans %}Ip{% endtrans %}</th>
+                    <th width="20%">{% trans %}SerialNumber{% endtrans %}</th>
+                    <th width="20%">{% trans %}Actions{% endtrans %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,26 +27,26 @@
                     <td>{{ printer.Ip }}</td>
                     <td>{{ printer.SerialNumber }}</td>
                     <td>
-                        <form method="post" action="{{ path('printer_delete', {'id': printer.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <form method="post" action="{{ path('printer_delete', {'id': printer.id}) }}" onsubmit="return confirm('{% trans %}Are you sure you want to delete this item?{% endtrans %}');">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ printer.id) }}">
-                            <a href="{{ path('printer_show', {'id': printer.id}) }}" class="btn btn-sm btn-light">details</a>
-                            <a href="{{ path('printer_edit', {'id': printer.id}) }}" class="btn btn-sm btn-light">edit</a>
-                            <button class="btn btn-sm btn-danger">Delete</button>
+                            <a href="{{ path('dashboard_details', {'id': printer.id}) }}" class="btn btn-sm btn-light">{% trans %}details{% endtrans %}</a>
+                            <a href="{{ path('printer_edit', {'id': printer.id}) }}" class="btn btn-sm btn-light">{% trans %}edit{% endtrans %}</a>
+                            <button class="btn btn-sm btn-danger">{% trans %}delete{% endtrans %}</button>
                         </form>
 
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="5">no records found</td>
+                    <td colspan="5">{% trans %}no records found{% endtrans %}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <a href="{{ path('printer_bulkadd') }}" class="btn btn-primary">Bulk Add</a>
-        <a href="{{ path('printer_new') }}" class="btn btn-light">Create new</a>
+        <a href="{{ path('printer_bulkadd') }}" class="btn btn-primary">{% trans %}Bulk Add{% endtrans %}</a>
+        <a href="{{ path('printer_new') }}" class="btn btn-light">{% trans %}Create new{% endtrans %}</a>
 
 </div>
 {% endblock %}

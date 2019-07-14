@@ -2,6 +2,6 @@
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
-        <a href="{{ path('printer_index') }}" class="btn btn-light">back to list</a>
+        <a href="{{ path('printer_index') }}" class="btn btn-light">{% trans %}back to list{% endtrans %}</a>
     {{ form_end(form) }}
 </div>

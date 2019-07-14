@@ -37,6 +37,18 @@ class PrinterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $printer->setLocation("");
+            $printer->setLastCheck(new \DateTime("now"));
+            $printer->setSerialNumber("");
+            $printer->setIsColorPrinter(false);
+            $printer->setTonerBlack(0);
+            $printer->setTonerYellow(0);
+            $printer->setTonerCyan(0);
+            $printer->setTonerMagenta(0);
+            $printer->setType("");
+            $printer->setTotalPages(0);
+
             $entityManager->persist($printer);
             $entityManager->flush();
 
@@ -101,16 +113,6 @@ class PrinterController extends AbstractController
         return $this->render('printer/bulkadd.html.twig', [
             'printer' => $printer,
             'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="printer_show", methods={"GET"})
-     */
-    public function show(Printer $printer): Response
-    {
-        return $this->render('printer/show.html.twig', [
-            'printer' => $printer,
         ]);
     }
 
