@@ -88,6 +88,26 @@ class Printer
      */
     private $unreachableCount;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $TonerBlackDescription;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $TonerCyanDescription;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $TonerMagentaDescription;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $TonerYellowDescription;
+
     public function __construct()
     {
         $this->printerHistories = new ArrayCollection();
@@ -145,9 +165,10 @@ class Printer
     /**
      * @param mixed $Location
      */
-    public function setLocation($Location): void
+    public function setLocation($Location): self
     {
         $this->Location = $Location;
+        return $this;
     }
 
     /**
@@ -161,9 +182,10 @@ class Printer
     /**
      * @param mixed $lastCheck
      */
-    public function setLastCheck($lastCheck): void
+    public function setLastCheck($lastCheck): self
     {
         $this->lastCheck = $lastCheck;
+        return $this;
     }
 
     /**
@@ -177,9 +199,10 @@ class Printer
     /**
      * @param mixed $isColorPrinter
      */
-    public function setIsColorPrinter($isColorPrinter): void
+    public function setIsColorPrinter($isColorPrinter): self
     {
         $this->isColorPrinter = $isColorPrinter;
+        return $this;
     }
 
     /**
@@ -193,9 +216,10 @@ class Printer
     /**
      * @param mixed $TonerBlack
      */
-    public function setTonerBlack($TonerBlack): void
+    public function setTonerBlack($TonerBlack): self
     {
         $this->TonerBlack = $TonerBlack;
+        return $this;
     }
 
     /**
@@ -209,9 +233,11 @@ class Printer
     /**
      * @param mixed $TonerYellow
      */
-    public function setTonerYellow($TonerYellow): void
+    public function setTonerYellow($TonerYellow): self
     {
         $this->TonerYellow = $TonerYellow;
+
+        return $this;
     }
 
     /**
@@ -225,9 +251,10 @@ class Printer
     /**
      * @param mixed $TonerMagenta
      */
-    public function setTonerMagenta($TonerMagenta): void
+    public function setTonerMagenta($TonerMagenta): self
     {
         $this->TonerMagenta = $TonerMagenta;
+        return $this;
     }
 
     /**
@@ -241,9 +268,10 @@ class Printer
     /**
      * @param mixed $TonerCyan
      */
-    public function setTonerCyan($TonerCyan): void
+    public function setTonerCyan($TonerCyan): self
     {
         $this->TonerCyan = $TonerCyan;
+        return $this;
     }
 
     public function getType(): ?string
@@ -309,6 +337,54 @@ class Printer
     public function setUnreachableCount(?int $unreachableCount): self
     {
         $this->unreachableCount = $unreachableCount;
+
+        return $this;
+    }
+
+    public function getTonerBlackDescription(): ?string
+    {
+        return $this->TonerBlackDescription;
+    }
+
+    public function setTonerBlackDescription(?string $TonerBlackDescription): self
+    {
+        $this->TonerBlackDescription = $TonerBlackDescription;
+
+        return $this;
+    }
+
+    public function getTonerCyanDescription(): ?string
+    {
+        return $this->TonerCyanDescription;
+    }
+
+    public function setTonerCyanDescription(?string $TonerCyanDescription): self
+    {
+        $this->TonerCyanDescription = $TonerCyanDescription;
+
+        return $this;
+    }
+
+    public function getTonerMagentaDescription(): ?string
+    {
+        return $this->TonerMagentaDescription;
+    }
+
+    public function setTonerMagentaDescription(?string $TonerMagentaDescription): self
+    {
+        $this->TonerMagentaDescription = $TonerMagentaDescription;
+
+        return $this;
+    }
+
+    public function getTonerYellowDescription(): ?string
+    {
+        return $this->TonerYellowDescription;
+    }
+
+    public function setTonerYellowDescription(?string $TonerYellowDescription): self
+    {
+        $this->TonerYellowDescription = $TonerYellowDescription;
 
         return $this;
     }

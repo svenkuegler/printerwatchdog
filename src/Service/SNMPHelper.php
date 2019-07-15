@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Printer;
 use phpDocumentor\Reflection\Types\This;
+use App\Entity\PrinterInformation;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -179,39 +180,62 @@ class SNMPHelper
     /**
      * Ugly, quick and dirty cleanup
      *
-     * @param array $suppliersTable
-     * @return array
+     * @param PrinterInformation $printerInformation
      */
-    private function _getTonerInfoOnly(array $suppliersTable) : array
+    private function _getTonerInfo(PrinterInformation $printerInformation) : void
     {
-        $tonerOnly = [
-            "suppliesTable" => [],
-            "tonerBlack" => 0,
-            "tonerCyan" => 0,
-            "tonerMagenta" => 0,
-            "tonerYellow" => 0
-        ];
-        foreach ($suppliersTable as $row)
+        $tonerOnly = [];
+        foreach ($printerInformation->getSuppliesTable() as $row)
         {
             if($row['prtMarkerSuppliesType'] == 3) {
-                $tonerOnly['suppliesTable'][] = $row;
+                $tonerOnly[] = (object)$row;
             }
         }
+        $printerInformation->setSuppliesTable($tonerOnly);
 
-        if(count($tonerOnly['suppliesTable'])==1) {
-            $tonerOnly['isColorPrinter'] =  false;
-            $tonerOnly['tonerBlack'] = round($tonerOnly['suppliesTable'][0]['prtMarkerSuppliesLevel'] * 100 / $tonerOnly['suppliesTable'][0]['prtMarkerSuppliesMaxCapacity']);
+        if(count($printerInformation->getSuppliesTable())==1) {
+            $printerInformation
+                ->setTonerBlack(round($printerInformation->getSuppliesTable()[0]->prtMarkerSuppliesLevel * 100 / $printerInformation->getSuppliesTable()[0]->prtMarkerSuppliesMaxCapacity))
+                ->setTonerBlackDescription($printerInformation->getSuppliesTable()[0]->prtMarkerSuppliesDescription);
         } else {
-            $tonerOnly['isColorPrinter'] =  true;
-            // TODO: get color values
-        }
+            $printerInformation->setIsColorPrinter(true);
 
-        return $tonerOnly;
+            // TODO: Find a better way
+            // No Idea how to find out what color
+            // in the most cases the followed code works
+            // Please drop me a message if you find a better way
+            foreach ($printerInformation->getSuppliesTable() as $tbl)
+            {
+                if(strpos(strtolower($tbl->prtMarkerSuppliesDescription), "black") !== false) {
+                    $printerInformation
+                        ->setTonerBlack(round($tbl->prtMarkerSuppliesLevel * 100 / $tbl->prtMarkerSuppliesMaxCapacity))
+                        ->setTonerBlackDescription($tbl->prtMarkerSuppliesDescription);
+                }
+
+                if(strpos(strtolower($tbl->prtMarkerSuppliesDescription), "yellow") !== false) {
+                    $printerInformation
+                        ->setTonerYellow(round($tbl->prtMarkerSuppliesLevel * 100 / $tbl->prtMarkerSuppliesMaxCapacity))
+                        ->setTonerYellowDescription($tbl->prtMarkerSuppliesDescription);
+                }
+
+                if(strpos(strtolower($tbl->prtMarkerSuppliesDescription), "cyan") !== false) {
+                    $printerInformation
+                        ->setTonerCyan(round($tbl->prtMarkerSuppliesLevel * 100 / $tbl->prtMarkerSuppliesMaxCapacity))
+                        ->setTonerCyanDescription($tbl->prtMarkerSuppliesDescription);
+                }
+
+                if(strpos(strtolower($tbl->prtMarkerSuppliesDescription), "magenta") !== false) {
+                    $printerInformation
+                        ->setTonerMagenta(round($tbl->prtMarkerSuppliesLevel * 100 / $tbl->prtMarkerSuppliesMaxCapacity))
+                        ->setTonerMagentaDescription($tbl->prtMarkerSuppliesDescription);
+                }
+            }
+        }
     }
 
     /**
      * @param String $ip
-     * @return object|null
+     * @return PrinterInformation|null
      */
     public function getPrinterInfo(String $ip)
     {
@@ -220,41 +244,41 @@ class SNMPHelper
             return null;
         }
 
-        $results = [];
+        $results = new PrinterInformation();
 
         if(!$this->isDevicePrinter($ip)) {
             $this->logger->info(sprintf("%s not seems to be a printer.", $ip));
-            return (object) $results;
+            return $results;
         }
 
         // get default values
         $defaultOIDs = $this->container->getParameter("snmp.default");
         foreach ($defaultOIDs as $name => $options) {
             if($options['type'] == "table") {
-                $results[$name] = $this->_getTable($options['oid']);
+                call_user_func([$results, "set" . ucfirst($name)], $this->_getTable($options['oid']));
             } else {
-                $results[$name] = $this->_getValue($options['oid']);
+                call_user_func([$results, "set" . ucfirst($name)], $this->_getValue($options['oid']));
             }
         }
 
         // get and override enterprise specific values
-        if($this->container->hasParameter(sprintf("snmp.enterprise.oid%s", $results['sysObjID']))) {
-            $specificOIDs = $this->container->getParameter(sprintf("snmp.enterprise.oid%s", $results['sysObjID']));
+        if($this->container->hasParameter(sprintf("snmp.enterprise.oid%s", $results->getSysObjID()))) {
+            $specificOIDs = $this->container->getParameter(sprintf("snmp.enterprise.oid%s", $results->getSysObjID()));
             foreach ($specificOIDs as $name => $options) {
                 if($options['type'] == "table") {
-                    $results[$name] = $this->_getTable($options['oid']);
+                    call_user_func([$results, "set" . ucfirst($name)], $this->_getTable($options['oid']));
                 } else {
-                    $results[$name] = $this->_getValue($options['oid']);
+                    call_user_func([$results, "set" . ucfirst($name)], $this->_getValue($options['oid']));
                 }
             }
         }
 
-        // dirty cleanup
-        $results = array_merge($results, $this->_getTonerInfoOnly($results["suppliesTable"]));
+        // get Toner Infos
+        $this->_getTonerInfo($results);
 
         $this->_close();
 
-        return (object) $results;
+        return $results;
     }
 
     /**

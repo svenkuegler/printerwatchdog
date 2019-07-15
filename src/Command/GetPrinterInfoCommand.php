@@ -36,119 +36,145 @@ class GetPrinterInfoCommand extends Command
     {
         $this
             ->setDescription('Add a short description for your command')
-            ->addArgument('ip', InputArgument::OPTIONAL, 'IP Address: 192.168.1.0')
-        ;
+            ->addArgument('ip', InputArgument::OPTIONAL, 'IP Address: 192.168.1.0');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $ip = $input->getArgument('ip');
-        $em = $this->container->get('doctrine')->getEntityManager();
+        $em = $this->container->get('doctrine')->getManager();
 
         $io = new SymfonyStyle($input, $output);
         $snmpHelper = new SNMPHelper($this->logger, $this->container);
         $historyData = new PrinterHistory();
 
-        if(!is_null($ip))
-        {
+        if (!is_null($ip)) {
             $io->note(sprintf("Trying to get information for %s.", $ip));
             $printer = $this->printerRepository->findOneBy(["Ip" => $ip]);
-            $printerInformation = $snmpHelper->getPrinterInfo($ip);
-
-            if(is_null($printerInformation)) {
+            $pInfo = $snmpHelper->getPrinterInfo($ip);
+            var_dump($pInfo);
+            if (is_null($pInfo)) {
                 $this->logger->error(sprintf("Could not get information for IP %s", $printer->getIp()));
-                if($printer) {
+                if ($printer) {
                     // increase counter
-                    $printer->setUnreachableCount($printer->getUnreachableCount()+1);
+                    $printer->setUnreachableCount($printer->getUnreachableCount() + 1);
                     $em->persist($printer);
                     $em->flush();
                 }
             } else {
-                $historyData->setTotalPages($printerInformation->totalPages);
-                $historyData->setTonerBlack($printerInformation->tonerBlack);
-                $historyData->setTimestamp(new \DateTime("now"));
+                $historyData->setTotalPages($pInfo->getTotalPages())
+                    ->setTonerBlack($pInfo->getTonerBlack())
+                    ->setTonerCyan($pInfo->getTonerCyan())
+                    ->setTonerMagenta($pInfo->getTonerMagenta())
+                    ->setTonerYellow($pInfo->getTonerYellow())
+                    ->setTimestamp(new \DateTime("now"));
 
-                if($printer) {
-                    $io->success(sprintf("%s found in DB.", $ip));
+                if ($printer) {
+                    $io->note(sprintf("%s exists in DB, prepare to update ....", $ip));
 
-                    $printer->setLocation($printerInformation->sysLocation);
-                    $printer->setLastCheck(new \DateTime("now"));
-                    $printer->setSerialNumber($printerInformation->serialNumber);
-                    $printer->setIsColorPrinter($printerInformation->isColorPrinter);
-                    $printer->setTonerBlack($printerInformation->tonerBlack);
-                    $printer->setType((isset($printerInformation->printerType)) ? $printerInformation->printerType:"");
-                    $printer->setTotalPages($printerInformation->totalPages);
-                    $printer->setUnreachableCount(0);
+                    $printer->setLocation($pInfo->getSysLocation())
+                        ->setLastCheck(new \DateTime("now"))
+                        ->setSerialNumber($pInfo->getSerialNumber())
+                        ->setIsColorPrinter($pInfo->isColorPrinter())
+                        ->setTonerBlack($pInfo->getTonerBlack())
+                        ->setTonerBlackDescription($pInfo->getTonerBlackDescription())
+                        ->setTonerYellow($pInfo->getTonerYellow())
+                        ->setTonerYellowDescription($pInfo->getTonerYellowDescription())
+                        ->setTonerCyan($pInfo->getTonerCyan())
+                        ->setTonerCyanDescription($pInfo->getTonerCyanDescription())
+                        ->setTonerMagenta($pInfo->getTonerMagenta())
+                        ->setTonerMagentaDescription($pInfo->getTonerMagentaDescription())
+                        ->setType($pInfo->getPrinterType())
+                        ->setTotalPages($pInfo->getTotalPages())
+                        ->setUnreachableCount(0);
+
                     $historyData->setPrinter($printer);
 
                     $em->persist($printer);
                     $em->persist($historyData);
                     $em->flush();
 
+                    $io->success(sprintf("%s ´s infos updated in DB.", $ip));
+
                 } else {
                     $q = new Question(sprintf("Cant find IP %s in DB. Do you want to add? [y/N]", $ip));
                     $a = $io->askQuestion($q);
-                    if($a == "yes" || $a == "y") {
-                        $printer = new Printer();
-                        $printer->setName($ip);
-                        $printer->setIp($ip);
-                        $printer->setLocation($printerInformation->sysLocation);
-                        $printer->setLastCheck(new \DateTime("now"));
-                        $printer->setSerialNumber($printerInformation->serialNumber);
-                        $printer->setIsColorPrinter($printerInformation->isColorPrinter);
-                        $printer->setTonerBlack($printerInformation->tonerBlack);
-                        $printer->setTonerYellow(0);
-                        $printer->setTonerCyan(0);
-                        $printer->setTonerMagenta(0);
-                        $printer->setType($printerInformation->printerType);
-                        $printer->setTotalPages($printerInformation->totalPages);
-                        $printer->setUnreachableCount(0);
-                        $historyData->setPrinter($printer);
+                    if ($a == "yes" || $a == "y") {
+                        $prn = new Printer();
+                        $prn->setName($ip)
+                            ->setIp($ip)
+                            ->setLocation($pInfo->getSysLocation())
+                            ->setLastCheck(new \DateTime("now"))
+                            ->setSerialNumber($pInfo->getSerialNumber())
+                            ->setIsColorPrinter($pInfo->isColorPrinter())
+                            ->setTonerBlack($pInfo->getTonerBlack())
+                            ->setTonerBlackDescription($pInfo->getTonerBlackDescription())
+                            ->setTonerYellow($pInfo->getTonerYellow())
+                            ->setTonerYellowDescription($pInfo->getTonerYellowDescription())
+                            ->setTonerCyan($pInfo->getTonerCyan())
+                            ->setTonerCyanDescription($pInfo->getTonerCyanDescription())
+                            ->setTonerMagenta($pInfo->getTonerMagenta())
+                            ->setTonerMagentaDescription($pInfo->getTonerMagentaDescription())
+                            ->setType($pInfo->getPrinterType())
+                            ->setTotalPages($pInfo->getTotalPages())
+                            ->setUnreachableCount(0);
+                        $historyData->setPrinter($prn);
 
-                        $em->persist($printer);
+                        $em->persist($prn);
                         $em->persist($historyData);
                         $em->flush();
+                        $io->success(sprintf("%s ´s infos written.", $ip));
                     }
                 }
             }
 
-        }
-        else
-        {
+        } else {
             $io->note("Trying to get all printer information");
 
             $printerList = $this->printerRepository->findAll();
             foreach ($printerList as $printer) {
 
-                $this->logger->notice(sprintf("Get information for IP %s", $printer->getIp()));
-                $printerInformation = $snmpHelper->getPrinterInfo($printer->getIp());
-                if(is_null($printerInformation)) {
+                $this->logger->info(sprintf("Get information for IP %s", $printer->getIp()));
+                $pInfo = $snmpHelper->getPrinterInfo($printer->getIp());
+                if (is_null($pInfo)) {
                     $this->logger->error(sprintf("Could not get information for IP %s", $printer->getIp()));
-                    $printer->setUnreachableCount($printer->getUnreachableCount()+1);
+                    $printer->setUnreachableCount($printer->getUnreachableCount() + 1);
                     $em->persist($printer);
-
+                    $em->flush();
                 } else {
-                    $printer->setLocation((isset($printerInformation->sysLocation)) ? $printerInformation->sysLocation : "");
-                    $printer->setSerialNumber((isset($printerInformation->serialNumber)) ? $printerInformation->serialNumber : "");
-                    $printer->setIsColorPrinter((isset($printerInformation->isColorPrinter)) ? $printerInformation->isColorPrinter : false);
-                    $printer->setTonerBlack((isset($printerInformation->tonerBlack)) ? $printerInformation->tonerBlack : 0);
-                    $printer->setType((isset($printerInformation->printerType)) ? $printerInformation->printerType : "");
-                    $printer->setTotalPages((isset($printerInformation->totalPages)) ? (int)$printerInformation->totalPages : 0);
-                    $printer->setLastCheck(new \DateTime("now"));
-                    $printer->setUnreachableCount(0);
+                    $printer
+                        ->setLocation($pInfo->getSysLocation())
+                        ->setLastCheck(new \DateTime("now"))
+                        ->setSerialNumber($pInfo->getSerialNumber())
+                        ->setIsColorPrinter($pInfo->isColorPrinter())
+                        ->setTonerBlack($pInfo->getTonerBlack())
+                        ->setTonerBlackDescription($pInfo->getTonerBlackDescription())
+                        ->setTonerYellow($pInfo->getTonerYellow())
+                        ->setTonerYellowDescription($pInfo->getTonerYellowDescription())
+                        ->setTonerCyan($pInfo->getTonerCyan())
+                        ->setTonerCyanDescription($pInfo->getTonerCyanDescription())
+                        ->setTonerMagenta($pInfo->getTonerMagenta())
+                        ->setTonerMagentaDescription($pInfo->getTonerMagentaDescription())
+                        ->setType($pInfo->getPrinterType())
+                        ->setTotalPages($pInfo->getTotalPages())
+                        ->setUnreachableCount(0);
 
                     $this->logger->notice(sprintf("Save actual information for IP %s", $printer->getIp()));
                     $em->persist($printer);
 
                     $historyData = new PrinterHistory();
-                    $historyData->setTotalPages((isset($printerInformation->totalPages)) ? (int)$printerInformation->totalPages : 0);
-                    $historyData->setTonerBlack((isset($printerInformation->tonerBlack)) ? (int)$printerInformation->tonerBlack : 0);
-                    $historyData->setTimestamp(new \DateTime("now"));
-                    $historyData->setPrinter($printer);
+                    $historyData->setTotalPages($pInfo->getTotalPages())
+                        ->setTonerBlack($pInfo->getTonerBlack())
+                        ->setTonerCyan($pInfo->getTonerCyan())
+                        ->setTonerMagenta($pInfo->getTonerMagenta())
+                        ->setTonerYellow($pInfo->getTonerYellow())
+                        ->setTimestamp(new \DateTime("now"))
+                        ->setPrinter($printer);
+
                     $em->persist($historyData);
+                    $em->flush();
                 }
 
-                $em->flush();
             }
         }
         $this->logger->info("Test");

@@ -46,20 +46,26 @@
 
                                     <dt class="col-sm-2">{% trans %}Toner{% endtrans %}</dt>
                                     <dd class="col-sm-4">
-                                        <div class="progress" style="height: 20px;">
+                                        <div class="progress mb-1" style="height: 20px;">
                                             <div class="progress-bar bg-black" role="progressbar" style="width: {{ printer.tonerblack }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100">
                                                 {{ printer.tonerblack }} %
                                             </div>
                                         </div>
                                         {% if printer.iscolorprinter %}
-                                            <div class="progress">
-                                                <div class="progress-bar bg-yellow" role="progressbar" style="width: {{ printer.toneryellow }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress mb-1">
+                                                <div class="progress-bar bg-yellow" role="progressbar" style="width: {{ printer.toneryellow }}%" aria-valuenow="{{ printer.toneryellow }}" aria-valuemin="0" aria-valuemax="100">
+                                                    {{ printer.toneryellow }} %
+                                                </div>
+                                            </div>
+                                            <div class="progress mb-1">
+                                                <div class="progress-bar bg-magenta" role="progressbar" style="width: {{ printer.tonermagenta }}%" aria-valuenow="{{ printer.tonermagenta }}" aria-valuemin="0" aria-valuemax="100">
+                                                    {{ printer.tonermagenta }} %
+                                                </div>
                                             </div>
                                             <div class="progress">
-                                                <div class="progress-bar bg-magenta" role="progressbar" style="width: {{ printer.tonermagenta }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-cyan" role="progressbar" style="width: {{ printer.tonercyan }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-cyan" role="progressbar" style="width: {{ printer.tonercyan }}%" aria-valuenow="{{ printer.tonercyan }}" aria-valuemin="0" aria-valuemax="100">
+                                                    {{ printer.tonercyan }} %
+                                                </div>
                                             </div>
                                         {% endif %}
                                     </dd>
@@ -135,29 +141,68 @@
 
     <script type="text/javascript">
 
-        var label = [];
-        var pagesData = [];
-        var tonerData = [];
+        label = [];
+        pagesData = [];
+        tonerDataBlack = [];
+        tonerDataYellow = [];
+        tonerDataCyan = [];
+        tonerDataMagenta = [];
+        tonerDatasets = [];
+
         {% for history in printer.printerHistories %}
         label.push('{{ history.timestamp|date("d.m.Y H:i:s") }}');
         pagesData.push({{ history.totalpages }});
-        tonerData.push({{ history.tonerblack }});
+        tonerDataBlack.push({{ history.tonerblack }});
+        {% if printer.isColorPrinter %}
+        tonerDataCyan.push({{ history.tonercyan }});
+        tonerDataMagenta.push({{ history.tonermagenta }});
+        tonerDataYellow.push({{ history.toneryellow }});
+        {% endif %}
         {% endfor %}
 
-        var options = {};
-        var dataToner = {
+
+        _black = {
+            "label":"{% trans %}Black{% endtrans %}",
+            "data":tonerDataBlack,
+            "fill":false,
+            "borderColor":"black",
+            "lineTension":0.1
+        };
+        tonerDatasets.push(_black);
+
+        {% if printer.isColorPrinter %}
+        _yellow = {
+            "label":"{% trans %}Yellow{% endtrans %}",
+            "data":tonerDataYellow,
+            "fill":false,
+            "borderColor":"yellow",
+            "lineTension":0.1
+        };
+        tonerDatasets.push(_yellow);
+        _cyan = {
+            "label":"{% trans %}Cyan{% endtrans %}",
+            "data":tonerDataCyan,
+            "fill":false,
+            "borderColor":"cyan",
+            "lineTension":0.1
+        };
+        tonerDatasets.push(_cyan);
+        _magenta = {
+            "label":"{% trans %}Magenta{% endtrans %}",
+            "data":tonerDataMagenta,
+            "fill":false,
+            "borderColor":"magenta",
+            "lineTension":0.1
+        };
+        tonerDatasets.push(_magenta);
+        {% endif %}
+
+        dataToner = {
             "labels": label.reverse(),
-            "datasets":[
-                {
-                    "label":"{% trans %}Black{% endtrans %}",
-                    "data":tonerData,
-                    "fill":false,
-                    "borderColor":"black",
-                    "lineTension":0.1
-                }]
+            "datasets": tonerDatasets
         };
 
-        var dataPages = {
+        dataPages = {
             "labels":label.reverse(),
             "datasets":[
                 {
@@ -169,8 +214,8 @@
                 }]
         };
 
-        var ctT = document.getElementById('chartToner').getContext('2d');
-        var chartToner = new Chart(ctT, {
+        ctT = document.getElementById('chartToner').getContext('2d');
+        chartToner = new Chart(ctT, {
             type: 'line',
             data: dataToner,
             options: {
@@ -186,8 +231,8 @@
             }
         });
 
-        var ctP = document.getElementById('chartPages').getContext('2d');
-        var chartPages = new Chart(ctP, {
+        ctP = document.getElementById('chartPages').getContext('2d');
+        chartPages = new Chart(ctP, {
             type: 'line',
             data: dataPages,
             options: {legend: false}
