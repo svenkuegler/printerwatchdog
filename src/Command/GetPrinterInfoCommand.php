@@ -52,7 +52,7 @@ class GetPrinterInfoCommand extends Command
             $io->note(sprintf("Trying to get information for %s.", $ip));
             $printer = $this->printerRepository->findOneBy(["Ip" => $ip]);
             $pInfo = $snmpHelper->getPrinterInfo($ip);
-            var_dump($pInfo);
+
             if (is_null($pInfo)) {
                 $this->logger->error(sprintf("Could not get information for IP %s", $printer->getIp()));
                 if ($printer) {
