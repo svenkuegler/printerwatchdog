@@ -19,6 +19,13 @@
                                     <dt class="col-sm-2">{% trans %}IP{% endtrans %}</dt>
                                     <dd class="col-sm-4">{{ printer.ip }} <a href="https://{{ printer.ip }}" class="link-unstyled" target="_blank" title="{% trans %}Open Web Interface{% endtrans %}"> <i class="fas fa-link"></i></a></dd>
 
+                                    {% if snipeItInfo is not null %}
+                                    <dt class="col-sm-2">{% trans %}AssetName{% endtrans %}</dt>
+                                    <dd class="col-sm-4">{{ snipeItInfo.assetName }}</dd>
+                                    <dt class="col-sm-2">{% trans %}AssetID{% endtrans %}</dt>
+                                    <dd class="col-sm-4">{{ snipeItInfo.assetTag }} <a href="{{ snipeItUrl }}hardware/{{ snipeItInfo.assetId }}" class="link-unstyled" target="_blank" title="{% trans %}Open SnipeIT{% endtrans %}"> <i class="fas fa-link"></i></a></dd>
+                                    {% endif %}
+
                                     <dt class="col-sm-2">{% trans %}Name{% endtrans %}</dt>
                                     <dd class="col-sm-4">{{ printer.name }}</dd>
                                     <dt class="col-sm-2">{% trans %}SerialNumber{% endtrans %}</dt>
@@ -73,12 +80,20 @@
             </div>
         </div>
 
-        <!--<div class="row">
-            <h3>Asset Details</h3>
-            <div class="col12">
-
+        <!--{% if snipeItInfo is not null %}
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>{% trans %}Asset Information{% endtrans %}</h5>
+                    </div>
+                    <div class="card-body">
+                        xxx
+                    </div>
+                </div>
             </div>
-        </div>-->
+        </div>
+        {% endif %}-->
 
         <div class="row mt-3">
             <div class="col-12">
@@ -158,7 +173,17 @@
         var chartToner = new Chart(ctT, {
             type: 'line',
             data: dataToner,
-            options: options
+            options: {
+                scales: {
+                    yAxes:[{
+                        ticks: {
+                            min: 0,
+                            max: 100,
+                            stepSize: 10,
+                        }
+                    }]
+                }
+            }
         });
 
         var ctP = document.getElementById('chartPages').getContext('2d');
