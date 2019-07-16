@@ -46,27 +46,35 @@
 
                                     <dt class="col-sm-2">{% trans %}Toner{% endtrans %}</dt>
                                     <dd class="col-sm-4">
-                                        <div class="progress mb-1" style="height: 20px;">
-                                            <div class="progress-bar bg-black" role="progressbar" style="width: {{ printer.tonerblack }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100">
-                                                {{ printer.tonerblack }} %
+                                        <span data-toggle="tooltip" title="{{ printer.tonerBlackDescription }}">
+                                            <div class="progress mb-1" style="height: 20px;">
+                                                <div class="progress-bar bg-black" role="progressbar" style="width: {{ printer.tonerblack }}%" aria-valuenow="{{ printer.tonerblack }}" aria-valuemin="0" aria-valuemax="100">
+                                                    {{ printer.tonerblack }} %
+                                                </div>
                                             </div>
-                                        </div>
+                                        </span>
                                         {% if printer.iscolorprinter %}
+                                        <span data-toggle="tooltip" title="{{ printer.tonerYellowDescription }}">
                                             <div class="progress mb-1">
                                                 <div class="progress-bar bg-yellow" role="progressbar" style="width: {{ printer.toneryellow }}%" aria-valuenow="{{ printer.toneryellow }}" aria-valuemin="0" aria-valuemax="100">
                                                     {{ printer.toneryellow }} %
                                                 </div>
                                             </div>
+                                        </span>
+                                        <span data-toggle="tooltip" title="{{ printer.tonerMagentaDescription }}">
                                             <div class="progress mb-1">
                                                 <div class="progress-bar bg-magenta" role="progressbar" style="width: {{ printer.tonermagenta }}%" aria-valuenow="{{ printer.tonermagenta }}" aria-valuemin="0" aria-valuemax="100">
                                                     {{ printer.tonermagenta }} %
                                                 </div>
                                             </div>
+                                        </span>
+                                        <span data-toggle="tooltip" title="{{ printer.tonerCyanDescription }}">
                                             <div class="progress">
                                                 <div class="progress-bar bg-cyan" role="progressbar" style="width: {{ printer.tonercyan }}%" aria-valuenow="{{ printer.tonercyan }}" aria-valuemin="0" aria-valuemax="100">
                                                     {{ printer.tonercyan }} %
                                                 </div>
                                             </div>
+                                        </span>
                                         {% endif %}
                                     </dd>
                                     <dd class="col-sm-6"></dd>
@@ -140,6 +148,9 @@
     <script src="{{ asset('js/Chart.bundle.min.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("[data-toggle=tooltip]").tooltip();
+        });
 
         label = [];
         pagesData = [];
