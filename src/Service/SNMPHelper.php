@@ -277,7 +277,7 @@ class SNMPHelper
         $this->_getTonerInfo($results);
 
         // Set Description as Type if empty
-        if(strlen($results->getPrinterType()<3)) {
+        if(strlen($results->getPrinterType())<3) {
             $results->setPrinterType($results->getSysDescr());
         }
 
