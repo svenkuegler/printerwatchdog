@@ -2,8 +2,11 @@
 
 namespace App\Command;
 
+use App\Entity\Printer;
 use App\Repository\PrinterRepository;
+use App\Repository\UserRepository;
 use App\Service\ContainerParametersHelper;
+use App\Service\MailHelperService;
 use App\Service\SlackService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -19,20 +22,67 @@ class SendNotificationCommand extends Command
 {
     protected static $defaultName = 'app:send-notification';
 
+    /**
+     * @var LoggerInterface
+     */
     private $_logger;
+
+    /**
+     * @var ContainerInterface
+     */
     private $_container;
+
+    /**
+     * @var PrinterRepository
+     */
     private $_printerRepository;
+
+    /**
+     * @var UserRepository
+     */
+    private $_userRepository;
+
+    /**
+     * @var ContainerParametersHelper
+     */
     private $_helper;
 
-    public function __construct(LoggerInterface $logger, ContainerInterface $container, PrinterRepository $printerRepository, ContainerParametersHelper $helper)
+    /**
+     * @var MailHelperService
+     */
+    private $_mailHelper;
+
+    /**
+     * @var SlackService
+     */
+    private $_slackHelper;
+
+    /**
+     * SendNotificationCommand constructor.
+     * @param LoggerInterface $logger
+     * @param ContainerInterface $container
+     * @param PrinterRepository $printerRepository
+     * @param UserRepository $userRepository
+     * @param ContainerParametersHelper $helper
+     * @param MailHelperService $mailHelper
+     * @param SlackService $slack
+     */
+    public function __construct(LoggerInterface $logger, ContainerInterface $container, PrinterRepository $printerRepository, UserRepository $userRepository, ContainerParametersHelper $helper, MailHelperService $mailHelper, SlackService $slack)
     {
         $this->_helper = $helper;
         $this->_logger = $logger;
         $this->_container = $container;
         $this->_printerRepository = $printerRepository;
+        $this->_userRepository = $userRepository;
+        $this->_mailHelper = $mailHelper;
+        $this->_slackHelper = $slack;
+
         parent::__construct();
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function configure()
     {
         $this
@@ -42,32 +92,64 @@ class SendNotificationCommand extends Command
         ;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|void|null
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
         $config = Yaml::parseFile( $this->_helper->getApplicationRootDir()  . "/config/notification.yaml");
-        $slack = new SlackService($this->_logger, $this->_container);
-
 
         $printers = $this->_printerRepository->findAll();
         foreach ($printers as $printer) {
 
             // EMail
-            if($printer->getTonerBlack() <= $config['email']['tonerlevel']['danger']) {
-                // TODO: send notification email
-            } elseif ($printer->getTonerBlack() <= $config['email']['tonerlevel']['warning']) {
-                // TODO: send notification email
+            if($config['email']['enabled']) {
+                $this->_notifyWithEMail($printer, $config['email']['tonerlevel']['warning'], $config['email']['tonerlevel']['danger']);
             }
 
             // Slack
-            if($printer->getTonerBlack() <= $config['email']['tonerlevel']['danger']) {
-                $slack->setMessage(sprintf('Printer %s toner level is danger level!', $printer->getName()))->send();
-            } elseif ($printer->getTonerBlack() <= $config['email']['tonerlevel']['warning']) {
-                $slack->setMessage(sprintf('Printer %s toner level is warning!', $printer->getName()))->send();
+            if($config['slack']['enabled']) {
+                $this->_notifyWithSlack($printer, $config['slack']['tonerlevel']['warning'], $config['slack']['tonerlevel']['danger']);
             }
-
         }
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success('Successfully notified!');
+    }
+
+    /**
+     * @param Printer $printer
+     * @param int $warningLevel
+     * @param int $dangerLevel
+     */
+    private function _notifyWithEMail(Printer $printer, int $warningLevel, int $dangerLevel) {
+        if($printer->getTonerBlack() <= $dangerLevel) {
+            $this->_mailHelper
+                ->setSubject("Notification: Toner Danger for " . $printer->getSerialNumber())
+                ->setRecipients($this->_userRepository->getAllEMailAddresses())
+                ->setMessageTemplate("mails/danger_notification.html.twig", ['printer' => $printer])
+                ->send();
+        } elseif ($printer->getTonerBlack() <= $warningLevel) {
+            $this->_mailHelper
+                ->setSubject("Notification: Toner Warning for " . $printer->getSerialNumber())
+                ->setRecipients($this->_userRepository->getAllEMailAddresses())
+                ->setMessageTemplate("mails/warning_notification.html.twig", ['printer' => $printer])
+                ->send();
+        }
+    }
+
+    /**
+     * @param Printer $printer
+     * @param int $warningLevel
+     * @param int $dangerLevel
+     */
+    private function _notifyWithSlack(Printer $printer, int $warningLevel, int $dangerLevel) {
+        if ($printer->getTonerBlack() <= $dangerLevel) {
+            $this->_slackHelper->setMessage(sprintf('Printer %s toner level is danger level!', $printer->getName()))->send();
+        } elseif ($printer->getTonerBlack() <= $warningLevel) {
+            $this->_slackHelper->setMessage(sprintf('Printer %s toner level is warning!', $printer->getName()))->send();
+        }
     }
 }

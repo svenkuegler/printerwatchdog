@@ -5,6 +5,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
 
+    # Mailer settings
+    mailer.from: "printerwatchdog@mydomain.com"
+
     # SnipeIT Settings
     snipeit.url: "%env(SNIPEIT_API_URL)%"
     snipeit.apikey: "%env(SNIPEIT_API_KEY)%"

@@ -1,0 +1,12 @@
+<html lang="en">
+<head>
+    <title>Danger Notification</title>
+</head>
+    <body>
+        <h1>{% trans with {"%SERIAL%": printer.serialnumber } %}Printer with SerialNumber %SERIAL% reached Level: Danger{% endtrans %}</h1>
+        <p></p>
+        <p>{% trans %}Here comes more information if needed ....{% endtrans %}</p>
+        <p></p>
+        <p>{% trans with {"%ID%": printer.id, "%URL%":absolute_url(path('dashboard_details', {'id': printer.id})) }%}More information under <a href="%URL%">%URL%</a>{% endtrans %}</p>
+    </body>
+</html>
