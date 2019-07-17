@@ -32,7 +32,7 @@ class GetPrinterImageExtension extends AbstractExtension
 
     public function getPrinterImage($value)
     {
-        $value = strtolower(trim(preg_replace('/\s+/', '-', $value))).".jpg";
+        $value = strtolower(trim(preg_replace('/\s+/', '-', preg_replace('/[^a-zA-Z0-9\s]/', '', $value)))).".jpg";
         $path = $this->kernel->getProjectDir() . "/public/images/printer/";
 
         if(file_exists($path.$value)) {
