@@ -125,13 +125,13 @@ class SendNotificationCommand extends Command
      * @param int $dangerLevel
      */
     private function _notifyWithEMail(Printer $printer, int $warningLevel, int $dangerLevel) {
-        if($printer->getTonerBlack() <= $dangerLevel) {
+        if($printer->getTonerBlack() <= $dangerLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$dangerLevel || $printer->getTonerCyan()<=$dangerLevel || $printer->getTonerYellow()<=$dangerLevel))) {
             $this->_mailHelper
                 ->setSubject("Notification: Toner Danger for " . $printer->getSerialNumber())
                 ->setRecipients($this->_userRepository->getAllEMailAddresses())
                 ->setMessageTemplate("mails/danger_notification.html.twig", ['printer' => $printer])
                 ->send();
-        } elseif ($printer->getTonerBlack() <= $warningLevel) {
+        } elseif($printer->getTonerBlack() <= $warningLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$warningLevel || $printer->getTonerCyan()<=$warningLevel || $printer->getTonerYellow()<=$warningLevel))) {
             $this->_mailHelper
                 ->setSubject("Notification: Toner Warning for " . $printer->getSerialNumber())
                 ->setRecipients($this->_userRepository->getAllEMailAddresses())
@@ -146,9 +146,9 @@ class SendNotificationCommand extends Command
      * @param int $dangerLevel
      */
     private function _notifyWithSlack(Printer $printer, int $warningLevel, int $dangerLevel) {
-        if ($printer->getTonerBlack() <= $dangerLevel) {
+        if($printer->getTonerBlack() <= $dangerLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$dangerLevel || $printer->getTonerCyan()<=$dangerLevel || $printer->getTonerYellow()<=$dangerLevel))) {
             $this->_slackHelper->setMessage(sprintf('Printer %s toner level is danger level!', $printer->getName()))->send();
-        } elseif ($printer->getTonerBlack() <= $warningLevel) {
+        } elseif($printer->getTonerBlack() <= $warningLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$warningLevel || $printer->getTonerCyan()<=$warningLevel || $printer->getTonerYellow()<=$warningLevel))) {
             $this->_slackHelper->setMessage(sprintf('Printer %s toner level is warning!', $printer->getName()))->send();
         }
     }

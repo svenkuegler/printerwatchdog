@@ -36,11 +36,13 @@ class CardExtension extends AbstractExtension
     public function getCardColor(Printer $printer)
     {
         $res = "";
-        if($printer->getisColorPrinter() == false) {
-            if($printer->getTonerBlack()<=$this->notificationConfig['web']['tonerlevel']['danger']) {
-                $res = "text-white bg-danger";
-            } elseif($printer->getTonerBlack()<=$this->notificationConfig['web']['tonerlevel']['warning']) {
-                $res = "text-white bg-warning";
+        if($this->notificationConfig['web']['enabled']) {
+            $warningLevel = $this->notificationConfig['web']['tonerlevel']['warning'];
+            $dangerLevel = $this->notificationConfig['web']['tonerlevel']['danger'];
+            if($printer->getTonerBlack() <= $dangerLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$dangerLevel || $printer->getTonerCyan()<=$dangerLevel || $printer->getTonerYellow()<=$dangerLevel))) {
+                    $res = "text-white bg-danger";
+            } elseif($printer->getTonerBlack() <= $warningLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$warningLevel || $printer->getTonerCyan()<=$warningLevel || $printer->getTonerYellow()<=$warningLevel))) {
+                    $res = "text-white bg-warning";
             }
         }
 
