@@ -58,10 +58,10 @@ List of used frameworks and libraries.
  * Font Awesome Free v5.9.0
  * jQuery v3.4.1
  * Chart.js v2.8
-
+ * Chihuahua Icon from www.flaticon.com
+ 
 ## ToDo
  * Full Documentation
  * Multi Language Support
- * Printer History
  * E-Mail Templates
  * LDAP (Active Directory) Support
