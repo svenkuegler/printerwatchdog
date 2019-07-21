@@ -87,8 +87,8 @@ class SendNotificationCommand extends Command
     {
         $this
             ->setDescription('Send Notification to given targets.')
-            //->addOption('slack', null, InputOption::VALUE_NONE, 'Use Slack Notification')
-            //->addOption('email', null, InputOption::VALUE_NONE, 'Use E-Mail Notification')
+            ->addOption('slack', null, InputOption::VALUE_NONE, 'Use Slack Notification')
+            ->addOption('email', null, InputOption::VALUE_NONE, 'Use E-Mail Notification')
         ;
     }
 
@@ -101,22 +101,23 @@ class SendNotificationCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $config = Yaml::parseFile( $this->_helper->getApplicationRootDir()  . "/config/notification.yaml");
-
+        $this->_logger->info(sprintf("Starting notification with %s %s", ($input->getOption('email'))? "option email," : "no email option," , ($input->getOption('slack'))?'option slack.':'no slack option.'));
+        
         $printers = $this->_printerRepository->findAll();
         foreach ($printers as $printer) {
 
             // EMail
-            if($config['email']['enabled']) {
+            if($config['email']['enabled'] && $input->getOption('email')) {
                 $this->_notifyWithEMail($printer, $config['email']['tonerlevel']['warning'], $config['email']['tonerlevel']['danger']);
             }
 
             // Slack
-            if($config['slack']['enabled']) {
+            if($config['slack']['enabled'] && $input->getOption('slack')) {
                 $this->_notifyWithSlack($printer, $config['slack']['tonerlevel']['warning'], $config['slack']['tonerlevel']['danger']);
             }
         }
 
-        $io->success('Successfully notified!');
+        $this->_logger->info('Successfully notified!');
     }
 
     /**
@@ -127,13 +128,13 @@ class SendNotificationCommand extends Command
     private function _notifyWithEMail(Printer $printer, int $warningLevel, int $dangerLevel) {
         if($printer->getTonerBlack() <= $dangerLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$dangerLevel || $printer->getTonerCyan()<=$dangerLevel || $printer->getTonerYellow()<=$dangerLevel))) {
             $this->_mailHelper
-                ->setSubject("Notification: Toner Danger for " . $printer->getSerialNumber())
+                ->setSubject("Toner Level Danger for " . $printer->getSerialNumber())
                 ->setRecipients($this->_userRepository->getAllEMailAddresses())
                 ->setMessageTemplate("mails/danger_notification.html.twig", ['printer' => $printer])
                 ->send();
         } elseif($printer->getTonerBlack() <= $warningLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$warningLevel || $printer->getTonerCyan()<=$warningLevel || $printer->getTonerYellow()<=$warningLevel))) {
             $this->_mailHelper
-                ->setSubject("Notification: Toner Warning for " . $printer->getSerialNumber())
+                ->setSubject("Toner Level Warning for " . $printer->getSerialNumber())
                 ->setRecipients($this->_userRepository->getAllEMailAddresses())
                 ->setMessageTemplate("mails/warning_notification.html.twig", ['printer' => $printer])
                 ->send();
@@ -147,9 +148,15 @@ class SendNotificationCommand extends Command
      */
     private function _notifyWithSlack(Printer $printer, int $warningLevel, int $dangerLevel) {
         if($printer->getTonerBlack() <= $dangerLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$dangerLevel || $printer->getTonerCyan()<=$dangerLevel || $printer->getTonerYellow()<=$dangerLevel))) {
-            $this->_slackHelper->setMessage(sprintf('Printer %s toner level is danger level!', $printer->getName()))->send();
+            $this->_slackHelper
+                ->setMessage(sprintf('Toner Level is danger for %s!', $printer->getSerialNumber()))
+                ->setDangerAttachment($printer)
+                ->send();
         } elseif($printer->getTonerBlack() <= $warningLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$warningLevel || $printer->getTonerCyan()<=$warningLevel || $printer->getTonerYellow()<=$warningLevel))) {
-            $this->_slackHelper->setMessage(sprintf('Printer %s toner level is warning!', $printer->getName()))->send();
+            $this->_slackHelper
+                ->setMessage(sprintf('Toner Level is warning for %s!', $printer->getSerialNumber()))
+                ->setWarningAttachment($printer)
+                ->send();
         }
     }
 }

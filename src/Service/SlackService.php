@@ -2,11 +2,15 @@
 
 namespace App\Service;
 
+use App\Entity\Printer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 class SlackService
 {
+
+    const WarningColor = '#ffc107';
+    const DangerColor = '#dc3545';
 
     private $_logger;
     private $_container;
@@ -43,6 +47,76 @@ class SlackService
     public function setAttachments(array $attachments): SlackService
     {
         $this->_attachments = $attachments;
+        return $this;
+    }
+
+    /**
+     * @param Printer $printer
+     * @return $this
+     */
+    public function setWarningAttachment(Printer $printer) {
+        $rC = $this->_container->get('router')->getContext();
+        $this->_attachments = [
+            [
+                'fallback' => 'Toner level is warning',
+                'title'  => 'Toner level is warning',
+                'title_link' => sprintf('%s/dashboard/%s/detail', $rC->getBaseUrl() . (($rC->getHttpPort() != 80) ? ':' . $rC->getHttpPort() : ''), $printer->getId()),
+                'color'    => SlackService::WarningColor,
+                'fields'   => [
+                    [
+                        'title' => 'Location',
+                        'value' => $printer->getLocation(),
+                        'short' => true
+                    ],
+                    [
+                        'title' => 'IP',
+                        'value' => '<http://' . $printer->getIp() . '|' . $printer->getIp() . '>',
+                        'short' => true
+                    ],
+                    [
+                        'title' => 'Toner',
+                        'value' => "Black: " . $printer->getTonerBlack() . "%" . (($printer->getisColorPrinter())? "\nYellow: " . $printer->getTonerYellow() . "%\nCyan: " . $printer->getTonerCyan() . "%\nMagenta: " . $printer->getTonerMagenta() . "%%": ""),
+                        'short' => true
+                    ]
+                ]
+            ]
+        ];
+
+        return $this;
+    }
+
+    /**
+     * @param Printer $printer
+     * @return $this
+     */
+    public function setDangerAttachment(Printer $printer) {
+        $rC = $this->_container->get('router')->getContext();
+        $this->_attachments = [
+            [
+                'fallback' => 'Toner level is danger',
+                'title'  => 'Toner level is danger',
+                'title_link' => sprintf('%s/dashboard/%s/detail', $rC->getBaseUrl() . (($rC->getHttpPort() != 80) ? ':' . $rC->getHttpPort() : ''), $printer->getId()),
+                'color'    => SlackService::DangerColor,
+                'fields'   => [
+                    [
+                        'title' => 'Location',
+                        'value' => $printer->getLocation(),
+                        'short' => true
+                    ],
+                    [
+                        'title' => 'IP',
+                        'value' => '<http://' . $printer->getIp() . '|' . $printer->getIp() . '>',
+                        'short' => true
+                    ],
+                    [
+                        'title' => 'Toner',
+                        'value' => "Black: " . $printer->getTonerBlack() . "%" . (($printer->getisColorPrinter())? "\nYellow: " . $printer->getTonerYellow() . "%\nCyan: " . $printer->getTonerCyan() . "%\nMagenta: " . $printer->getTonerMagenta() . "%%": ""),
+                        'short' => true
+                    ]
+                ]
+            ]
+        ];
+
         return $this;
     }
 
