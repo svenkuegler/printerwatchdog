@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Printer;
 use App\Entity\PrinterHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -17,6 +18,21 @@ class PrinterHistoryRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, PrinterHistory::class);
+    }
+
+    /**
+     * @param Printer $printer
+     * @return PrinterHistory[]
+     */
+    public function findAllGroupByDay(Printer $printer)
+    {
+        return $this->createQueryBuilder('ph')
+            ->select('MAX(ph.TotalPages) AS TotalPages, MIN(ph.TonerBlack) AS TonerBlack, MIN(ph.TonerYellow) AS TonerYellow ,MIN(ph.TonerCyan) AS TonerCyan ,MIN(ph.TonerMagenta) AS TonerMagenta ,ph.Timestamp ,DATE_FORMAT(ph.Timestamp, \'%Y-%m-%d \') AS dateSub')
+            ->andWhere('ph.Printer = :printer')
+            ->setParameter('printer', $printer)
+            ->groupBy("dateSub")
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

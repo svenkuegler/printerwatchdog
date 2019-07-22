@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\PrinterHistoryRepository;
 use App\Repository\PrinterRepository;
 use App\Service\SnipeITService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,13 +26,15 @@ class DashboardController extends AbstractController
     /**
      * @Route("/dashboard/{id}/detail", name="dashboard_details")
      */
-    public function details(Request $request, PrinterRepository $printerRepository, SnipeITService $snipeITService)
+    public function details(Request $request, PrinterRepository $printerRepository, PrinterHistoryRepository $printerHistoryRepository, SnipeITService $snipeITService)
     {
         $printer = $printerRepository->findOneBy(['id' => $request->get("id")]);
+        $printerHistory = $printerHistoryRepository->findAllGroupByDay($printer);
         $snipeItInfo = $snipeITService->getAssetInformationBySerial($printer->getSerialNumber());
 
         return $this->render('dashboard/detail.html.twig', [
             'printer' => $printer,
+            'printerHistory' => $printerHistory,
             'snipeItUrl' => $this->getParameter('snipeit.url'),
             'snipeItInfo' => $snipeItInfo
         ]);

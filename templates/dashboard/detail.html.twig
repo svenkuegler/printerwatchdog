@@ -160,14 +160,14 @@
         tonerDataMagenta = [];
         tonerDatasets = [];
 
-        {% for history in printer.printerHistories %}
-        label.push('{{ history.timestamp|date("d.m.Y H:i:s") }}');
-        pagesData.push({{ history.totalpages }});
-        tonerDataBlack.push({{ history.tonerblack }});
+        {%  for history in printerHistory %}
+        label.push('{{ history.Timestamp|date("d.m.Y") }}');
+        pagesData.push({{ history.TotalPages }});
+        tonerDataBlack.push({{ history.TonerBlack }});
         {% if printer.isColorPrinter %}
-        tonerDataCyan.push({{ history.tonercyan }});
-        tonerDataMagenta.push({{ history.tonermagenta }});
-        tonerDataYellow.push({{ history.toneryellow }});
+        tonerDataCyan.push({{ history.TonerCyan }});
+        tonerDataMagenta.push({{ history.TonerMagenta }});
+        tonerDataYellow.push({{ history.TonerYellow }});
         {% endif %}
         {% endfor %}
 
