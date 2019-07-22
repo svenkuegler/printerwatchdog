@@ -40,13 +40,13 @@ $ sudo -u www-data crontab -e
 *Note: Run the cronjob as __www-data__ prevents some file/folder-permission problems.*
 ```text
 # Get Printer information 5 minutes after full hour
-5 * * * * php bin/console app:get-printer-infos
+5 * * * * php /path/to/printerwatchdog/bin/console app:get-printer-info
 
 # Send Slack Notification 3 times on a working day
-* 8,12,16 * 1-6 php bin/console app:send-notification --slack
+* 8,12,16 * * 1-6 php /path/to/printerwatchdog/bin/console app:send-notification --slack
 
 # Send E-Mail Notification every day 6am
-* 6 * * * php bin/console app:send-notification --email
+* 6 * * * php /path/to/printerwatchdog/bin/console app:send-notification --email
 ```
 
 ### Notification
