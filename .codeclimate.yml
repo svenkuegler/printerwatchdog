@@ -1,0 +1,5 @@
+exclude_patterns:
+    - public/css/all.css
+    - public/css/bootstrap*.css
+    - public/css/Chart.min.css
+    - public/js/*
