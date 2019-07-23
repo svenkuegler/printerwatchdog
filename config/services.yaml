@@ -6,7 +6,7 @@
 parameters:
 
     # Mailer settings
-    mailer.from: "printerwatchdog@mydomain.com"
+    mailer.from: "%env(APP_MAIL_FROM)%"
 
     # SnipeIT Settings
     snipeit.url: "%env(SNIPEIT_API_URL)%"
@@ -60,6 +60,11 @@ parameters:
             type: "value"
             oid: ".1.3.6.1.2.1.43.5.1.1.16.1"
 
+    # Routing information
+    router.request_context.host: '%env(APP_URL)%'
+    router.request_context.scheme: '%env(APP_SCHEME)%'
+    router.request_context.base_url: '%env(APP_BASE_URL)%'
+    asset.request_context.base_path: '%router.request_context.base_url%'
 
 services:
     # default configuration for services in *this* file

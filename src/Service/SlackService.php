@@ -60,7 +60,7 @@ class SlackService
             [
                 'fallback' => 'Toner level is warning',
                 'title'  => 'Toner level is warning',
-                'title_link' => sprintf('%s/dashboard/%s/detail', $rC->getBaseUrl() . (($rC->getHttpPort() != 80) ? ':' . $rC->getHttpPort() : ''), $printer->getId()),
+                'title_link' => sprintf('%s/dashboard/%s/detail', $rC->getBaseUrl(), $printer->getId()),
                 'color'    => SlackService::WarningColor,
                 'fields'   => [
                     [
@@ -95,7 +95,7 @@ class SlackService
             [
                 'fallback' => 'Toner level is danger',
                 'title'  => 'Toner level is danger',
-                'title_link' => sprintf('%s/dashboard/%s/detail', $rC->getBaseUrl() . (($rC->getHttpPort() != 80) ? ':' . $rC->getHttpPort() : ''), $printer->getId()),
+                'title_link' => sprintf('%s/dashboard/%s/detail', $rC->getBaseUrl(), $printer->getId()),
                 'color'    => SlackService::DangerColor,
                 'fields'   => [
                     [
