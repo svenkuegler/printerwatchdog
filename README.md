@@ -43,10 +43,10 @@ $ sudo -u www-data crontab -e
 5 * * * * php /path/to/printerwatchdog/bin/console app:get-printer-info
 
 # Send Slack Notification 3 times on a working day
-* 8,12,16 * * 1-6 php /path/to/printerwatchdog/bin/console app:send-notification --slack
+0 8,12,16 * * 1-6 php /path/to/printerwatchdog/bin/console app:send-notification --slack
 
 # Send E-Mail Notification every day 6am
-* 6 * * * php /path/to/printerwatchdog/bin/console app:send-notification --email
+0 6 * * * php /path/to/printerwatchdog/bin/console app:send-notification --email
 ```
 
 ### Notification
