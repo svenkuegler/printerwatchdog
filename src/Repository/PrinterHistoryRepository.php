@@ -35,6 +35,49 @@ class PrinterHistoryRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @param Printer $printer
+     * @return mixed[]
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function get30DaysUsage(Printer $printer)
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT b.id, b.printer_id,
+                       b.max_pages - b.min_pages AS pages_per_day,
+                       b.max_black - b.min_black AS black_per_day,
+                       b.max_yellow - b.min_yellow AS yellow_per_day,
+                       b.max_cyan - b.min_cyan AS cyan_per_day,
+                       b.max_magenta - b.min_magenta AS magenta_per_day,
+                       b.formated_date
+                FROM (SELECT id,
+                             printer_id,
+                             MAX(total_pages) as max_pages,
+                             MIN(total_pages) as min_pages,
+                             MAX(toner_black) as max_black,
+                             MIN(toner_black) as min_black,
+                             MAX(toner_yellow) as max_yellow,
+                             MIN(toner_yellow) as min_yellow,
+                             MAX(toner_magenta) as max_magenta,
+                             MIN(toner_magenta) as min_magenta,
+                             MAX(toner_cyan) as max_cyan,
+                             MIN(toner_cyan) as min_cyan,
+                             DATE(timestamp)  as formated_date
+                      FROM printer_history
+                      WHERE printer_id = :printerId
+                        AND timestamp BETWEEN DATE_SUB(NOW(), INTERVAL :days DAY) AND DATE(NOW())
+                      GROUP BY DATE(timestamp)) b;";
+
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([
+            'printerId' => $printer->getId(),
+            'days' => 30
+        ]);
+
+        return $stmt->fetchAll();
+    }
+
     // /**
     //  * @return PrinterHistory[] Returns an array of PrinterHistory objects
     //  */
