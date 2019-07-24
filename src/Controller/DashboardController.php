@@ -11,9 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
 {
-
     /**
      * @Route("/dashboard/{view}", name="dashboard", defaults={"view"="card"})
+     *
+     * @param PrinterRepository $printerRepository
+     * @param $view
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(PrinterRepository $printerRepository, $view)
     {
@@ -25,16 +28,25 @@ class DashboardController extends AbstractController
 
     /**
      * @Route("/dashboard/{id}/detail", name="dashboard_details")
+     *
+     * @param Request $request
+     * @param PrinterRepository $printerRepository
+     * @param PrinterHistoryRepository $printerHistoryRepository
+     * @param SnipeITService $snipeITService
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function details(Request $request, PrinterRepository $printerRepository, PrinterHistoryRepository $printerHistoryRepository, SnipeITService $snipeITService)
     {
         $printer = $printerRepository->findOneBy(['id' => $request->get("id")]);
         $printerHistory = $printerHistoryRepository->findAllGroupByDay($printer);
+        $printerStatistic = $printerHistoryRepository->get30DaysUsage($printer);
         $snipeItInfo = $snipeITService->getAssetInformationBySerial($printer->getSerialNumber());
 
         return $this->render('dashboard/detail.html.twig', [
             'printer' => $printer,
             'printerHistory' => $printerHistory,
+            'printerStatistic' => $printerStatistic,
             'snipeItUrl' => $this->getParameter('snipeit.url'),
             'snipeItInfo' => $snipeItInfo
         ]);

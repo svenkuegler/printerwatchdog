@@ -94,6 +94,37 @@
             </div>
         </div>
 
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>{% trans %}Statistics{% endtrans %}</h5>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-2">{% trans %}Avg Pages per Day*:{% endtrans %}</dt>
+                            <dd class="col-sm-2">{{ printerStatistic.avg30daysPages }}</dd>
+
+                            <dt class="col-sm-2">{% trans %}Avg Black Usage*:{% endtrans %}</dt>
+                            <dd class="col-sm-6">{{ printerStatistic.avg30daysBlackUsage }}%</dd>
+                        {% if printer.isColorPrinter %}
+                            <dt class="col-sm-2 offset-4">{% trans %}Avg Yellow*:{% endtrans %}</dt>
+                            <dd class="col-sm-2">{{ printerStatistic.avg30daysYellowUsage }}%</dd>
+
+                            <dt class="col-sm-2 offset-4">{% trans %}Avg Magenta*:{% endtrans %}</dt>
+                            <dd class="col-sm-2">{{ printerStatistic.avg30daysMagentaUsage }}%</dd>
+
+                            <dt class="col-sm-2 offset-4">{% trans %}Avg Cyan*:{% endtrans %}</dt>
+                            <dd class="col-sm-2">{{ printerStatistic.avg30daysCyanUsage }}%</dd>
+                        {% endif %}
+                        </dl>
+
+                        <small class="text-muted">{% trans %}* Notice - values based on 30 Days average.{% endtrans %}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--{% if snipeItInfo is not null %}
         <div class="row mt-3">
             <div class="col-12">
