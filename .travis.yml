@@ -20,7 +20,9 @@ script:
     #- sudo rm -r vendor
     #- composer install --no-interaction --no-dev --optimize-autoloader
     - composer dump-env prod
-    - tar cvzf --exclude=var/* /tmp/release.tar.gz .
+    - sudo rm -r var/cache/*
+    - sudo rm -r var/log/*
+    - tar cvzf /tmp/release.tar.gz .
 
 deploy:
     provider: releases
