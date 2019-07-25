@@ -19,18 +19,18 @@ jobs:
             - php bin/console doctrine:fixtures:load -n -q --env test
             - php bin/phpunit
 
-#        - stage: GitHub Release
-#          install:
-#              - travis_retry composer install --no-interaction --no-dev --optimize-autoloader
-#          script:
-#            - composer dump-env prod
-#            - tar cvzf /tmp/release.tar.gz .
-#          deploy:
-#              provider: releases
-#              api_key:
-#                  secure: "XZlwSyo50pG2dT305n8zfxMb0Oc0/srI+YcjjT1ZYIqV7DDMbYvMsFvldNe03Lnr3xk+q1wp/LEZr1zVSnsTD6HM+AwFRBRmAbJDLd0L9IRlXSZFhlUprXzVxb77h70unUJFcinDlaOu6Sg+QkWi3SPCcJANHfdZI87fYXGPPeyPbjcRc8iRw9+6ZWhtSV3ANJU1wLNf1M+Eee4CBARwGl9FtMxPy4aqeWEHC2KetVQAiWYhapWCnvtG1qrgQFjc6yv+EVVb9Tml0EsOo/YuYIHoli0GMn6HQv/XeKV73wjwNAV9tGvgneIEjYcrzmwRB4jSMmykvA5dEd4doieG/7gMqnYzmruwRHhJ3PTXqno2eID/OaBdcsQEoVuxUVInnrMnjp8foKi2ww3x+C4GAYtUt0+qbugLHvISDW6J4e1qxkCQATeA1fUZif2koYqDH8/Rnd1063QE1xzYVWFMj9JgNJZoYtbtBRdbcgGF0eYUEdINYaIm2kcewULdg/0MRho5M8rhHJ8e0jBr2FAF3esFYYsDgbP9VbV0h1g3so8D6gwAY520uCQaPUmmzx1NIB0QGUiQ+EaG44MtVOLZQ0o7HzPXK555A8rppkwKKXIF6QR3UTQNuV5BMQupjBTuW2sT0sFWHnvzS6MTmImmLgwaOGIA5iX0gA0FHTyz9ks="
-#              file: '/tmp/release.tar.gz'
-#              skip_cleanup: true
-#              draft: true
+        - stage: GitHub Release
+          install:
+              - APP_ENV=prod composer install --no-interaction --no-dev --optimize-autoloader
+          script:
+            - composer dump-env prod
+            - tar cvzf /tmp/release.tar.gz .
+          deploy:
+              provider: releases
+              api_key:
+                  secure: "XZlwSyo50pG2dT305n8zfxMb0Oc0/srI+YcjjT1ZYIqV7DDMbYvMsFvldNe03Lnr3xk+q1wp/LEZr1zVSnsTD6HM+AwFRBRmAbJDLd0L9IRlXSZFhlUprXzVxb77h70unUJFcinDlaOu6Sg+QkWi3SPCcJANHfdZI87fYXGPPeyPbjcRc8iRw9+6ZWhtSV3ANJU1wLNf1M+Eee4CBARwGl9FtMxPy4aqeWEHC2KetVQAiWYhapWCnvtG1qrgQFjc6yv+EVVb9Tml0EsOo/YuYIHoli0GMn6HQv/XeKV73wjwNAV9tGvgneIEjYcrzmwRB4jSMmykvA5dEd4doieG/7gMqnYzmruwRHhJ3PTXqno2eID/OaBdcsQEoVuxUVInnrMnjp8foKi2ww3x+C4GAYtUt0+qbugLHvISDW6J4e1qxkCQATeA1fUZif2koYqDH8/Rnd1063QE1xzYVWFMj9JgNJZoYtbtBRdbcgGF0eYUEdINYaIm2kcewULdg/0MRho5M8rhHJ8e0jBr2FAF3esFYYsDgbP9VbV0h1g3so8D6gwAY520uCQaPUmmzx1NIB0QGUiQ+EaG44MtVOLZQ0o7HzPXK555A8rppkwKKXIF6QR3UTQNuV5BMQupjBTuW2sT0sFWHnvzS6MTmImmLgwaOGIA5iX0gA0FHTyz9ks="
+              file: '/tmp/release.tar.gz'
+              skip_cleanup: true
+              draft: true
 #              on:
 #                  tags: true
