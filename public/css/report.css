@@ -1,0 +1,22 @@
+@media print {
+    .print-hide-background {
+        background-image: none !important;
+        background-color: transparent !important;
+    }
+
+    .print-page-break-after {
+        page-break-after: always;
+    }
+
+    .print-page-break-before {
+        page-break-before: always;
+    }
+
+    .print-color-black {
+        color: black !important;
+    }
+
+    code, pre {
+        border: none !important;
+    }
+}

@@ -1,0 +1,30 @@
+<div class="col-6">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+            <div class="col-md-4 text-center pt-4 text-muted">
+                <span class="fa-stack fa-5x">
+                    <i class="fa fa-file fa-stack-2x"></i>
+                    <i class="fa fa-table fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans %}Asset Report{% endtrans %}</h5>
+                    <p class="card-text" style="height: 110px;">{% trans %}This report generates a full export of monitored printers.{% endtrans %}</p>
+                    <div class="card-text text-right">
+                        <a href="{{ path('generate_report_view', {'report':'asset_report'}) }}" class="btn btn-primary" target="_blank">{% trans %}View Report{% endtrans %}</a>
+                        <div class="dropdown d-inline">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% trans %}Export as ...{% endtrans %}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{ path('generate_pdf_export', {'report':'asset_report'}) }}"><i class="fa fa-file-pdf"></i> {% trans %}PDF File{% endtrans %}</a>
+                                <a class="dropdown-item" href="{{ path('generate_csv_export', {'report':'asset_report'}) }}"><i class="fa fa-file-csv"></i> {% trans %}CSV File{% endtrans %}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

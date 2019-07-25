@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Reports{% endtrans %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row page-header">
+        <h1>{% trans %}Reports{% endtrans %}</h1>
+    </div>
+
+    <div class="row">
+        {% include('report/card_assetreport.html.twig') %}
+    </div>
+</div>
+{% endblock %}
