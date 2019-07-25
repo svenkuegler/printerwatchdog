@@ -32,6 +32,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.2",
+        "symfony/css-selector": "4.3.*",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^4.3",
