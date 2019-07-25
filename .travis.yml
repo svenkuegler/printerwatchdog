@@ -15,9 +15,7 @@ install: travis_retry composer install --no-interaction --prefer-source
 
 script:
     - php bin/phpunit
-
-after_script:
-    - rm -r vendor
+    - sudo rm -r vendor
     - composer install --no-interaction --no-dev
     - mkdir dist
     - tar cvzf --exclude=./var/* dist/release.tar.gz .
