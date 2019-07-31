@@ -12,17 +12,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     /**
-     * @Route("/dashboard/{view}", name="dashboard", defaults={"view"="card"})
+     * @Route("/dashboard/{view}", name="dashboard", defaults={"view"="dash"})
      *
      * @param PrinterRepository $printerRepository
      * @param $view
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function index(PrinterRepository $printerRepository, $view)
     {
         return $this->render('dashboard/index.html.twig', [
             'view' => $this->_validateViewParam($view),
-            'printerList' => $printerRepository->findAll()
+            'printerList' => $printerRepository->findAll(),
+            'printerSummary' => $printerRepository->getSummary()
         ]);
     }
 
@@ -58,7 +60,7 @@ class DashboardController extends AbstractController
      */
     private function _validateViewParam(string $view)
     {
-        $availableViews = ['card', 'table'];
+        $availableViews = ['dash', 'card', 'table'];
         return (!in_array($view, $availableViews)) ? $availableViews[0] : $view;
     }
 }

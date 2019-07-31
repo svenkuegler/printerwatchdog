@@ -1,0 +1,102 @@
+<div class="container mt-lg-5">
+    <div class="row">
+        <div class="col-md-6 ">
+            <div class="card h-100">
+                <h5 class="card-header">{{ 'Toner Usage'|trans }}</h5>
+                <div class="card-body">
+                    <canvas id="chartPages" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <h5 class="card-header">{{ 'last check'|trans }}</h5>
+                    <div class="card-body text-center">
+                        <h1 class="display-4">
+                            {{ printerSummary.lastCheck|date('d.m.Y H:i:s') }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-3">
+                <div class="card">
+                    <h5 class="card-header">{{'avg. Pages per Day'|trans}}*</h5>
+                    <div class="card-body">
+                        <h1 class="display-3 text-center">
+                            {{ printerSummary.totalAvgPages }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="card">
+                    <h5 class="card-header">{{'SW / Color'|trans}}</h5>
+                    <div class="card-body">
+                        <h1 class="display-3 text-center">
+                            {{ printerSummary.printerTotalSw }}/{{ printerSummary.printerTotalColor }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="card">
+                    <h5 class="card-header">{{'Printer Errors'|trans}}</h5>
+                    <div class="card-body">
+                        <h1 class="display-1 text-center">
+                            {{ printerSummary.recentErrors }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="card {% if printerSummary.recentlyunreachable >0 %} border-warning{% endif %}">
+                    <h5 class="card-header{% if printerSummary.recentlyunreachable >0 %} bg-warning text-white{% endif %}">{{'recently unreachable'|trans}}</h5>
+                    <div class="card-body">
+                        <h1 class="display-1 text-center {% if printerSummary.recentlyunreachable >0 %} text-warning{% endif %}">
+                            {{ printerSummary.recentlyunreachable }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <small class="text-muted">* {% trans %}based on 30 days calculation{% endtrans %}</small>
+        </div>
+    </div>
+</div>
+
+{% block stylesheets %}
+    <style href="{{ asset('css/Chart.min.css') }}" rel="stylesheet"></style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/Chart.bundle.min.js') }}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        data = {
+            datasets: [{
+                backgroundColor: ['rgba(220, 53, 69, 1)', 'rgba(255, 193, 7, 1)', 'rgba(40, 167, 69, 1)'],
+                data: [{{ printerSummary.printerTonerDanger }}, {{ printerSummary.printerTonerWarning }}, {{ printerSummary.printerTonerOk }}]
+            }],
+            labels: [ '{{'Danger'|trans}}', '{{'Warning'|trans}}', '{{'Okay'|trans}}' ]
+        };
+
+
+        ctP = document.getElementById('chartPages').getContext('2d');
+        chartPages = new Chart(ctP, {
+            type: 'doughnut',
+            data: data,
+            options: []
+        });
+
+    </script>
+{% endblock %}
