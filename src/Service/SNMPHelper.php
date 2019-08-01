@@ -287,6 +287,25 @@ class SNMPHelper
     }
 
     /**
+     * @param String $ip
+     * @param string $oid
+     * @return int|string|null
+     */
+    public function getSingleValue(String $ip, string $oid)
+    {
+        if(!$this->_connect($ip)) {
+            $this->_close();
+            return null;
+        }
+
+        $result = $this->_getValue($oid);
+
+        $this->_close();
+
+        return $result;
+    }
+
+    /**
      * @param $ip
      * @return bool
      */
