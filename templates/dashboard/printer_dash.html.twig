@@ -16,7 +16,11 @@
                     <h5 class="card-header">{{ 'last check'|trans }}</h5>
                     <div class="card-body text-center">
                         <h1 class="display-4">
-                            {{ printerSummary.lastCheck|date('d.m.Y H:i:s') }}
+                            {% if printerSummary.lastCheck is null %}
+                                {{ 'unknown'|trans }}
+                            {% else %}
+                                {{ printerSummary.lastCheck|date('d.m.Y H:i:s') }}
+                            {% endif %}
                         </h1>
                     </div>
                 </div>
