@@ -54,9 +54,9 @@ class PrinterSummary
     private $printerTonerDanger = 0;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastCheck(): string
+    public function getLastCheck(): ?string
     {
         return $this->lastCheck;
     }
