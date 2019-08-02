@@ -9,7 +9,7 @@ namespace App\Entity;
 class PrinterSummary
 {
     /**
-     * @var string
+     * @var ?string
      */
     private $lastCheck;
 
@@ -62,10 +62,10 @@ class PrinterSummary
     }
 
     /**
-     * @param string $lastCheck
+     * @param string|null $lastCheck
      * @return PrinterSummary
      */
-    public function setLastCheck(string $lastCheck): PrinterSummary
+    public function setLastCheck(?string $lastCheck): PrinterSummary
     {
         $this->lastCheck = $lastCheck;
         return $this;
