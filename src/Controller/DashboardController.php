@@ -43,14 +43,13 @@ class DashboardController extends AbstractController
         $printer = $printerRepository->findOneBy(['id' => $request->get("id")]);
         $printerHistory = $printerHistoryRepository->findAllGroupByDay($printer);
         $printerStatistic = $printerHistoryRepository->get30DaysUsage($printer);
-        $snipeItInfo = $snipeITService->getAssetInformationBySerial($printer->getSerialNumber());
 
         return $this->render('dashboard/detail.html.twig', [
             'printer' => $printer,
             'printerHistory' => $printerHistory,
             'printerStatistic' => $printerStatistic,
-            'snipeItUrl' => $this->getParameter('snipeit.url'),
-            'snipeItInfo' => $snipeItInfo
+            'snipeItUrl' => $snipeITService->getSnipeItUrl(),
+            'snipeItInfo' => $snipeITService->getAssetInformationBySerial($printer->getSerialNumber())
         ]);
     }
 
