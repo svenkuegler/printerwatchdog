@@ -5,6 +5,7 @@ namespace App\EventSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
 
 class UserLocaleSubscriber implements EventSubscriberInterface
 {
@@ -28,14 +29,14 @@ class UserLocaleSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'security.interactive_login' => 'onSecurityInteractiveLogin',
+            SecurityEvents::INTERACTIVE_LOGIN => 'onInteractiveLogin',
         ];
     }
 
     /**
      * @param InteractiveLoginEvent $event
      */
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
         $user = $event->getAuthenticationToken()->getUser();
 
