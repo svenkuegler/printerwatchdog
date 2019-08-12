@@ -4,8 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Printer;
 use App\Entity\PrinterHistory;
-use App\Entity\PrinterStatistic;
-use App\Entity\PrinterStatistics;
+use App\Entity\PrinterHistoryStatisticData;
+use App\Entity\PrinterHistoryStatistics;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -39,12 +39,12 @@ class PrinterHistoryRepository extends ServiceEntityRepository
 
     /**
      * @param Printer $printer
-     * @return PrinterStatistics
+     * @return PrinterHistoryStatistics
      * @throws \Doctrine\DBAL\DBALException
      */
     public function get30DaysUsage(Printer $printer)
     {
-        $printerStatistics = new PrinterStatistics();
+        $printerStatistics = new PrinterHistoryStatistics();
         $connection = $this->getEntityManager()->getConnection();
 
         $sql = "SELECT b.id, b.printer_id,
@@ -80,7 +80,7 @@ class PrinterHistoryRepository extends ServiceEntityRepository
 
         foreach ($stmt->fetchAll() as $stats)
         {
-            $ps = new PrinterStatistic();
+            $ps = new PrinterHistoryStatisticData();
             $ps->setPrinterId($stats['printer_id'])
                 ->setFormatedDate($stats['formated_date'])
                 ->setPagesPerDay($stats['pages_per_day'])

@@ -1,6 +1,7 @@
-    <div class="row">
+    <div class="row mt-5">
         <div class="text-center col-12">
             <span class="text-muted">
+                <a href="{{ url('dashboard', {"view":"dash"}) }}" class="btn btn-sm btn-light" title="{% trans %}Dashboard View{% endtrans %}"><i class="fas fa-tachometer-alt"></i></a>
                 <a href="{{ url('dashboard', {"view":"card"}) }}" class="btn btn-sm btn-light" title="{% trans %}Card View{% endtrans %}"><i class="fas fa-th"></i></a>
                 <a href="{{ url('dashboard', {"view":"table"}) }}" class="btn btn-sm btn-light" title="{% trans %}Table View{% endtrans %}"><i class="fas fa-table"></i></a>
             </span>

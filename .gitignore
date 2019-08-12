@@ -20,3 +20,9 @@
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 /public/images/printer/*.jpg
+
+###> Vagrant
+/*-console.log
+/.vagrant/
+/.debug/
+/public/apc.php

@@ -86,6 +86,7 @@ class GetPrinterInfoCommand extends Command
                         ->setTonerMagentaDescription($pInfo->getTonerMagentaDescription())
                         ->setType($pInfo->getPrinterType())
                         ->setTotalPages($pInfo->getTotalPages())
+                        ->setConsoleDisplay($pInfo->getConsoleDisplayBuffer())
                         ->setUnreachableCount(0);
 
                     $historyData->setPrinter($printer);
@@ -117,6 +118,7 @@ class GetPrinterInfoCommand extends Command
                             ->setTonerMagentaDescription($pInfo->getTonerMagentaDescription())
                             ->setType($pInfo->getPrinterType())
                             ->setTotalPages($pInfo->getTotalPages())
+                            ->setConsoleDisplay($pInfo->getConsoleDisplayBuffer())
                             ->setUnreachableCount(0);
                         $historyData->setPrinter($prn);
 
@@ -157,6 +159,7 @@ class GetPrinterInfoCommand extends Command
                         ->setTonerMagentaDescription($pInfo->getTonerMagentaDescription())
                         ->setType($pInfo->getPrinterType())
                         ->setTotalPages($pInfo->getTotalPages())
+                        ->setConsoleDisplay($pInfo->getConsoleDisplayBuffer())
                         ->setUnreachableCount(0);
 
                     $this->logger->notice(sprintf("Save actual information for IP %s", $printer->getIp()));

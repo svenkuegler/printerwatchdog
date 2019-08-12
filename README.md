@@ -81,6 +81,15 @@ SNIPEIT_API_KEY=HERE-COMES-THE-ULTRA-LONG-API-KEY
 
 ## Development
 
+I decided to use vagrant as platform independent development environment. 
+More information at [Vagrant](https://www.vagrantup.com) and [Virtualbox](https://www.virtualbox.org).
+
+Bring the machine up with:
+```bash
+$ vagrant up
+```
+
+If the machine is up and running open: [http://127.0.0.1:8080](http://127.0.0.1:8080)  
 
 #### Translation
 Find the Translation files in __/translations/*__ folder.

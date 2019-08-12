@@ -48,10 +48,27 @@ class SnipeITService
     {
         $this->_logger = $logger;
         $this->_container = $container;
-        $this->_apiUrl = $container->getParameter("snipeit.url");
-        $this->_apiKey = $container->getParameter("snipeit.apikey");
+        try{
+            $this->_apiUrl = $container->getParameter('snipeit.url');
+            $this->_apiKey = $container->getParameter('snipeit.apikey');
+        } catch (\Exception $e) {
+            $this->_apiUrl = null;
+            $this->_apiKey = null;
+        }
 
         $this->_isEnabled = (is_null($this->_apiKey))?false:true;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getSnipeItUrl()
+    {
+        if(!$this->_isEnabled) {
+            return null;
+        }
+
+        return $this->_apiUrl;
     }
 
     /**
