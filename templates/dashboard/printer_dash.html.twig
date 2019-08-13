@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="col-md-6 mt-3">
-                <div class="card {% if printerSummary.recentlyunreachable >0 %} border-warning{% endif %}">
+                <div class="card {% if printerSummary.recentlyunreachable >0 %} border-warning{% endif %}" onclick="openFilteredCards('fUnreachable')">
                     <h5 class="card-header{% if printerSummary.recentlyunreachable >0 %} bg-warning text-white{% endif %}">{{'recently unreachable'|trans}}</h5>
                     <div class="card-body">
                         <h1 class="display-1 text-center {% if printerSummary.recentlyunreachable >0 %} text-warning{% endif %}">
@@ -99,8 +99,32 @@
         chartPages = new Chart(ctP, {
             type: 'doughnut',
             data: data,
-            options: []
+            options: {
+                onClick: function (evt, item) {
+                    lbl = item[0]._model.label;
+                    url = '';
+                    switch(lbl) {
+                        case '{{'Okay'|trans}}':
+                            openFilteredCards('fOkay');
+                            break;
+
+                        case '{{'Warning'|trans}}':
+                            openFilteredCards('fWarning');
+                            break;
+
+                        case '{{'Danger'|trans}}':
+                            openFilteredCards('fDanger');
+                            break;
+
+                        default:
+                            // Do Nothing!
+                    }
+                }
+            }
         });
 
+        function openFilteredCards(filterVar) {
+            location.href = "{{ url('dashboard', {'view': 'card'}) }}?filter=" + filterVar;
+        }
     </script>
 {% endblock %}

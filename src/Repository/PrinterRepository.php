@@ -4,8 +4,11 @@ namespace App\Repository;
 
 use App\Entity\Printer;
 use App\Entity\PrinterSummary;
+use App\Service\ContainerParametersHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * @method Printer|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,9 +18,43 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class PrinterRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var int
+     */
+    private $lvlDanger = 0;
+
+    /**
+     * @var int
+     */
+    private $lvlWarning = 0;
+
+    /**
+     * PrinterRepository constructor.
+     * @param RegistryInterface $registry
+     * @param ContainerParametersHelper $containerParametersHelper
+     */
+    public function __construct(RegistryInterface $registry, ContainerParametersHelper $containerParametersHelper)
     {
+        $config = Yaml::parseFile( $containerParametersHelper->getApplicationRootDir()  . "/config/notification.yaml");
+        $this->lvlWarning = $config['web']['tonerlevel']['warning'];
+        $this->lvlDanger = $config['web']['tonerlevel']['danger'];
+
         parent::__construct($registry, Printer::class);
+    }
+
+    /**
+     * @return Printer[]
+     * @param array $filter
+     */
+    public function findAllWithFilter(array $filter)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        foreach ($filter as $f) {
+            $qb = $this->_filterFieldMapper($qb, $f);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -58,30 +95,34 @@ class PrinterRepository extends ServiceEntityRepository
 
         $summary->setPrinterTonerOk(
             (int)$this->createQueryBuilder('p')
-                ->orWhere('p.TonerBlack > 30 AND p.isColorPrinter = 0')
-                ->orWhere('p.isColorPrinter = 1 AND p.TonerBlack > 30 AND p.TonerYellow > 30 AND p.TonerMagenta > 30 AND p.TonerCyan > 30')
+                ->orWhere('p.TonerBlack > :lvlWarning AND p.isColorPrinter = 0')
+                ->orWhere('p.isColorPrinter = 1 AND p.TonerBlack > :lvlWarning AND p.TonerYellow > :lvlWarning AND p.TonerMagenta > :lvlWarning AND p.TonerCyan > :lvlWarning')
                 ->select('COUNT(p.id) as r')
+                ->setParameter('lvlWarning', $this->lvlWarning)
                 ->getQuery()->getOneOrNullResult()['r']
         );
 
         $summary->setPrinterTonerWarning(
             (int)$this->createQueryBuilder('p')
-                ->orWhere('p.TonerCyan < 30')
-                ->andWhere('p.TonerCyan > 10')
-                ->orWhere('p.TonerMagenta < 30')
-                ->andWhere('p.TonerMagenta > 10')
-                ->orWhere('p.TonerYellow < 30')
-                ->andWhere('p.TonerYellow > 10')
-                ->orWhere('p.TonerBlack < 30')
-                ->andWhere('p.TonerBlack > 10')
+                ->orWhere('p.TonerCyan < :lvlWarning')
+                ->andWhere('p.TonerCyan > :lvlDanger')
+                ->orWhere('p.TonerMagenta < :lvlWarning')
+                ->andWhere('p.TonerMagenta > :lvlDanger')
+                ->orWhere('p.TonerYellow < :lvlWarning')
+                ->andWhere('p.TonerYellow > :lvlDanger')
+                ->orWhere('p.TonerBlack < :lvlWarning')
+                ->andWhere('p.TonerBlack > :lvlDanger')
+                ->setParameter('lvlDanger', $this->lvlDanger)
+                ->setParameter('lvlWarning', $this->lvlWarning)
                 ->select('COUNT(p.id) as r')
                 ->getQuery()->getOneOrNullResult()['r']
         );
 
         $summary->setPrinterTonerDanger(
             (int)$this->createQueryBuilder('p')
-                ->orWhere('p.TonerBlack < 10 AND p.isColorPrinter = 0')
-                ->orWhere('p.isColorPrinter = 1 AND (p.TonerBlack < 10 OR p.TonerYellow < 10 OR p.TonerMagenta < 10 OR p.TonerCyan < 10)')
+                ->orWhere('p.TonerBlack < :lvlDanger AND p.isColorPrinter = 0')
+                ->orWhere('p.isColorPrinter = 1 AND (p.TonerBlack < :lvlDanger OR p.TonerYellow < :lvlDanger OR p.TonerMagenta < :lvlDanger OR p.TonerCyan < :lvlDanger)')
+                ->setParameter('lvlDanger', $this->lvlDanger)
                 ->select('COUNT(p.id) as r')
                 ->getQuery()->getOneOrNullResult()['r']
         );
@@ -104,6 +145,46 @@ class PrinterRepository extends ServiceEntityRepository
         return $summary;
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param string $filter
+     * @return QueryBuilder
+     */
+    private function _filterFieldMapper(QueryBuilder $queryBuilder, string $filter) {
+
+        switch($filter) {
+            case 'fUnreachable':
+                $queryBuilder->andWhere('p.unreachableCount > 0');
+                break;
+
+            case 'fDanger':
+                $queryBuilder->orWhere('p.TonerBlack < :lvlDanger AND p.isColorPrinter = 0')
+                    ->orWhere('p.isColorPrinter = 1 AND (p.TonerBlack < :lvlDanger OR p.TonerYellow < :lvlDanger OR p.TonerMagenta < :lvlDanger OR p.TonerCyan < :lvlDanger)')
+                    ->setParameter('lvlDanger', $this->lvlDanger);
+                break;
+
+            case 'fWarning':
+                $queryBuilder->orWhere('p.TonerCyan < :lvlWarning')
+                    ->andWhere('p.TonerCyan > :lvlDanger')
+                    ->orWhere('p.TonerMagenta < :lvlWarning')
+                    ->andWhere('p.TonerMagenta > :lvlDanger')
+                    ->orWhere('p.TonerYellow < :lvlWarning')
+                    ->andWhere('p.TonerYellow > :lvlDanger')
+                    ->orWhere('p.TonerBlack < :lvlWarning')
+                    ->andWhere('p.TonerBlack > :lvlDanger')
+                    ->setParameter('lvlDanger', $this->lvlDanger)
+                    ->setParameter('lvlWarning', $this->lvlWarning);
+                break;
+
+            case 'fOkay':
+                $queryBuilder->orWhere('p.TonerBlack > :lvlWarning AND p.isColorPrinter = 0')
+                    ->orWhere('p.isColorPrinter = 1 AND p.TonerBlack > :lvlWarning AND p.TonerYellow > :lvlWarning AND p.TonerMagenta > :lvlWarning AND p.TonerCyan > :lvlWarning')
+                    ->setParameter('lvlWarning', $this->lvlWarning);
+                break;
+        }
+
+        return $queryBuilder;
+    }
     // /**
     //  * @return Printer[] Returns an array of Printer objects
     //  */

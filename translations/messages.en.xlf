@@ -361,6 +361,29 @@
         <source>unknown</source>
         <target>unknown</target>
       </trans-unit>
+      <trans-unit id="MfS91Yg" resname="This view is filtered by:">
+        <source>This view is filtered by:</source>
+        <target>This view is filtered by:</target>
+      </trans-unit>
+      <trans-unit id="IbEAgRi" resname="remove this filter">
+        <source>remove this filter</source>
+        <target>remove this filter</target>
+      </trans-unit>
+      <trans-unit id="filter-1" resname="fUnreachable">
+        <source>fUnreachable</source>
+        <target>unreachable printer</target>
+      </trans-unit><trans-unit id="filter-ok" resname="fOkay">
+        <source>fOkay</source>
+        <target>printer with toner level - okay</target>
+      </trans-unit>
+      <trans-unit id="filter-warn" resname="fWarning">
+        <source>fWarning</source>
+        <target>printer with toner level - warning</target>
+      </trans-unit>
+      <trans-unit id="filter-dng" resname="fDanger">
+        <source>fDanger</source>
+        <target>printer with toner level - danger</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -14,17 +14,22 @@ class DashboardController extends AbstractController
     /**
      * @Route("/dashboard/{view}", name="dashboard", defaults={"view"="dash"})
      *
+     * @param Request $request
      * @param PrinterRepository $printerRepository
      * @param $view
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function index(PrinterRepository $printerRepository, $view)
+    public function index(Request $request, PrinterRepository $printerRepository, $view)
     {
+        $filter = (is_array($request->get('filter', []))) ? [] : explode(":", $request->get('filter'));
+
         return $this->render('dashboard/index.html.twig', [
             'view' => $this->_validateViewParam($view),
-            'printerList' => $printerRepository->findAll(),
-            'printerSummary' => $printerRepository->getSummary()
+            'printerList' => $printerRepository->findAllWithFilter($filter),
+            'printerSummary' => $printerRepository->getSummary(),
+            'filter' => $filter
         ]);
     }
 
