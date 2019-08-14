@@ -5,7 +5,21 @@
     <body>
         <h1>{% trans with {"%SERIAL%": printer.serialnumber } %}Printer with SerialNumber %SERIAL% reached Level: Danger{% endtrans %}</h1>
         <p></p>
-        <p>{% trans %}Here comes more information if needed ....{% endtrans %}</p>
+        <p><strong>{{ 'Name'|trans }}:</strong> {{ printer.name }}</p>
+        <p><strong>{{ 'IP'|trans }}:</strong> {{ printer.ip }}</p>
+        <p><strong>{{ 'Location'|trans }}:</strong> {{ printer.location }}</p>
+        <p><strong>{{ 'SerialNumber'|trans }}:</strong> {{ printer.serialnumber }}</p>
+        <p><strong>{{ 'Type'|trans }}:</strong> {{ printer.type }}</p>
+        <p></p>
+        <p>
+            <strong>{{ 'Toner'|trans }}:</strong>
+            <br>{{ 'Black'|trans }} - {{ printer.tonerblack }} % ({{ printer.tonerBlackDescription }})
+            {% if printer.isColorPrinter %}
+            <br>{{ 'Cyan'|trans }} - {{ printer.tonercyan }} % ({{ printer.tonerCyanDescription }})
+            <br>{{ 'Magenta'|trans }} - {{ printer.tonermagenta }} % ({{ printer.tonerMagentaDescription }})
+            <br>{{ 'Yellow'|trans }} - {{ printer.toneryellow }} % ({{ printer.tonerYellowDescription }})
+            {% endif %}
+        </p>
         <p></p>
         <p>{% trans with {"%ID%": printer.id, "%URL%":absolute_url(path('dashboard_details', {'id': printer.id})) }%}More information under <a href="%URL%">%URL%</a>{% endtrans %}</p>
     </body>
