@@ -9,10 +9,20 @@ PrinterWatchdog is a small website project to monitor and notify printer in your
  * configure your own notification level
  * custom printer images
 
+## Screenshots
+![Dashboard Overview](/docs/images/screenshots/screenshot_dash_overview.png?raw=true  "Dashboard Overview" | width=400)
+![Dashboard Cards](/docs/images/screenshots/screenshot_dash_cards.png?raw=true  "Dashboard Cards" | width=400)
+![Detail View](/docs/images/screenshots/screenshot_details.png?raw=true  "Detail View" | width=400)
+![Dashboard Overview](/docs/images/screenshots/screenshot_notification.png?raw=true  "Notifications" | width=400)
+![Printer List](/docs/images/screenshots/screenshot_printer_list.png?raw=true  "Printer List" | width=400)
+![User Management](/docs/images/screenshots/screenshot_user_management.png?raw=true  "User Management" | width=400)
+
+
 ## Installation / Update
 ### Requirements
  * &gt; PHP 7.1 
  * SNMP Module
+ * LDAP Module (if you want to use LDAP Auth)
 
 ### ... grab latest release from GitHub [recommend]
  1. goto [https://github.com/svenkuegler/printerwatchdog/releases](https://github.com/svenkuegler/printerwatchdog/releases)
@@ -26,7 +36,8 @@ Download latest Version from GitHub.
 ```bash
 $ cd /tmp
 $ git clone https://github.com/svenkuegler/printerwatchdog.git
-$ cd printerwatchdog/
+$ mv -r printerwatchdog /var/www/printerwatchdog
+$ cd /var/www/printerwatchdog
 $ composer install --no-dev
 ```
 
@@ -89,7 +100,24 @@ Bring the machine up with:
 $ vagrant up
 ```
 
-If the machine is up and running open: [http://127.0.0.1:8080](http://127.0.0.1:8080)  
+If the machine is up and running open: [http://192.168.1.44](http://192.168.1.44) or [http://127.0.0.1:8080](http://127.0.0.1:8080)   
+
+#### E-Mail Tests using Mailslurper
+I use [Mailslurper](https://mailslurper.com/) to test the Mails. Default values in .env file pointed to Mailslurper. 
+
+> MailSlurper is a small SMTP mail server that slurps mail into oblivion! MailSlurper is perfect for individual developers or small teams writing mail-enabled applications that wish to test email functionality without the risk or hassle of installing and configuring a full blown email server. It's simple to use! Simply setup MailSlurper, configure your code and/or application server to send mail through the address where MailSlurper is running, and start sending emails! MailSlurper will capture those emails into a database for you to view at your leisure.
+>
+> more information on [mailslurper.com](https://mailslurper.com/)
+
+##### Usage:
+```bash
+# Login to your Vagrant Machine, for example with ...
+$ vagrant up
+
+# Start Mailslurper in background and drop messages to /dev/null
+$ /opt/mailslurper/mailslurper &>/dev/null &
+```
+Now you can open [http://192.168.1.44:8080](http://192.168.1.44:8080) to look into your Mails.
 
 #### Translation
 Find the Translation files in __/translations/*__ folder.
@@ -112,7 +140,6 @@ List of used frameworks and libraries.
  
 ## ToDo
  * Full Documentation
- * Multi Language Support
- * E-Mail Templates
+ * Add more translations
  * LDAP (Active Directory) Support
  * Unit Tests
