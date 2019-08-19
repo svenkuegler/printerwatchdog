@@ -10,12 +10,23 @@ PrinterWatchdog is a small website project to monitor and notify printer in your
  * custom printer images
 
 ## Screenshots
-![Dashboard Overview](/docs/images/screenshots/screenshot_dash_overview.png?raw=true  "Dashboard Overview" | width=400)
-![Dashboard Cards](/docs/images/screenshots/screenshot_dash_cards.png?raw=true  "Dashboard Cards" | width=400)
-![Detail View](/docs/images/screenshots/screenshot_details.png?raw=true  "Detail View" | width=400)
-![Dashboard Overview](/docs/images/screenshots/screenshot_notification.png?raw=true  "Notifications" | width=400)
-![Printer List](/docs/images/screenshots/screenshot_printer_list.png?raw=true  "Printer List" | width=400)
-![User Management](/docs/images/screenshots/screenshot_user_management.png?raw=true  "User Management" | width=400)
+__Dashbord Overview__    
+![Dashboard Overview](/docs/images/screenshots/screenshot_dash_overview.png?raw=true  "Dashboard Overview")
+
+__Dashboard Cards__    
+![Dashboard Cards](/docs/images/screenshots/screenshot_dash_cards.png?raw=true  "Dashboard Cards")
+
+__Printer Detail View__    
+![Detail View](/docs/images/screenshots/screenshot_details.png?raw=true  "Detail View")
+
+__Notification Settings__    
+![Dashboard Overview](/docs/images/screenshots/screenshot_notification.png?raw=true  "Notifications")
+
+__Printer List__    
+![Printer List](/docs/images/screenshots/screenshot_printer_list.png?raw=true  "Printer List")
+
+__User Management__    
+![User Management](/docs/images/screenshots/screenshot_user_management.png?raw=true  "User Management")
 
 
 ## Installation / Update
