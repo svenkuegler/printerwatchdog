@@ -27,6 +27,7 @@ class UserRepository extends ServiceEntityRepository
     {
         $emailArr = [];
         $result = $this->createQueryBuilder('email')
+            ->andWhere('email.isActive = true')
             ->getQuery()
             ->getResult();
         foreach ($result as $user) {

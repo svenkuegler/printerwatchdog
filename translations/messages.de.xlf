@@ -35,223 +35,223 @@
       </trans-unit>
       <trans-unit id="15GHHye" resname="Printer Detail">
         <source>Printer Detail</source>
-        <target>__Printer Detail</target>
+        <target>Drucker Details</target>
       </trans-unit>
       <trans-unit id="RkxP.QG" resname="Edit">
         <source>Edit</source>
-        <target>__Edit</target>
+        <target>bearbeiten</target>
       </trans-unit>
       <trans-unit id="v1UFF0p" resname="IP">
         <source>IP</source>
-        <target>__IP</target>
+        <target>IP</target>
       </trans-unit>
       <trans-unit id="5rmLrQm" resname="Open Web Interface">
         <source>Open Web Interface</source>
-        <target>__Open Web Interface</target>
+        <target>Web-Oberfläche öffnen</target>
       </trans-unit>
       <trans-unit id="OHdTNKi" resname="AssetName">
         <source>AssetName</source>
-        <target>__AssetName</target>
+        <target>AssetName</target>
       </trans-unit>
       <trans-unit id="6dT3rsE" resname="AssetID">
         <source>AssetID</source>
-        <target>__AssetID</target>
+        <target>AssetID</target>
       </trans-unit>
       <trans-unit id="_QL417G" resname="Open SnipeIT">
         <source>Open SnipeIT</source>
-        <target>__Open SnipeIT</target>
+        <target>SnipeIT öffnen</target>
       </trans-unit>
       <trans-unit id="3NHVIj9" resname="Name">
         <source>Name</source>
-        <target>__Name</target>
+        <target>Name</target>
       </trans-unit>
       <trans-unit id="3YJNdOQ" resname="SerialNumber">
         <source>SerialNumber</source>
-        <target>__SerialNumber</target>
+        <target>Seriennr.</target>
       </trans-unit>
       <trans-unit id="FbYZdLJ" resname="Location">
         <source>Location</source>
-        <target>__Location</target>
+        <target>Ort</target>
       </trans-unit>
       <trans-unit id="7Z9Rt70" resname="LastCheck">
         <source>LastCheck</source>
-        <target>__LastCheck</target>
+        <target>letzter Abgleich</target>
       </trans-unit>
       <trans-unit id="uq3fcPt" resname="Type">
         <source>Type</source>
-        <target>__Type</target>
+        <target>Typ</target>
       </trans-unit>
       <trans-unit id="zDFFmmZ" resname="ColorPrinter">
         <source>ColorPrinter</source>
-        <target>__ColorPrinter</target>
+        <target>Farbdrucker</target>
       </trans-unit>
       <trans-unit id="inmIkP6" resname="yes">
         <source>yes</source>
-        <target>__yes</target>
+        <target>Ja</target>
       </trans-unit>
       <trans-unit id="k5Apjz_" resname="no">
         <source>no</source>
-        <target>__no</target>
+        <target>Nein</target>
       </trans-unit>
       <trans-unit id="7Izm7rw" resname="TotalPages">
         <source>TotalPages</source>
-        <target>__TotalPages</target>
+        <target>Seiten gesamt</target>
       </trans-unit>
       <trans-unit id="pwBBf45" resname="Toner">
         <source>Toner</source>
-        <target>__Toner</target>
+        <target>Toner</target>
       </trans-unit>
       <trans-unit id="q6pGrbT" resname="Unreachable">
         <source>Unreachable</source>
-        <target>__Unreachable</target>
+        <target>Nicht erreichbar</target>
       </trans-unit>
       <trans-unit id="MsY_j0g" resname="%c% times">
         <source>%c% times</source>
-        <target>__%c% times</target>
+        <target>%c% mal</target>
       </trans-unit>
       <trans-unit id="plYQfpn" resname="Statistics">
         <source>Statistics</source>
-        <target>__Statistics</target>
+        <target>Statistik</target>
       </trans-unit>
       <trans-unit id="aNHpVjj" resname="Avg Pages per Day*:">
         <source>Avg Pages per Day*:</source>
-        <target>__Avg Pages per Day*:</target>
+        <target>Ø Seiten/Tag*:></target>
       </trans-unit>
       <trans-unit id="wH_UA1h" resname="Avg Black Usage*:">
         <source>Avg Black Usage*:</source>
-        <target>__Avg Black Usage*:</target>
+        <target>Ø Schwarz*:></target>
       </trans-unit>
       <trans-unit id="8o_Hqwa" resname="Avg Yellow*:">
         <source>Avg Yellow*:</source>
-        <target>__Avg Yellow*:</target>
+        <target>Ø Gelb*:></target>
       </trans-unit>
       <trans-unit id="CrQkXUd" resname="Avg Magenta*:">
         <source>Avg Magenta*:</source>
-        <target>__Avg Magenta*:</target>
+        <target>Ø Magenta*:></target>
       </trans-unit>
       <trans-unit id="M7lhlUj" resname="Avg Cyan*:">
         <source>Avg Cyan*:</source>
-        <target>__Avg Cyan*:</target>
+        <target>Ø Cyan*:></target>
       </trans-unit>
       <trans-unit id="5rL1.sX" resname="* Notice - values based on 30 Days average.">
         <source>* Notice - values based on 30 Days average.</source>
-        <target>__* Notice - values based on 30 Days average.</target>
+        <target>* Hinweis - Werte basieren auf einem 30 Tage Durchschnitt.</target>
       </trans-unit>
       <trans-unit id="NOEIwIl" resname="Display">
         <source>Display</source>
-        <target>__Display</target>
+        <target>Anzeige</target>
       </trans-unit>
       <trans-unit id="1swKCIw" resname="refresh">
         <source>refresh</source>
-        <target>__refresh</target>
+        <target>aktualisieren</target>
       </trans-unit>
       <trans-unit id="eINhjEy" resname="Asset Information">
         <source>Asset Information</source>
-        <target>__Asset Information</target>
+        <target>Asset Informationen</target>
       </trans-unit>
       <trans-unit id="CtErQPN" resname="Toner History">
         <source>Toner History</source>
-        <target>__Toner History</target>
+        <target>Toner Verlauf</target>
       </trans-unit>
       <trans-unit id="zocU8Cx" resname="TotalPage History">
         <source>TotalPage History</source>
-        <target>__TotalPage History</target>
+        <target>Verlauf Seiten gesamt</target>
       </trans-unit>
       <trans-unit id="xs.m5PE" resname="Black">
         <source>Black</source>
-        <target>__Black</target>
+        <target>Schwarz</target>
       </trans-unit>
       <trans-unit id="Gd2D8Rd" resname="Yellow">
         <source>Yellow</source>
-        <target>__Yellow</target>
+        <target>Gelb</target>
       </trans-unit>
       <trans-unit id="6VuyIuB" resname="Cyan">
         <source>Cyan</source>
-        <target>__Cyan</target>
+        <target>Cyan</target>
       </trans-unit>
       <trans-unit id="G80AmXe" resname="Magenta">
         <source>Magenta</source>
-        <target>__Magenta</target>
+        <target>Magenta</target>
       </trans-unit>
       <trans-unit id="NfGgo2P" resname="Total Pages">
         <source>Total Pages</source>
-        <target>__Total Pages</target>
+        <target>Seiten gesamt</target>
       </trans-unit>
       <trans-unit id="hdme8pV" resname="loading ...">
         <source>loading ...</source>
-        <target>__loading ...</target>
+        <target>lade ...</target>
       </trans-unit>
       <trans-unit id="uj4Lklh" resname="could not get information">
         <source>could not get information</source>
-        <target>__could not get information</target>
+        <target>Informationen konnten nicht abgerufen werden.</target>
       </trans-unit>
       <trans-unit id="VPvxhsa" resname="Dashboard View">
         <source>Dashboard View</source>
-        <target>__Dashboard View</target>
+        <target>Dashboard Anzeige</target>
       </trans-unit>
       <trans-unit id="CLBag1S" resname="Card View">
         <source>Card View</source>
-        <target>__Card View</target>
+        <target>Karten Anzeige</target>
       </trans-unit>
       <trans-unit id="6GNtfFV" resname="Table View">
         <source>Table View</source>
-        <target>__Table View</target>
+        <target>Tabellen Anzeige</target>
       </trans-unit>
       <trans-unit id="jqCUk3f" resname="Serial">
         <source>Serial</source>
-        <target>__Serial</target>
+        <target>Seriennr.</target>
       </trans-unit>
       <trans-unit id="gycKqSL" resname="last check: %date%">
         <source>last check: %date%</source>
-        <target>__last check: %date%</target>
+        <target>letzter Abruf: %date%</target>
       </trans-unit>
       <trans-unit id="gS2nfjO" resname="Toner Usage">
         <source>Toner Usage</source>
-        <target>__Toner Usage</target>
+        <target>Toner Füllstand</target>
       </trans-unit>
       <trans-unit id="BcU2wsf" resname="last check">
         <source>last check</source>
-        <target>__last check</target>
+        <target>letzter Abruf</target>
       </trans-unit>
       <trans-unit id="sjpqhDn" resname="unknown">
         <source>unknown</source>
-        <target>__unknown</target>
+        <target>unbekannt</target>
       </trans-unit>
       <trans-unit id="E8vz4fH" resname="avg. Pages per Day">
         <source>avg. Pages per Day</source>
-        <target>__avg. Pages per Day</target>
+        <target>Ø Seiten / Tag</target>
       </trans-unit>
       <trans-unit id="OCO.T1K" resname="SW / Color">
         <source>SW / Color</source>
-        <target>__SW / Color</target>
+        <target>SW / Farbe</target>
       </trans-unit>
       <trans-unit id="OqaOkMo" resname="Printer Errors">
         <source>Printer Errors</source>
-        <target>__Printer Errors</target>
+        <target>Drucker mit Fehler</target>
       </trans-unit>
       <trans-unit id="AhduwZ." resname="recently unreachable">
         <source>recently unreachable</source>
-        <target>__recently unreachable</target>
+        <target>kürzlich unerreichbar</target>
       </trans-unit>
       <trans-unit id="zyNPDfc" resname="based on 30 days calculation">
         <source>based on 30 days calculation</source>
-        <target>__based on 30 days calculation</target>
+        <target>Wert basiert auf einem 30 Tage Druchschnitt.</target>
       </trans-unit>
       <trans-unit id="hBLAcAJ" resname="Danger">
         <source>Danger</source>
-        <target>__Danger</target>
+        <target>Gefährlich</target>
       </trans-unit>
       <trans-unit id="6YHdrkX" resname="Warning">
         <source>Warning</source>
-        <target>__Warning</target>
+        <target>Warnung</target>
       </trans-unit>
       <trans-unit id="FlhAUv0" resname="Okay">
         <source>Okay</source>
-        <target>__Okay</target>
+        <target>Okay</target>
       </trans-unit>
       <trans-unit id="yYKyPfr" resname="Last check">
         <source>Last check</source>
-        <target>__Last check</target>
+        <target>Letzter Abruf</target>
       </trans-unit>
       <trans-unit id="6_WDvvR" resname="Printer with SerialNumber %SERIAL% reached Level: Danger">
         <source>Printer with SerialNumber %SERIAL% reached Level: Danger</source>
@@ -271,95 +271,119 @@
       </trans-unit>
       <trans-unit id="B6Bjyrf" resname="Notification Settings">
         <source>Notification Settings</source>
-        <target>__Notification Settings</target>
+        <target>Benachrichtigungseinstellungen</target>
       </trans-unit>
       <trans-unit id="dRwiKDa" resname="* to disable a notification channel set both values to 0">
         <source>* to disable a notification channel set both values to 0</source>
-        <target>__* to disable a notification channel set both values to 0</target>
+        <target>* Um einen Benachrichtigungskanal zu deaktivieren, beide Werte auf 0 setzen.</target>
       </trans-unit>
       <trans-unit id="yFzOCGk" resname="save changes">
         <source>save changes</source>
-        <target>__save changes</target>
+        <target>Änderungen speichern</target>
       </trans-unit>
       <trans-unit id="cqYoLXx" resname="New Printer">
         <source>New Printer</source>
-        <target>__New Printer</target>
+        <target>Neuer Drucker</target>
       </trans-unit>
       <trans-unit id="QzHjal4" resname="Create new Printers">
         <source>Create new Printers</source>
-        <target>__Create new Printers</target>
+        <target>Erstelle neuen Drucker</target>
       </trans-unit>
       <trans-unit id="poshUZJ" resname="Edit Printer">
         <source>Edit Printer</source>
-        <target>__Edit Printer</target>
+        <target>Drucker bearbeiten</target>
       </trans-unit>
       <trans-unit id="5qFCx6_" resname="Printer List">
         <source>Printer List</source>
-        <target>__Printer List</target>
+        <target>Drucker Liste</target>
       </trans-unit>
       <trans-unit id="EhVukhv" resname="Id">
         <source>Id</source>
-        <target>__Id</target>
+        <target>Id</target>
       </trans-unit>
       <trans-unit id="C8ggYME" resname="Ip">
         <source>Ip</source>
-        <target>__Ip</target>
+        <target>Ip</target>
       </trans-unit>
       <trans-unit id=".4BZ3Gd" resname="Actions">
         <source>Actions</source>
-        <target>__Actions</target>
+        <target>Aktion</target>
       </trans-unit>
       <trans-unit id="REE8PZe" resname="Are you sure you want to delete this item?">
         <source>Are you sure you want to delete this item?</source>
-        <target>__Are you sure you want to delete this item?</target>
+        <target>Sind sie sich sicher diesen Eintrag löschen zu wollen?</target>
       </trans-unit>
       <trans-unit id="Qf.Yt2r" resname="details">
         <source>details</source>
-        <target>__details</target>
+        <target>Details</target>
       </trans-unit>
       <trans-unit id="JiEhxTc" resname="edit">
         <source>edit</source>
-        <target>__edit</target>
+        <target>bearbeiten</target>
       </trans-unit>
       <trans-unit id="YZdZVQP" resname="delete">
         <source>delete</source>
-        <target>__delete</target>
+        <target>löschen</target>
       </trans-unit>
       <trans-unit id="D5lam8." resname="no records found">
         <source>no records found</source>
-        <target>__no records found</target>
+        <target>keine Ergebnisse gefunden</target>
       </trans-unit>
       <trans-unit id="ofzb0i0" resname="Bulk Add">
         <source>Bulk Add</source>
-        <target>__Bulk Add</target>
+        <target>Mehrere Drucker hinzufügen</target>
       </trans-unit>
       <trans-unit id="nz33U6Q" resname="Create new">
         <source>Create new</source>
-        <target>__Create new</target>
+        <target>Neu</target>
       </trans-unit>
       <trans-unit id="d7K7Xin" resname="Create new Printer">
         <source>Create new Printer</source>
-        <target>__Create new Printer</target>
+        <target>Erstelle neuen Drucker</target>
       </trans-unit>
       <trans-unit id="U0M9PNE" resname="back to list">
         <source>back to list</source>
-        <target>__back to list</target>
+        <target>zurück zur Liste</target>
       </trans-unit>
       <trans-unit id="wYmEDPf" resname="Log in">
         <source>Log in</source>
-        <target>__Log in</target>
+        <target>Anmelden</target>
       </trans-unit>
       <trans-unit id="dDUw20Q" resname="Please sign in">
         <source>Please sign in</source>
-        <target>__Please sign in</target>
+        <target>Bitte melde dich an</target>
       </trans-unit>
       <trans-unit id="47ienTP" resname="Username">
         <source>Username</source>
-        <target>__Username</target>
+        <target>Benutzername</target>
       </trans-unit>
       <trans-unit id="588_9PF" resname="Password">
         <source>Password</source>
-        <target>__Password</target>
+        <target>Passwort</target>
+      </trans-unit>
+      <trans-unit id="MfS91Yg" resname="This view is filtered by:">
+        <source>This view is filtered by:</source>
+        <target>Ergenisse gefiltert:</target>
+      </trans-unit>
+      <trans-unit id="IbEAgRi" resname="remove this filter">
+        <source>remove this filter</source>
+        <target>Filter entfernen</target>
+      </trans-unit>
+      <trans-unit id="filter-1" resname="fUnreachable">
+        <source>fUnreachable</source>
+        <target>Nicht erreichbare Drucker</target>
+      </trans-unit>
+      <trans-unit id="filter-ok" resname="fOkay">
+        <source>fOkay</source>
+        <target>Drucker mit Tonerstand - Okay</target>
+      </trans-unit>
+      <trans-unit id="filter-warn" resname="fWarning">
+        <source>fWarning</source>
+        <target>Drucker mit Tonerstand - Warnung</target>
+      </trans-unit>
+      <trans-unit id="filter-dng" resname="fDanger">
+        <source>fDanger</source>
+        <target>Drucker mit Tonerstand - Gefährlich</target>
       </trans-unit>
     </body>
   </file>

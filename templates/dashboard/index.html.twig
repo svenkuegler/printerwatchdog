@@ -4,6 +4,7 @@
 {% block body %}
 <div class="container-fluid">
     <div class="row">
+        {% include 'dashboard/filter.html.twig' with {'filter': filter} %}
         {% include "dashboard/printer_" ~ view ~ ".html.twig" with {'printerList': printerList} %}
     </div>
     {% include "dashboard/displaytype.html.twig" %}

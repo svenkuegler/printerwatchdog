@@ -110,7 +110,7 @@ class SlackService
                     ],
                     [
                         'title' => 'Toner',
-                        'value' => "Black: " . $printer->getTonerBlack() . "%" . (($printer->getisColorPrinter())? "\nYellow: " . $printer->getTonerYellow() . "%\nCyan: " . $printer->getTonerCyan() . "%\nMagenta: " . $printer->getTonerMagenta() . "%%": ""),
+                        'value' => "Black: " . $printer->getTonerBlack() . "%" . (($printer->getisColorPrinter())? "\nYellow: " . $printer->getTonerYellow() . "%\nCyan: " . $printer->getTonerCyan() . "%\nMagenta: " . $printer->getTonerMagenta() . "%": ""),
                         'short' => true
                     ]
                 ]
