@@ -102,9 +102,17 @@ class SendNotificationCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $config = Yaml::parseFile( $this->_helper->getApplicationRootDir()  . "/config/notification.yaml");
         $this->_logger->info(sprintf("Starting notification with %s %s", ($input->getOption('email'))? "option email," : "no email option," , ($input->getOption('slack'))?'option slack.':'no slack option.'));
-        
+        $unreachableCount = $this->_container->getParameter('printer.inactive.unreachable_count');
+        $notifyUnreachable = $this->_container->getParameter('printer.inactive.notification_enabled');
+
         $printers = $this->_printerRepository->findAll();
         foreach ($printers as $printer) {
+
+            // skip notification for unreachable printer
+            if($printer->getUnreachableCount() > $unreachableCount) {
+                if($notifyUnreachable == false)
+                    continue;
+            }
 
             // EMail
             if($config['email']['enabled'] && $input->getOption('email')) {

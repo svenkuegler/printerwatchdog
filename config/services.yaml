@@ -63,6 +63,10 @@ parameters:
             type: "value"
             oid: ".1.3.6.1.2.1.43.5.1.1.16.1"
 
+    # Application Settings
+    printer.inactive.unreachable_count: '%env(PRINTER_INACTIVE_COUNT)%'
+    printer.inactive.notification_enabled: '%env(INACTIVE_PRINTER_NOTIFICATION)%'
+
     # Routing information
     router.request_context.host: '%env(APP_URL)%'
     router.request_context.scheme: '%env(APP_SCHEME)%'
