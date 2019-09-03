@@ -7,6 +7,7 @@
         "ext-curl": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "ext-snmp": "*",
         "beberlei/doctrineextensions": "^1.2",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.3.*",
