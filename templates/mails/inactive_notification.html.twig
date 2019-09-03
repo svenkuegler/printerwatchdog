@@ -1,0 +1,11 @@
+<html lang="en">
+<head>
+    <title>Disabled Notification</title>
+</head>
+<body>
+<h1>{% trans with {"%SERIAL%": printer.serialnumber } %}Printer with SerialNumber %SERIAL% is now marked as unreachable!{% endtrans %}</h1>
+<p></p>
+<p></p>
+<p>{% trans with {"%ID%": printer.id, "%URL%":absolute_url(path('dashboard_details', {'id': printer.id})) }%}More information under <a href="%URL%">%URL%</a>{% endtrans %}</p>
+</body>
+</html>
