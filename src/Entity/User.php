@@ -50,6 +50,11 @@ class User implements UserInterface
      */
     private $locale;
 
+    /**
+     * @ORM\Column(type="string", length=6)
+     */
+    private $source;
+
 
     public function getId(): ?int
     {
@@ -157,6 +162,24 @@ class User implements UserInterface
     {
         $this->locale = $locale;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * @param mixed $source
+     * @return User
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
         return $this;
     }
 }

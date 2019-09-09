@@ -37,6 +37,23 @@ class UserRepository extends ServiceEntityRepository
         return $emailArr;
     }
 
+    /**
+     * Get all Username in a simple array
+     * @return array
+     */
+    public function getAllUsername()
+    {
+        $arr = [];
+        $result = $this->createQueryBuilder('u')
+            ->getQuery()
+            ->getResult();
+        foreach ($result as $user) {
+            $arr[] = $user->getUsername();
+        }
+
+        return $arr;
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

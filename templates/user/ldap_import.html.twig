@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ldap Import{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row page-header">
+            <h1>
+                {{ 'Import User from your LDAP Directory'|trans }}
+                <small>{{ dn }}</small>
+            </h1>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>{{ 'displayName'|trans }}</th>
+                <th>{{ 'userPrincipalName'|trans }}</th>
+                <th>{{ 'mail'|trans }}</th>
+                <th>{{ 'action'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        {% set i = 0 %}
+        {% for entry in ldapResult %}
+            <tr class="{% if entry.alreadyexists %}bg-success{% endif %}">
+                <td class="font-weight-bold">{{ entry.displayName }}</td>
+                <td>
+                    {{ entry.userPrincipalName }}
+                </td>
+                <td>{{ entry.mail }}</td>
+                <td>
+                    {% if entry.mail != '' and entry.userPrincipalName != '' and entry.alreadyexists == false %}
+                        {{ form_start(forms[i]) }}
+                        {{ form_widget(forms[i]) }}
+                        <button class="btn btn-sm btn-primary">{{ 'import user'|trans }}</button>
+                        {{ form_end(forms[i]) }}
+                    {% elseif entry.alreadyexists == true %}
+                    {{ 'imported'|trans }}
+                    {% else %}
+                    <a href="#" class="btn btn-sm btn-light disabled">{{ 'incomplete'|trans }} <span class="text-danger">*</span></a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% set i = i+1 %}
+        {% endfor %}
+        </table>
+        <small class="text-muted">
+            <span class="text-danger">*</span> {{ "Can\'t Import User without UserPrincialName and EMail."|trans }}
+        </small>
+    </div>
+
+{% endblock %}

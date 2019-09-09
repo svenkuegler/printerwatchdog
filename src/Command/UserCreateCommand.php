@@ -89,6 +89,7 @@ class UserCreateCommand extends Command
         $user->setEmail($email);
         $user->setRoles($roles);
         $user->setPassword($this->_passwordEncoder->encodePassword($user, $password));
+        $user->setSource('local');
 
         $em = $this->_container->get('doctrine')->getManager();
         $em->persist($user);
