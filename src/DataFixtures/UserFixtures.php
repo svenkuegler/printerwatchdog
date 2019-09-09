@@ -69,7 +69,7 @@ class UserFixtures extends Fixture
             ->setIsActive(true)
             ->setRoles(['ROLE_USER'])
             ->setEmail('ldapuser@printerwatchdog.org')
-            ->setPassword(null)
+            ->setPassword('passwordProvidedByLdapConnection')
             ->setSource('ldap')
         ;
         $manager->persist($ldap_user);
