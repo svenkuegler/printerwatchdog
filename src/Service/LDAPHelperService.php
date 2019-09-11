@@ -23,27 +23,37 @@ class LDAPHelperService
     private $logger;
 
     /**
+     * @var bool
+     */
+    private $isEnabled = false;
+
+    /**
      * LDAPHelperService constructor.
      * @param ContainerParametersHelper $containerParametersHelper
-     * @throws \Exception
+     * @param LoggerInterface $logger
      */
     public function __construct(ContainerParametersHelper $containerParametersHelper, LoggerInterface $logger)
     {
         $this->containerHelper = $containerParametersHelper;
         $this->logger = $logger;
 
-        if(!function_exists("ldap_bind")) {
-            throw new \Exception("LDAP not available on this Server!");
+        if(is_null($this->containerHelper->getParameter('ldap.server'))) {
+            $this->logger->debug("LDAP is disabled in this environment!");
+            $this->isEnabled = false;
+            return;
         }
 
-        if(is_null($this->containerHelper->getParameter('ldap.server'))) {
-            throw new \Exception("LDAP is disabled in this environment!");
+        if(!function_exists("ldap_bind")) {
+            $this->logger->debug("LDAP PHP-Module not available on this Server!");
+            $this->isEnabled = false;
+            return;
         }
 
         $server = $this->containerHelper->getParameter('ldap.server');
         $port = $this->containerHelper->getParameter('ldap.port');
 
         $this->ldapConnection = ldap_connect($server, $port);
+        if(!empty($php_errormsg)) $this->logger->error($php_errormsg);
         ldap_set_option($this->ldapConnection,LDAP_OPT_PROTOCOL_VERSION,3);
         ldap_set_option($this->ldapConnection,LDAP_OPT_REFERRALS,0);
     }
@@ -55,9 +65,15 @@ class LDAPHelperService
      */
     public function checkPassword($username, $password) : bool
     {
-        $check = @ldap_bind($this->ldapConnection, $username, $password);
-        if(!empty($php_errormsg)) $this->logger->error($php_errormsg);
+        if($this->isEnabled) {
+            $check = @ldap_bind($this->ldapConnection, $username, $password);
+            if(!empty($php_errormsg)) $this->logger->error($php_errormsg);
 
-        return $check;
+            return $check;
+        } else {
+            $this->logger->error('Tried to check LDAP Password but LDAP seems to be disabled!');
+            return false;
+        }
+
     }
 }

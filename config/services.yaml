@@ -9,8 +9,8 @@ parameters:
     mailer.from: "%env(APP_MAIL_FROM)%"
 
     # SnipeIT Settings
-    snipeit.url: "%env(SNIPEIT_API_URL)%"
-    snipeit.apikey: "%env(SNIPEIT_API_KEY)%"
+    snipeit.url: "%env(nullable:SNIPEIT_API_URL)%"
+    snipeit.apikey: "%env(nullable:SNIPEIT_API_KEY)%"
 
     # Slack Settings
     slack.webhook: "%env(SLACK_WEBHOOK)%"
@@ -74,7 +74,7 @@ parameters:
     asset.request_context.base_path: '%router.request_context.base_url%'
 
     # Ldap Settings
-    ldap.server: '%env(LDAP_SERVER)%'
+    ldap.server: "%env(nullable:LDAP_SERVER)%"
     ldap.port: '%env(LDAP_PORT)%'
     ldap.connection_string: 'ldap://%ldap.server%:%ldap.port%'
     ldap.query_dn: '%env(LDAP_QUERY_DN)%'
