@@ -141,7 +141,7 @@ class PrinterRepository extends ServiceEntityRepository
         $stmt->execute([
             'days' => 30
         ]);
-        $summary->setTotalAvgPages($stmt->fetchColumn(0));
+        $summary->setTotalAvgPages(intval($stmt->fetchColumn(0)));
 
         return $summary;
     }

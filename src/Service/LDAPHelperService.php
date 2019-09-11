@@ -25,7 +25,7 @@ class LDAPHelperService
     /**
      * @var bool
      */
-    private $isEnabled = false;
+    private $isEnabled = true;
 
     /**
      * LDAPHelperService constructor.
