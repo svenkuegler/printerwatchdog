@@ -115,23 +115,23 @@
       </trans-unit>
       <trans-unit id="aNHpVjj" resname="Avg Pages per Day*:">
         <source>Avg Pages per Day*:</source>
-        <target>Ø Seiten/Tag*:></target>
+        <target><![CDATA[Ø Seiten/Tag*:>]]></target>
       </trans-unit>
       <trans-unit id="wH_UA1h" resname="Avg Black Usage*:">
         <source>Avg Black Usage*:</source>
-        <target>Ø Schwarz*:></target>
+        <target><![CDATA[Ø Schwarz*:>]]></target>
       </trans-unit>
       <trans-unit id="8o_Hqwa" resname="Avg Yellow*:">
         <source>Avg Yellow*:</source>
-        <target>Ø Gelb*:></target>
+        <target><![CDATA[Ø Gelb*:>]]></target>
       </trans-unit>
       <trans-unit id="CrQkXUd" resname="Avg Magenta*:">
         <source>Avg Magenta*:</source>
-        <target>Ø Magenta*:></target>
+        <target><![CDATA[Ø Magenta*:>]]></target>
       </trans-unit>
       <trans-unit id="M7lhlUj" resname="Avg Cyan*:">
         <source>Avg Cyan*:</source>
-        <target>Ø Cyan*:></target>
+        <target><![CDATA[Ø Cyan*:>]]></target>
       </trans-unit>
       <trans-unit id="5rL1.sX" resname="* Notice - values based on 30 Days average.">
         <source>* Notice - values based on 30 Days average.</source>
@@ -369,21 +369,125 @@
         <source>remove this filter</source>
         <target>Filter entfernen</target>
       </trans-unit>
-      <trans-unit id="filter-1" resname="fUnreachable">
+      <trans-unit id="A58pMYR" resname="fUnreachable">
         <source>fUnreachable</source>
         <target>Nicht erreichbare Drucker</target>
       </trans-unit>
-      <trans-unit id="filter-ok" resname="fOkay">
+      <trans-unit id="GgkCSg." resname="fOkay">
         <source>fOkay</source>
         <target>Drucker mit Tonerstand - Okay</target>
       </trans-unit>
-      <trans-unit id="filter-warn" resname="fWarning">
+      <trans-unit id="tLPMqso" resname="fWarning">
         <source>fWarning</source>
         <target>Drucker mit Tonerstand - Warnung</target>
       </trans-unit>
-      <trans-unit id="filter-dng" resname="fDanger">
+      <trans-unit id="1D8jcDa" resname="fDanger">
         <source>fDanger</source>
         <target>Drucker mit Tonerstand - Gefährlich</target>
+      </trans-unit>
+      <trans-unit id="VyOLFnW" resname="Username cannot changed, provided by LDAP">
+        <source>Username cannot changed, provided by LDAP</source>
+        <target>Der vom LDAP Verzeichnis bereitgestellte Benutzername kann nicht geändert werden.</target>
+      </trans-unit>
+      <trans-unit id="59PnafP" resname="Administrator">
+        <source>Administrator</source>
+        <target>Administrator</target>
+      </trans-unit>
+      <trans-unit id="nTsN5OZ" resname="User activated!">
+        <source>User activated!</source>
+        <target>Benutzer wurde aktiviert.</target>
+      </trans-unit>
+      <trans-unit id="Rz3c4ss" resname="User deactivated!">
+        <source>User deactivated!</source>
+        <target>Benutzer wurde deaktiviert.</target>
+      </trans-unit>
+      <trans-unit id="rG4.xIO" resname="User successfully changed!">
+        <source>User successfully changed!</source>
+        <target>Benutzer erfolgreich bearbeitet.</target>
+      </trans-unit>
+      <trans-unit id="Eegd6QZ" resname="User imported successfully.">
+        <source>User imported successfully.</source>
+        <target>Benutzer erfolgreich importiert.</target>
+      </trans-unit>
+      <trans-unit id="Ekk1zM5" resname="Ooops! Something is going wrong!">
+        <source>Ooops! Something is going wrong!</source>
+        <target>Uuups! Da ist etwas schief gegangen!</target>
+      </trans-unit>
+      <trans-unit id="1XImTTG" resname="Printer with SerialNumber %SERIAL% is now marked as unreachable!">
+        <source>Printer with SerialNumber %SERIAL% is now marked as unreachable!</source>
+        <target>Drucker mit der Seriennummer %SERIAL% wurde als nicht erreichbar markiert!</target>
+      </trans-unit>
+      <trans-unit id="ezuwN7u" resname="User index">
+        <source>User index</source>
+        <target>Benutzer</target>
+      </trans-unit>
+      <trans-unit id="kjQGlYm" resname="Active">
+        <source>Active</source>
+        <target>Aktiv</target>
+      </trans-unit>
+      <trans-unit id="DlcMpvq" resname="Source">
+        <source>Source</source>
+        <target>Quelle</target>
+      </trans-unit>
+      <trans-unit id="lpzL089" resname="Email">
+        <source>Email</source>
+        <target>E-Mail</target>
+      </trans-unit>
+      <trans-unit id="wlM3BVR" resname="Roles">
+        <source>Roles</source>
+        <target>Berechtigung</target>
+      </trans-unit>
+      <trans-unit id="Kw3N1AA" resname="actions">
+        <source>actions</source>
+        <target>Aktionen</target>
+      </trans-unit>
+      <trans-unit id="WwesQPU" resname="deactivate">
+        <source>deactivate</source>
+        <target>deaktivieren</target>
+      </trans-unit>
+      <trans-unit id="IAx_YiA" resname="activate">
+        <source>activate</source>
+        <target>aktivieren</target>
+      </trans-unit>
+      <trans-unit id="EK3iBBJ" resname="Import from LDAP">
+        <source>Import from LDAP</source>
+        <target>Import aus LDAP Verzeichnis</target>
+      </trans-unit>
+      <trans-unit id="M4ThpvL" resname="Import User from your LDAP Directory">
+        <source>Import User from your LDAP Directory</source>
+        <target>Benutzerimport aus LDAP Verzeichnis</target>
+      </trans-unit>
+      <trans-unit id="4QA5pf3" resname="displayName">
+        <source>displayName</source>
+        <target>Anzeigename</target>
+      </trans-unit>
+      <trans-unit id="43iQd3D" resname="userPrincipalName">
+        <source>userPrincipalName</source>
+        <target>UserPrincipalName</target>
+      </trans-unit>
+      <trans-unit id="ANjT8Rc" resname="mail">
+        <source>mail</source>
+        <target>E-Mail</target>
+      </trans-unit>
+      <trans-unit id="vZOMaI9" resname="action">
+        <source>action</source>
+        <target>Aktion</target>
+      </trans-unit>
+      <trans-unit id="FelD6dp" resname="import user">
+        <source>import user</source>
+        <target>importieren</target>
+      </trans-unit>
+      <trans-unit id="X1Qie3T" resname="imported">
+        <source>imported</source>
+        <target>importiert</target>
+      </trans-unit>
+      <trans-unit id="hVVLud1" resname="incomplete">
+        <source>incomplete</source>
+        <target>unvollständig</target>
+      </trans-unit>
+      <trans-unit id="zFmzav_" resname="Can't Import User without UserPrincialName and EMail.">
+        <source>Can't Import User without UserPrincialName and EMail.</source>
+        <target>Benutzer ohne UserPrincialName and EMail können nicht importiert werden.</target>
       </trans-unit>
     </body>
   </file>

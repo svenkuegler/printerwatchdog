@@ -73,6 +73,15 @@ parameters:
     router.request_context.base_url: '%env(APP_BASE_URL)%'
     asset.request_context.base_path: '%router.request_context.base_url%'
 
+    # Ldap Settings
+    ldap.server: '%env(LDAP_SERVER)%'
+    ldap.port: '%env(LDAP_PORT)%'
+    ldap.connection_string: 'ldap://%ldap.server%:%ldap.port%'
+    ldap.query_dn: '%env(LDAP_QUERY_DN)%'
+    ldap.query_string: '%env(LDAP_QUERY_STRING)%'
+    ldap.bind.user: '%env(LDAP_BIND_USER)%'
+    ldap.bind.password: '%env(LDAP_BIND_PASSWD)%'
+
 services:
     # default configuration for services in *this* file
     _defaults:
