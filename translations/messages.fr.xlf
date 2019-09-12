@@ -369,21 +369,125 @@
         <source>remove this filter</source>
         <target>__remove this filter</target>
       </trans-unit>
-      <trans-unit id="filter-1" resname="fUnreachable">
+      <trans-unit id="A58pMYR" resname="fUnreachable">
         <source>fUnreachable</source>
         <target>__unreachable printer</target>
       </trans-unit>
-      <trans-unit id="filter-ok" resname="fOkay">
+      <trans-unit id="GgkCSg." resname="fOkay">
         <source>fOkay</source>
         <target>__printer with toner level - okay</target>
       </trans-unit>
-      <trans-unit id="filter-warn" resname="fWarning">
+      <trans-unit id="tLPMqso" resname="fWarning">
         <source>fWarning</source>
         <target>__printer with toner level - warning</target>
       </trans-unit>
-      <trans-unit id="filter-dng" resname="fDanger">
+      <trans-unit id="1D8jcDa" resname="fDanger">
         <source>fDanger</source>
         <target>__printer with toner level - danger</target>
+      </trans-unit>
+      <trans-unit id="VyOLFnW" resname="Username cannot changed, provided by LDAP">
+        <source>Username cannot changed, provided by LDAP</source>
+        <target>__Username cannot changed, provided by LDAP</target>
+      </trans-unit>
+      <trans-unit id="59PnafP" resname="Administrator">
+        <source>Administrator</source>
+        <target>__Administrator</target>
+      </trans-unit>
+      <trans-unit id="nTsN5OZ" resname="User activated!">
+        <source>User activated!</source>
+        <target>__User activated!</target>
+      </trans-unit>
+      <trans-unit id="Rz3c4ss" resname="User deactivated!">
+        <source>User deactivated!</source>
+        <target>__User deactivated!</target>
+      </trans-unit>
+      <trans-unit id="rG4.xIO" resname="User successfully changed!">
+        <source>User successfully changed!</source>
+        <target>__User successfully changed!</target>
+      </trans-unit>
+      <trans-unit id="Eegd6QZ" resname="User imported successfully.">
+        <source>User imported successfully.</source>
+        <target>__User imported successfully.</target>
+      </trans-unit>
+      <trans-unit id="Ekk1zM5" resname="Ooops! Something is going wrong!">
+        <source>Ooops! Something is going wrong!</source>
+        <target>__Ooops! Something is going wrong!</target>
+      </trans-unit>
+      <trans-unit id="1XImTTG" resname="Printer with SerialNumber %SERIAL% is now marked as unreachable!">
+        <source>Printer with SerialNumber %SERIAL% is now marked as unreachable!</source>
+        <target>__Printer with SerialNumber %SERIAL% is now marked as unreachable!</target>
+      </trans-unit>
+      <trans-unit id="ezuwN7u" resname="User index">
+        <source>User index</source>
+        <target>__User index</target>
+      </trans-unit>
+      <trans-unit id="kjQGlYm" resname="Active">
+        <source>Active</source>
+        <target>__Active</target>
+      </trans-unit>
+      <trans-unit id="DlcMpvq" resname="Source">
+        <source>Source</source>
+        <target>__Source</target>
+      </trans-unit>
+      <trans-unit id="lpzL089" resname="Email">
+        <source>Email</source>
+        <target>__Email</target>
+      </trans-unit>
+      <trans-unit id="wlM3BVR" resname="Roles">
+        <source>Roles</source>
+        <target>__Roles</target>
+      </trans-unit>
+      <trans-unit id="Kw3N1AA" resname="actions">
+        <source>actions</source>
+        <target>__actions</target>
+      </trans-unit>
+      <trans-unit id="WwesQPU" resname="deactivate">
+        <source>deactivate</source>
+        <target>__deactivate</target>
+      </trans-unit>
+      <trans-unit id="IAx_YiA" resname="activate">
+        <source>activate</source>
+        <target>__activate</target>
+      </trans-unit>
+      <trans-unit id="EK3iBBJ" resname="Import from LDAP">
+        <source>Import from LDAP</source>
+        <target>__Import from LDAP</target>
+      </trans-unit>
+      <trans-unit id="M4ThpvL" resname="Import User from your LDAP Directory">
+        <source>Import User from your LDAP Directory</source>
+        <target>__Import User from your LDAP Directory</target>
+      </trans-unit>
+      <trans-unit id="4QA5pf3" resname="displayName">
+        <source>displayName</source>
+        <target>__displayName</target>
+      </trans-unit>
+      <trans-unit id="43iQd3D" resname="userPrincipalName">
+        <source>userPrincipalName</source>
+        <target>__userPrincipalName</target>
+      </trans-unit>
+      <trans-unit id="ANjT8Rc" resname="mail">
+        <source>mail</source>
+        <target>__mail</target>
+      </trans-unit>
+      <trans-unit id="vZOMaI9" resname="action">
+        <source>action</source>
+        <target>__action</target>
+      </trans-unit>
+      <trans-unit id="FelD6dp" resname="import user">
+        <source>import user</source>
+        <target>__import user</target>
+      </trans-unit>
+      <trans-unit id="X1Qie3T" resname="imported">
+        <source>imported</source>
+        <target>__imported</target>
+      </trans-unit>
+      <trans-unit id="hVVLud1" resname="incomplete">
+        <source>incomplete</source>
+        <target>__incomplete</target>
+      </trans-unit>
+      <trans-unit id="zFmzav_" resname="Can't Import User without UserPrincialName and EMail.">
+        <source>Can't Import User without UserPrincialName and EMail.</source>
+        <target>__Can't Import User without UserPrincialName and EMail.</target>
       </trans-unit>
     </body>
   </file>

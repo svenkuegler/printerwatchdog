@@ -17,6 +17,11 @@ class ProfileController extends AbstractController
     public function index(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(ProfileType::class, $this->getUser());
+
+        if($this->getUser()->getSource() == 'ldap') {
+            $form->remove('plainPassword');
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

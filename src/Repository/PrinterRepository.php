@@ -129,18 +129,19 @@ class PrinterRepository extends ServiceEntityRepository
 
         $connection = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT b.max_pages - b.min_pages AS pages_per_day
+        $sql = "SELECT ROUND(AVG(c.pages_per_day) / :days) as avg_pages from  (
+                SELECT b.max_pages - b.min_pages AS pages_per_day
                 FROM (SELECT MAX(total_pages) as max_pages,
                              MIN(total_pages) as min_pages
                       FROM printer_history
                       WHERE timestamp BETWEEN DATE_SUB(NOW(), INTERVAL :days DAY) AND DATE(NOW())
-                      GROUP BY DATE(timestamp)) b;";
+                      GROUP BY DATE(timestamp)) b) c;";
 
         $stmt = $connection->prepare($sql);
         $stmt->execute([
             'days' => 30
         ]);
-        $summary->setTotalAvgPages($stmt->fetchColumn(0));
+        $summary->setTotalAvgPages(intval($stmt->fetchColumn(0)));
 
         return $summary;
     }
