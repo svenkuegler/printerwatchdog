@@ -27,6 +27,7 @@ class UserRepository extends ServiceEntityRepository
     {
         $emailArr = [];
         $result = $this->createQueryBuilder('email')
+            ->andWhere('email.isActive = true')
             ->getQuery()
             ->getResult();
         foreach ($result as $user) {
@@ -34,6 +35,23 @@ class UserRepository extends ServiceEntityRepository
         }
 
         return $emailArr;
+    }
+
+    /**
+     * Get all Username in a simple array
+     * @return array
+     */
+    public function getAllUsername()
+    {
+        $arr = [];
+        $result = $this->createQueryBuilder('u')
+            ->getQuery()
+            ->getResult();
+        foreach ($result as $user) {
+            $arr[] = $user->getUsername();
+        }
+
+        return $arr;
     }
 
     // /**

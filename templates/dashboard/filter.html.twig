@@ -1,0 +1,8 @@
+{% if filter|length > 0 %}
+    <div class="offset-1 col-10 text-center mt-2 mb-3">
+        <small>{{ 'This view is filtered by:'|trans }}</small>
+        {% for f in filter  %}
+        <a href="{{ app.request.pathinfo  ~ filterUrl(filter, f) }}" class="badge badge-secondary" title="{{ 'remove this filter'|trans }}"> {{ f|trans }} <i class="fas fa-times"></i></a>
+        {% endfor %}
+    </div>
+{% endif %}

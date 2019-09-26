@@ -60,6 +60,11 @@ class PrinterInformation
     private $suppliesTable = [];
 
     /**
+     * @var string
+     */
+    private $consoleDisplayBuffer = "";
+
+    /**
      * @var int
      */
     private $tonerBlack = 0;
@@ -465,5 +470,22 @@ class PrinterInformation
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getConsoleDisplayBuffer(): string
+    {
+        return $this->consoleDisplayBuffer;
+    }
+
+    /**
+     * @param string $consoleDisplayBuffer
+     * @return PrinterInformation
+     */
+    public function setConsoleDisplayBuffer(string $consoleDisplayBuffer): PrinterInformation
+    {
+        $this->consoleDisplayBuffer = $consoleDisplayBuffer;
+        return $this;
+    }
 
 }

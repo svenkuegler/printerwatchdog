@@ -4,7 +4,10 @@ namespace App\Command;
 
 use App\Entity\Printer;
 use App\Entity\PrinterHistory;
+use App\Entity\PrinterInformation;
 use App\Repository\PrinterRepository;
+use App\Repository\UserRepository;
+use App\Service\MailHelperService;
 use App\Service\SNMPHelper;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -20,15 +23,47 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class GetPrinterInfoCommand extends Command
 {
     protected static $defaultName = 'app:get-printer-info';
+
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
+
+    /**
+     * @var PrinterRepository
+     */
     private $printerRepository;
+
+    /**
+     * @var ContainerInterface
+     */
     private $container;
 
-    public function __construct(LoggerInterface $logger, PrinterRepository $printerRepository, ContainerInterface $container)
+    /**
+     * @var MailHelperService
+     */
+    private $mailHelperService;
+
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * GetPrinterInfoCommand constructor.
+     * @param LoggerInterface $logger
+     * @param PrinterRepository $printerRepository
+     * @param ContainerInterface $container
+     * @param MailHelperService $mailHelperService
+     * @param UserRepository $userRepository
+     */
+    public function __construct(LoggerInterface $logger, PrinterRepository $printerRepository, ContainerInterface $container, MailHelperService $mailHelperService, UserRepository $userRepository)
     {
         $this->logger = $logger;
         $this->printerRepository = $printerRepository;
         $this->container = $container;
+        $this->mailHelperService = $mailHelperService;
+        $this->userRepository = $userRepository;
         parent::__construct();
     }
 
@@ -71,22 +106,7 @@ class GetPrinterInfoCommand extends Command
 
                 if ($printer) {
                     $io->note(sprintf("%s exists in DB, prepare to update ....", $ip));
-
-                    $printer->setLocation($pInfo->getSysLocation())
-                        ->setLastCheck(new \DateTime("now"))
-                        ->setSerialNumber($pInfo->getSerialNumber())
-                        ->setIsColorPrinter($pInfo->isColorPrinter())
-                        ->setTonerBlack($pInfo->getTonerBlack())
-                        ->setTonerBlackDescription($pInfo->getTonerBlackDescription())
-                        ->setTonerYellow($pInfo->getTonerYellow())
-                        ->setTonerYellowDescription($pInfo->getTonerYellowDescription())
-                        ->setTonerCyan($pInfo->getTonerCyan())
-                        ->setTonerCyanDescription($pInfo->getTonerCyanDescription())
-                        ->setTonerMagenta($pInfo->getTonerMagenta())
-                        ->setTonerMagentaDescription($pInfo->getTonerMagentaDescription())
-                        ->setType($pInfo->getPrinterType())
-                        ->setTotalPages($pInfo->getTotalPages())
-                        ->setUnreachableCount(0);
+                    $printer = $this->mapPrinterInformation($printer, $pInfo);
 
                     $historyData->setPrinter($printer);
 
@@ -117,6 +137,7 @@ class GetPrinterInfoCommand extends Command
                             ->setTonerMagentaDescription($pInfo->getTonerMagentaDescription())
                             ->setType($pInfo->getPrinterType())
                             ->setTotalPages($pInfo->getTotalPages())
+                            ->setConsoleDisplay($pInfo->getConsoleDisplayBuffer())
                             ->setUnreachableCount(0);
                         $historyData->setPrinter($prn);
 
@@ -137,30 +158,27 @@ class GetPrinterInfoCommand extends Command
                 $this->logger->info(sprintf("Get information for IP %s", $printer->getIp()));
                 $pInfo = $snmpHelper->getPrinterInfo($printer->getIp());
                 if (is_null($pInfo)) {
-                    $this->logger->error(sprintf("Could not get information for IP %s", $printer->getIp()));
+
+                    // printer seams to be unreachable, increase counter
                     $printer->setUnreachableCount($printer->getUnreachableCount() + 1);
+                    $this->logger->error(sprintf("Could not get information for IP %s (%s times)", $printer->getIp(), $printer->getUnreachableCount()));
+
+                    // printer reached inactive count, send notification
+                    if($this->container->getParameter('printer.inactive.unreachable_count') == $printer->getUnreachableCount()) {
+                        $this->logger->error("printer reached inactive count, send notification");
+                        $this->mailHelperService
+                            ->setMessageTemplate("mails/inactive_notification.html.twig", ['printer' => $printer])
+                            ->setRecipients($this->userRepository->getAllEMailAddresses())
+                            ->setSubject(sprintf("Printer %s is now marked as inactive", $printer->getSerialNumber()))
+                            ->send();
+                    }
+
                     $em->persist($printer);
                     $em->flush();
                 } else {
-                    $printer
-                        ->setLocation($pInfo->getSysLocation())
-                        ->setLastCheck(new \DateTime("now"))
-                        ->setSerialNumber($pInfo->getSerialNumber())
-                        ->setIsColorPrinter($pInfo->isColorPrinter())
-                        ->setTonerBlack($pInfo->getTonerBlack())
-                        ->setTonerBlackDescription($pInfo->getTonerBlackDescription())
-                        ->setTonerYellow($pInfo->getTonerYellow())
-                        ->setTonerYellowDescription($pInfo->getTonerYellowDescription())
-                        ->setTonerCyan($pInfo->getTonerCyan())
-                        ->setTonerCyanDescription($pInfo->getTonerCyanDescription())
-                        ->setTonerMagenta($pInfo->getTonerMagenta())
-                        ->setTonerMagentaDescription($pInfo->getTonerMagentaDescription())
-                        ->setType($pInfo->getPrinterType())
-                        ->setTotalPages($pInfo->getTotalPages())
-                        ->setUnreachableCount(0);
 
                     $this->logger->notice(sprintf("Save actual information for IP %s", $printer->getIp()));
-                    $em->persist($printer);
+                    $em->persist($this->mapPrinterInformation($printer, $pInfo));
 
                     $historyData = new PrinterHistory();
                     $historyData->setTotalPages($pInfo->getTotalPages())
@@ -175,8 +193,37 @@ class GetPrinterInfoCommand extends Command
                     $em->flush();
                 }
 
-            }
+            } // End Foreach
         }
-        $this->logger->info("Test");
+        $this->logger->info("Get Printer Information finished!");
+    }
+
+    /**
+     * @param Printer $printer
+     * @param PrinterInformation $printerInformation
+     * @return Printer
+     * @throws \Exception
+     */
+    private function mapPrinterInformation(Printer $printer, PrinterInformation $printerInformation)
+    {
+        $printer
+            ->setLocation($printerInformation->getSysLocation())
+            ->setLastCheck(new \DateTime("now"))
+            ->setSerialNumber($printerInformation->getSerialNumber())
+            ->setIsColorPrinter($printerInformation->isColorPrinter())
+            ->setTonerBlack($printerInformation->getTonerBlack())
+            ->setTonerBlackDescription($printerInformation->getTonerBlackDescription())
+            ->setTonerYellow($printerInformation->getTonerYellow())
+            ->setTonerYellowDescription($printerInformation->getTonerYellowDescription())
+            ->setTonerCyan($printerInformation->getTonerCyan())
+            ->setTonerCyanDescription($printerInformation->getTonerCyanDescription())
+            ->setTonerMagenta($printerInformation->getTonerMagenta())
+            ->setTonerMagentaDescription($printerInformation->getTonerMagentaDescription())
+            ->setType($printerInformation->getPrinterType())
+            ->setTotalPages($printerInformation->getTotalPages())
+            ->setConsoleDisplay($printerInformation->getConsoleDisplayBuffer())
+            ->setUnreachableCount(0);
+
+        return $printer;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class PrinterStatistics
+class PrinterHistoryStatistics
 {
     /**
      * @var Printer
@@ -35,7 +35,7 @@ class PrinterStatistics
     private $avg30daysCyanUsage = 0;
 
     /**
-     * @var PrinterStatistic[]
+     * @var PrinterHistoryStatisticData[]
      */
     private $statistics;
 
@@ -49,9 +49,9 @@ class PrinterStatistics
 
     /**
      * @param Printer $printer
-     * @return PrinterStatistics
+     * @return PrinterHistoryStatistics
      */
-    public function setPrinter(Printer $printer): PrinterStatistics
+    public function setPrinter(Printer $printer): PrinterHistoryStatistics
     {
         $this->printer = $printer;
         return $this;
@@ -67,9 +67,9 @@ class PrinterStatistics
 
     /**
      * @param int $avg30daysPages
-     * @return PrinterStatistics
+     * @return PrinterHistoryStatistics
      */
-    public function setAvg30daysPages(int $avg30daysPages): PrinterStatistics
+    public function setAvg30daysPages(int $avg30daysPages): PrinterHistoryStatistics
     {
         $this->avg30daysPages = $avg30daysPages;
         return $this;
@@ -85,9 +85,9 @@ class PrinterStatistics
 
     /**
      * @param float $avg30daysBlackUsage
-     * @return PrinterStatistics
+     * @return PrinterHistoryStatistics
      */
-    public function setAvg30daysBlackUsage(float $avg30daysBlackUsage): PrinterStatistics
+    public function setAvg30daysBlackUsage(float $avg30daysBlackUsage): PrinterHistoryStatistics
     {
         $this->avg30daysBlackUsage = $avg30daysBlackUsage;
         return $this;
@@ -103,9 +103,9 @@ class PrinterStatistics
 
     /**
      * @param float $avg30daysYellowUsage
-     * @return PrinterStatistics
+     * @return PrinterHistoryStatistics
      */
-    public function setAvg30daysYellowUsage(float $avg30daysYellowUsage): PrinterStatistics
+    public function setAvg30daysYellowUsage(float $avg30daysYellowUsage): PrinterHistoryStatistics
     {
         $this->avg30daysYellowUsage = $avg30daysYellowUsage;
         return $this;
@@ -121,9 +121,9 @@ class PrinterStatistics
 
     /**
      * @param float $avg30daysMagentaUsage
-     * @return PrinterStatistics
+     * @return PrinterHistoryStatistics
      */
-    public function setAvg30daysMagentaUsage(float $avg30daysMagentaUsage): PrinterStatistics
+    public function setAvg30daysMagentaUsage(float $avg30daysMagentaUsage): PrinterHistoryStatistics
     {
         $this->avg30daysMagentaUsage = $avg30daysMagentaUsage;
         return $this;
@@ -139,16 +139,16 @@ class PrinterStatistics
 
     /**
      * @param float $avg30daysCyanUsage
-     * @return PrinterStatistics
+     * @return PrinterHistoryStatistics
      */
-    public function setAvg30daysCyanUsage(float $avg30daysCyanUsage): PrinterStatistics
+    public function setAvg30daysCyanUsage(float $avg30daysCyanUsage): PrinterHistoryStatistics
     {
         $this->avg30daysCyanUsage = $avg30daysCyanUsage;
         return $this;
     }
 
     /**
-     * @return PrinterStatistic[]
+     * @return PrinterHistoryStatisticData[]
      */
     public function getStatistics(): array
     {
@@ -156,20 +156,20 @@ class PrinterStatistics
     }
 
     /**
-     * @param PrinterStatistic[] $statistics
-     * @return PrinterStatistics
+     * @param PrinterHistoryStatisticData[] $statistics
+     * @return PrinterHistoryStatistics
      */
-    public function setStatistics(array $statistics): PrinterStatistics
+    public function setStatistics(array $statistics): PrinterHistoryStatistics
     {
         $this->statistics = $statistics;
         return $this;
     }
 
     /**
-     * @param PrinterStatistic $statistic
-     * @return PrinterStatistics
+     * @param PrinterHistoryStatisticData $statistic
+     * @return PrinterHistoryStatistics
      */
-    public function addStatistic(PrinterStatistic $statistic): PrinterStatistics
+    public function addStatistic(PrinterHistoryStatisticData $statistic): PrinterHistoryStatistics
     {
         $this->statistics[] = $statistic;
         $this->calculateAvg();

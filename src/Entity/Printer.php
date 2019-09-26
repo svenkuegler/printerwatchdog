@@ -108,6 +108,11 @@ class Printer
      */
     private $TonerYellowDescription;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ConsoleDisplay;
+
     public function __construct()
     {
         $this->printerHistories = new ArrayCollection();
@@ -385,6 +390,18 @@ class Printer
     public function setTonerYellowDescription(?string $TonerYellowDescription): self
     {
         $this->TonerYellowDescription = $TonerYellowDescription;
+
+        return $this;
+    }
+
+    public function getConsoleDisplay(): ?string
+    {
+        return $this->ConsoleDisplay;
+    }
+
+    public function setConsoleDisplay(?string $ConsoleDisplay): self
+    {
+        $this->ConsoleDisplay = $ConsoleDisplay;
 
         return $this;
     }

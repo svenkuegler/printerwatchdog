@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class PrinterStatistic
+class PrinterHistoryStatisticData
 {
     /**
      * @var int
@@ -49,9 +49,9 @@ class PrinterStatistic
 
     /**
      * @param int $printer_id
-     * @return PrinterStatistic
+     * @return PrinterHistoryStatisticData
      */
-    public function setPrinterId(int $printer_id): PrinterStatistic
+    public function setPrinterId(int $printer_id): PrinterHistoryStatisticData
     {
         $this->printer_id = $printer_id;
         return $this;
@@ -67,7 +67,7 @@ class PrinterStatistic
 
     /**
      * @param mixed $formated_date
-     * @return PrinterStatistic
+     * @return PrinterHistoryStatisticData
      */
     public function setFormatedDate($formated_date)
     {
@@ -85,9 +85,9 @@ class PrinterStatistic
 
     /**
      * @param int $pages_per_day
-     * @return PrinterStatistic
+     * @return PrinterHistoryStatisticData
      */
-    public function setPagesPerDay(int $pages_per_day): PrinterStatistic
+    public function setPagesPerDay(int $pages_per_day): PrinterHistoryStatisticData
     {
         $this->pages_per_day = $pages_per_day;
         return $this;
@@ -103,9 +103,9 @@ class PrinterStatistic
 
     /**
      * @param int $black_per_day
-     * @return PrinterStatistic
+     * @return PrinterHistoryStatisticData
      */
-    public function setBlackPerDay(int $black_per_day): PrinterStatistic
+    public function setBlackPerDay(int $black_per_day): PrinterHistoryStatisticData
     {
         $this->black_per_day = $black_per_day;
         return $this;
@@ -121,9 +121,9 @@ class PrinterStatistic
 
     /**
      * @param int $yellow_per_day
-     * @return PrinterStatistic
+     * @return PrinterHistoryStatisticData
      */
-    public function setYellowPerDay(?int $yellow_per_day): PrinterStatistic
+    public function setYellowPerDay(?int $yellow_per_day): PrinterHistoryStatisticData
     {
         $this->yellow_per_day = intval($yellow_per_day);
         return $this;
@@ -139,9 +139,9 @@ class PrinterStatistic
 
     /**
      * @param int $cyan_per_day
-     * @return PrinterStatistic
+     * @return PrinterHistoryStatisticData
      */
-    public function setCyanPerDay(?int $cyan_per_day): PrinterStatistic
+    public function setCyanPerDay(?int $cyan_per_day): PrinterHistoryStatisticData
     {
         $this->cyan_per_day = intval($cyan_per_day);
         return $this;
@@ -157,9 +157,9 @@ class PrinterStatistic
 
     /**
      * @param int $magenta_per_day
-     * @return PrinterStatistic
+     * @return PrinterHistoryStatisticData
      */
-    public function setMagentaPerDay(?int $magenta_per_day): PrinterStatistic
+    public function setMagentaPerDay(?int $magenta_per_day): PrinterHistoryStatisticData
     {
         $this->magenta_per_day = intval($magenta_per_day);
         return $this;

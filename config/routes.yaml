@@ -6,4 +6,4 @@ index:
     path: /
     controller: App\Controller\DashboardController::index
     defaults:
-        view: "card"
+        view: "dash"

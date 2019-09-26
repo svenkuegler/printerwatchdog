@@ -64,9 +64,6 @@ class SNMPHelper
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
             return false;
-        } catch (\SNMPException $se) {
-            $this->logger->error($se->getMessage());
-            return false;
         }
 
         return true;
@@ -83,8 +80,6 @@ class SNMPHelper
             $ret = $this->SNMPConnection->get($oid);
         } catch (\Exception $e) {
             $this->logger->warning($e->getMessage());
-        } catch (\SNMPException $se) {
-            $this->logger->warning($se->getMessage());
         }
 
         return $ret;
@@ -174,7 +169,9 @@ class SNMPHelper
 
     private function _close() : void
     {
-        $this->SNMPConnection->close();
+        if($this->SNMPConnection instanceof \SNMP) {
+            $this->SNMPConnection->close();
+        }
     }
 
     /**
@@ -284,6 +281,25 @@ class SNMPHelper
         $this->_close();
 
         return $results;
+    }
+
+    /**
+     * @param String $ip
+     * @param string $oid
+     * @return int|string|null
+     */
+    public function getSingleValue(String $ip, string $oid)
+    {
+        if(!$this->_connect($ip)) {
+            $this->_close();
+            return null;
+        }
+
+        $result = $this->_getValue($oid);
+
+        $this->_close();
+
+        return $result;
     }
 
     /**

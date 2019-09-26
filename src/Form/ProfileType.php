@@ -35,6 +35,7 @@ class ProfileType extends AbstractType
                 'choices' => [
                     'English' => 'en',
                     'German' => 'de',
+                    'French' => 'fr',
                 ]
             ])
         ;

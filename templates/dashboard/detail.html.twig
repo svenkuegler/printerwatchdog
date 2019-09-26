@@ -95,31 +95,47 @@
         </div>
 
         <div class="row mt-3">
-            <div class="col-12">
-                <div class="card">
+            <div class="col-8">
+                <div class="card h-100">
                     <div class="card-header">
                         <h5>{% trans %}Statistics{% endtrans %}</h5>
                     </div>
                     <div class="card-body">
                         <dl class="row">
-                            <dt class="col-sm-2">{% trans %}Avg Pages per Day*:{% endtrans %}</dt>
-                            <dd class="col-sm-2">{{ printerStatistic.avg30daysPages }}</dd>
+                            <dt class="col-sm-3">{% trans %}Avg Pages per Day*:{% endtrans %}</dt>
+                            <dd class="col-sm-3">{{ printerStatistic.avg30daysPages }}</dd>
 
-                            <dt class="col-sm-2">{% trans %}Avg Black Usage*:{% endtrans %}</dt>
-                            <dd class="col-sm-6">{{ printerStatistic.avg30daysBlackUsage }}%</dd>
+                            <dt class="col-sm-3">{% trans %}Avg Black Usage*:{% endtrans %}</dt>
+                            <dd class="col-sm-3">{{ printerStatistic.avg30daysBlackUsage|number_format(3) }}%</dd>
                         {% if printer.isColorPrinter %}
-                            <dt class="col-sm-2 offset-4">{% trans %}Avg Yellow*:{% endtrans %}</dt>
-                            <dd class="col-sm-2">{{ printerStatistic.avg30daysYellowUsage }}%</dd>
+                            <dt class="col-sm-3 offset-6">{% trans %}Avg Yellow*:{% endtrans %}</dt>
+                            <dd class="col-sm-3">{{ printerStatistic.avg30daysYellowUsage|number_format(3) }}%</dd>
 
-                            <dt class="col-sm-2 offset-4">{% trans %}Avg Magenta*:{% endtrans %}</dt>
-                            <dd class="col-sm-2">{{ printerStatistic.avg30daysMagentaUsage }}%</dd>
+                            <dt class="col-sm-3 offset-6">{% trans %}Avg Magenta*:{% endtrans %}</dt>
+                            <dd class="col-sm-3">{{ printerStatistic.avg30daysMagentaUsage|number_format(3) }}%</dd>
 
-                            <dt class="col-sm-2 offset-4">{% trans %}Avg Cyan*:{% endtrans %}</dt>
-                            <dd class="col-sm-2">{{ printerStatistic.avg30daysCyanUsage }}%</dd>
+                            <dt class="col-sm-3 offset-6">{% trans %}Avg Cyan*:{% endtrans %}</dt>
+                            <dd class="col-sm-3">{{ printerStatistic.avg30daysCyanUsage|number_format(3) }}%</dd>
                         {% endif %}
                         </dl>
 
                         <small class="text-muted">{% trans %}* Notice - values based on 30 Days average.{% endtrans %}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5>{{ 'Display'|trans }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="pl-3 pr-3 pt-4 pb-4 bg-light text-muted">
+                            <samp id="consoleDisplay">{{ printer.consoleDisplay }}</samp>
+                        </div>
+                        <a href="javascript:void(0)" id="getLiveDisplayBuffer" class="btn btn-default btn-block mt-3">
+                            <i class="fas fa-sync"></i> {{ 'refresh'|trans }}
+                        </a>
+                        <div class="text-danger text-center" id="errorMessage"></div>
                     </div>
                 </div>
             </div>
@@ -280,5 +296,16 @@
             options: {legend: false}
         });
 
+        $('#getLiveDisplayBuffer').click(function () {
+            $('#consoleDisplay').html('<div class="text-center"><i class="fas fa-spinner fa-pulse"></i> {{'loading ...'|trans}}</div>');
+            $('#errorMessage').html('');
+
+            $.getJSON('{{ path('api_request_single_value', {'id': printer.id, 'value': 'consoleDisplayBuffer'}) }}', function (data) {
+                $('#consoleDisplay').html( (data.status == 200) ? data.result : '{{ printer.consoleDisplay }}' );
+                $('#errorMessage').html(data.errorMessage);
+            }).fail(function () {
+                $('#errorMessage').html( '{{ 'could not get information'|trans }}' );
+            });
+        });
     </script>
 {% endblock %}

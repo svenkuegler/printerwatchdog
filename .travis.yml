@@ -32,5 +32,5 @@ jobs:
               file: '/tmp/release.tar.gz'
               skip_cleanup: true
               draft: true
-#              on:
-#                  tags: true
+              on:
+                  tags: true

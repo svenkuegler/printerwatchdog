@@ -1,6 +1,6 @@
 {% for printer in printerList  %}
-    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ">
-        <div class="card printercard {{ getCardColor(printer) }}">
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 pt-1 pb-2">
+        <div class="card printercard h-100 {{ getCardColor(printer) }}">
             <div class="card-body">
                 <h5><a href="{{ path('dashboard_details', {'id': printer.id }) }}" class="link-unstyled"> <i class="fas fa-print"></i> {{ printer.name }}</a></h5>
 
