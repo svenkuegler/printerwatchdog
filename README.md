@@ -192,6 +192,9 @@ Now you can open [http://192.168.1.44:8080](http://192.168.1.44:8080) to look in
 ---
 
 #### Translation
+Help to translate on [POEditor](https://poeditor.com/join/project/5C3qSMNOPo).   
+Join the public project: [https://poeditor.com/join/project/5C3qSMNOPo](https://poeditor.com/join/project/5C3qSMNOPo)
+
 Find the Translation files in __/translations/*__ folder.
 
 ---
