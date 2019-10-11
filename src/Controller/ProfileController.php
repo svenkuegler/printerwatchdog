@@ -8,15 +8,18 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ProfileType;
 use App\Entity\User;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfileController extends AbstractController
 {
     /**
      * @Route("/profile", name="profile")
      */
-    public function index(Request $request, SessionInterface $session)
+    public function index(Request $request, SessionInterface $session, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $form = $this->createForm(ProfileType::class, $this->getUser());
+        $user = $this->getUser();
+        $form = $this->createForm(ProfileType::class, $user);
+        $em = $this->getDoctrine()->getManager();
 
         if($this->getUser()->getSource() == 'ldap') {
             $form->remove('plainPassword');
@@ -25,8 +28,12 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($form->has('plainPassword')) {
+                $user->setPassword($passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData()));
+            }
             $session->set('_locale', $form->getData()->getLocale());
-            $this->getDoctrine()->getManager()->flush();
+            $em->persist($user);
+            $em->flush();
 
             return $this->redirectToRoute('dashboard');
         }
