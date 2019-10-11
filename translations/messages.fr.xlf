@@ -1,517 +1,513 @@
-<?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="file.ext" datatype="plaintext" xml:space="preserve" source-language="en" target-language="fr">
     <header>
-      <tool tool-id="symfony" tool-name="Symfony"/>
+      <tool tool-id="poeditor.com" tool-name="POEditor"/>
     </header>
     <body>
-      <trans-unit id="Z7aWRoY" resname="Dashboard">
+      <trans-unit id="Z7aWRoY">
         <source>Dashboard</source>
-        <target>__Dashboard</target>
+        <target>Tableau de bord</target>
       </trans-unit>
-      <trans-unit id="Ak6sWxp" resname="Printer">
+      <trans-unit id="Ak6sWxp">
         <source>Printer</source>
-        <target>__Printer</target>
+        <target>Imprimante</target>
       </trans-unit>
-      <trans-unit id="fTG4MxO" resname="Notification">
+      <trans-unit id="fTG4MxO">
         <source>Notification</source>
-        <target>__Notification</target>
+        <target>Notification</target>
       </trans-unit>
-      <trans-unit id="tRLZfny" resname="User">
+      <trans-unit id="tRLZfny">
         <source>User</source>
-        <target>__User</target>
+        <target>Utilisateur</target>
       </trans-unit>
-      <trans-unit id="1pajW90" resname="Profile">
+      <trans-unit id="1pajW90">
         <source>Profile</source>
-        <target>__Profile</target>
+        <target>Profil</target>
       </trans-unit>
-      <trans-unit id="0FJ_Sz1" resname="Logout">
+      <trans-unit id="0FJ_Sz1">
         <source>Logout</source>
-        <target>__Logout</target>
+        <target>Se déconnecter</target>
       </trans-unit>
-      <trans-unit id="nWMiwfT" resname="Login">
+      <trans-unit id="nWMiwfT">
         <source>Login</source>
-        <target>__Login</target>
+        <target>S'identifier</target>
       </trans-unit>
-      <trans-unit id="15GHHye" resname="Printer Detail">
+      <trans-unit id="15GHHye">
         <source>Printer Detail</source>
-        <target>__Printer Detail</target>
+        <target>Détail de l'imprimante</target>
       </trans-unit>
-      <trans-unit id="RkxP.QG" resname="Edit">
+      <trans-unit id="RkxP.QG">
         <source>Edit</source>
-        <target>__Edit</target>
+        <target>Modifier</target>
       </trans-unit>
-      <trans-unit id="v1UFF0p" resname="IP">
+      <trans-unit id="v1UFF0p">
         <source>IP</source>
-        <target>__IP</target>
+        <target>IP</target>
       </trans-unit>
-      <trans-unit id="5rmLrQm" resname="Open Web Interface">
+      <trans-unit id="5rmLrQm">
         <source>Open Web Interface</source>
-        <target>__Open Web Interface</target>
+        <target>Interface Web ouverte</target>
       </trans-unit>
-      <trans-unit id="OHdTNKi" resname="AssetName">
+      <trans-unit id="OHdTNKi">
         <source>AssetName</source>
-        <target>__AssetName</target>
+        <target>AssetName</target>
       </trans-unit>
-      <trans-unit id="6dT3rsE" resname="AssetID">
+      <trans-unit id="6dT3rsE">
         <source>AssetID</source>
-        <target>__AssetID</target>
+        <target>AssetID</target>
       </trans-unit>
-      <trans-unit id="_QL417G" resname="Open SnipeIT">
+      <trans-unit id="_QL417G">
         <source>Open SnipeIT</source>
-        <target>__Open SnipeIT</target>
+        <target>Ouvrez SnipeIT</target>
       </trans-unit>
-      <trans-unit id="3NHVIj9" resname="Name">
+      <trans-unit id="3NHVIj9">
         <source>Name</source>
-        <target>__Name</target>
+        <target>Nom</target>
       </trans-unit>
-      <trans-unit id="3YJNdOQ" resname="SerialNumber">
+      <trans-unit id="3YJNdOQ">
         <source>SerialNumber</source>
-        <target>__SerialNumber</target>
+        <target>Numéro de série</target>
       </trans-unit>
-      <trans-unit id="FbYZdLJ" resname="Location">
+      <trans-unit id="FbYZdLJ">
         <source>Location</source>
-        <target>__Location</target>
+        <target>Emplacement</target>
       </trans-unit>
-      <trans-unit id="7Z9Rt70" resname="LastCheck">
+      <trans-unit id="7Z9Rt70">
         <source>LastCheck</source>
-        <target>__LastCheck</target>
+        <target>Dernière vérification</target>
       </trans-unit>
-      <trans-unit id="uq3fcPt" resname="Type">
+      <trans-unit id="uq3fcPt">
         <source>Type</source>
-        <target>__Type</target>
+        <target>Type</target>
       </trans-unit>
-      <trans-unit id="zDFFmmZ" resname="ColorPrinter">
+      <trans-unit id="zDFFmmZ">
         <source>ColorPrinter</source>
-        <target>__ColorPrinter</target>
+        <target>Imprimante couleur</target>
       </trans-unit>
-      <trans-unit id="inmIkP6" resname="yes">
+      <trans-unit id="inmIkP6">
         <source>yes</source>
-        <target>__yes</target>
+        <target>Oui</target>
       </trans-unit>
-      <trans-unit id="k5Apjz_" resname="no">
+      <trans-unit id="k5Apjz_">
         <source>no</source>
-        <target>__no</target>
+        <target>non</target>
       </trans-unit>
-      <trans-unit id="7Izm7rw" resname="TotalPages">
+      <trans-unit id="7Izm7rw">
         <source>TotalPages</source>
-        <target>__TotalPages</target>
+        <target>Pages totales</target>
       </trans-unit>
-      <trans-unit id="pwBBf45" resname="Toner">
+      <trans-unit id="pwBBf45">
         <source>Toner</source>
-        <target>__Toner</target>
+        <target>Toner</target>
       </trans-unit>
-      <trans-unit id="q6pGrbT" resname="Unreachable">
+      <trans-unit id="q6pGrbT">
         <source>Unreachable</source>
-        <target>__Unreachable</target>
+        <target>Inaccessible</target>
       </trans-unit>
-      <trans-unit id="MsY_j0g" resname="%c% times">
+      <trans-unit id="MsY_j0g">
         <source>%c% times</source>
-        <target>__%c% times</target>
+        <target>% c% fois</target>
       </trans-unit>
-      <trans-unit id="plYQfpn" resname="Statistics">
+      <trans-unit id="plYQfpn">
         <source>Statistics</source>
-        <target>__Statistics</target>
+        <target>Statistiques</target>
       </trans-unit>
-      <trans-unit id="aNHpVjj" resname="Avg Pages per Day*:">
-        <source>Avg Pages per Day*:</source>
-        <target>__Avg Pages per Day*:</target>
+      <trans-unit id="aNHpVjj">
+        <source>Avg Pages / Day*:</source>
+        <target>Nombre moyen de pages / jour *:</target>
       </trans-unit>
-      <trans-unit id="wH_UA1h" resname="Avg Black Usage*:">
+      <trans-unit id="wH_UA1h">
         <source>Avg Black Usage*:</source>
-        <target>__Avg Black Usage*:</target>
+        <target>Utilisation moyenne de noir *:</target>
       </trans-unit>
-      <trans-unit id="8o_Hqwa" resname="Avg Yellow*:">
+      <trans-unit id="8o_Hqwa">
         <source>Avg Yellow*:</source>
-        <target>__Avg Yellow*:</target>
+        <target>Jaune moyen *:</target>
       </trans-unit>
-      <trans-unit id="CrQkXUd" resname="Avg Magenta*:">
+      <trans-unit id="CrQkXUd">
         <source>Avg Magenta*:</source>
-        <target>__Avg Magenta*:</target>
+        <target>Moyenne Magenta *:</target>
       </trans-unit>
-      <trans-unit id="M7lhlUj" resname="Avg Cyan*:">
+      <trans-unit id="M7lhlUj">
         <source>Avg Cyan*:</source>
-        <target>__Avg Cyan*:</target>
+        <target>Cyan moyen *:</target>
       </trans-unit>
-      <trans-unit id="5rL1.sX" resname="* Notice - values based on 30 Days average.">
+      <trans-unit id="5rL1.sX">
         <source>* Notice - values based on 30 Days average.</source>
-        <target>__* Notice - values based on 30 Days average.</target>
+        <target>* Avis - valeurs basées sur une moyenne de 30 jours.</target>
       </trans-unit>
-      <trans-unit id="NOEIwIl" resname="Display">
+      <trans-unit id="NOEIwIl">
         <source>Display</source>
-        <target>__Display</target>
+        <target>Afficher</target>
       </trans-unit>
-      <trans-unit id="1swKCIw" resname="refresh">
+      <trans-unit id="1swKCIw">
         <source>refresh</source>
-        <target>__refresh</target>
+        <target>rafraîchir</target>
       </trans-unit>
-      <trans-unit id="eINhjEy" resname="Asset Information">
+      <trans-unit id="eINhjEy">
         <source>Asset Information</source>
-        <target>__Asset Information</target>
+        <target>Informations sur les actifs</target>
       </trans-unit>
-      <trans-unit id="CtErQPN" resname="Toner History">
+      <trans-unit id="CtErQPN">
         <source>Toner History</source>
-        <target>__Toner History</target>
+        <target>Histoire du toner</target>
       </trans-unit>
-      <trans-unit id="zocU8Cx" resname="TotalPage History">
+      <trans-unit id="zocU8Cx">
         <source>TotalPage History</source>
-        <target>__TotalPage History</target>
+        <target>Histoire TotalPage</target>
       </trans-unit>
-      <trans-unit id="xs.m5PE" resname="Black">
+      <trans-unit id="xs.m5PE">
         <source>Black</source>
-        <target>__Black</target>
+        <target>Noir</target>
       </trans-unit>
-      <trans-unit id="Gd2D8Rd" resname="Yellow">
+      <trans-unit id="Gd2D8Rd">
         <source>Yellow</source>
-        <target>__Yellow</target>
+        <target>Jaune</target>
       </trans-unit>
-      <trans-unit id="6VuyIuB" resname="Cyan">
+      <trans-unit id="6VuyIuB">
         <source>Cyan</source>
-        <target>__Cyan</target>
+        <target>Cyan</target>
       </trans-unit>
-      <trans-unit id="G80AmXe" resname="Magenta">
+      <trans-unit id="G80AmXe">
         <source>Magenta</source>
-        <target>__Magenta</target>
+        <target>Magenta</target>
       </trans-unit>
-      <trans-unit id="NfGgo2P" resname="Total Pages">
+      <trans-unit id="NfGgo2P">
         <source>Total Pages</source>
-        <target>__Total Pages</target>
+        <target>Pages totales</target>
       </trans-unit>
-      <trans-unit id="hdme8pV" resname="loading ...">
+      <trans-unit id="hdme8pV">
         <source>loading ...</source>
-        <target>__loading ...</target>
+        <target>chargement ...</target>
       </trans-unit>
-      <trans-unit id="uj4Lklh" resname="could not get information">
+      <trans-unit id="uj4Lklh">
         <source>could not get information</source>
-        <target>__could not get information</target>
+        <target>impossible d'obtenir des informations</target>
       </trans-unit>
-      <trans-unit id="VPvxhsa" resname="Dashboard View">
+      <trans-unit id="VPvxhsa">
         <source>Dashboard View</source>
-        <target>__Dashboard View</target>
+        <target>Tableau de bord Voir</target>
       </trans-unit>
-      <trans-unit id="CLBag1S" resname="Card View">
+      <trans-unit id="CLBag1S">
         <source>Card View</source>
-        <target>__Card View</target>
+        <target>Vue carte</target>
       </trans-unit>
-      <trans-unit id="6GNtfFV" resname="Table View">
+      <trans-unit id="6GNtfFV">
         <source>Table View</source>
-        <target>__Table View</target>
+        <target>Vue tableau</target>
       </trans-unit>
-      <trans-unit id="jqCUk3f" resname="Serial">
+      <trans-unit id="jqCUk3f">
         <source>Serial</source>
-        <target>__Serial</target>
+        <target>En série</target>
       </trans-unit>
-      <trans-unit id="gycKqSL" resname="last check: %date%">
+      <trans-unit id="gycKqSL">
         <source>last check: %date%</source>
-        <target>__last check: %date%</target>
+        <target>dernière vérification:% date%</target>
       </trans-unit>
-      <trans-unit id="gS2nfjO" resname="Toner Usage">
+      <trans-unit id="gS2nfjO">
         <source>Toner Usage</source>
-        <target>__Toner Usage</target>
+        <target>Utilisation du toner</target>
       </trans-unit>
-      <trans-unit id="BcU2wsf" resname="last check">
+      <trans-unit id="BcU2wsf">
         <source>last check</source>
-        <target>__last check</target>
+        <target>dernière vérification</target>
       </trans-unit>
-      <trans-unit id="sjpqhDn" resname="unknown">
+      <trans-unit id="sjpqhDn">
         <source>unknown</source>
-        <target>__unknown</target>
+        <target>inconnu</target>
       </trans-unit>
-      <trans-unit id="E8vz4fH" resname="avg. Pages per Day">
+      <trans-unit id="E8vz4fH">
         <source>avg. Pages per Day</source>
-        <target>__avg. Pages per Day</target>
+        <target>avg. Pages par jour</target>
       </trans-unit>
-      <trans-unit id="OCO.T1K" resname="SW / Color">
+      <trans-unit id="OCO.T1K">
         <source>SW / Color</source>
-        <target>__SW / Color</target>
+        <target>SW / Couleur</target>
       </trans-unit>
-      <trans-unit id="OqaOkMo" resname="Printer Errors">
+      <trans-unit id="OqaOkMo">
         <source>Printer Errors</source>
-        <target>__Printer Errors</target>
+        <target>Erreurs d'imprimante</target>
       </trans-unit>
-      <trans-unit id="AhduwZ." resname="recently unreachable">
+      <trans-unit id="AhduwZ.">
         <source>recently unreachable</source>
-        <target>__recently unreachable</target>
+        <target>récemment inaccessible</target>
       </trans-unit>
-      <trans-unit id="zyNPDfc" resname="based on 30 days calculation">
+      <trans-unit id="zyNPDfc">
         <source>based on 30 days calculation</source>
-        <target>__based on 30 days calculation</target>
+        <target>basé sur un calcul de 30 jours</target>
       </trans-unit>
-      <trans-unit id="hBLAcAJ" resname="Danger">
+      <trans-unit id="hBLAcAJ">
         <source>Danger</source>
-        <target>__Danger</target>
+        <target>Danger</target>
       </trans-unit>
-      <trans-unit id="6YHdrkX" resname="Warning">
+      <trans-unit id="6YHdrkX">
         <source>Warning</source>
-        <target>__Warning</target>
+        <target>Attention</target>
       </trans-unit>
-      <trans-unit id="FlhAUv0" resname="Okay">
+      <trans-unit id="FlhAUv0">
         <source>Okay</source>
-        <target>__Okay</target>
+        <target>d'accord</target>
       </trans-unit>
-      <trans-unit id="yYKyPfr" resname="Last check">
+      <trans-unit id="yYKyPfr">
         <source>Last check</source>
-        <target>__Last check</target>
+        <target>Dernière vérification</target>
       </trans-unit>
-      <trans-unit id="6_WDvvR" resname="Printer with SerialNumber %SERIAL% reached Level: Danger">
+      <trans-unit id="6_WDvvR">
         <source>Printer with SerialNumber %SERIAL% reached Level: Danger</source>
-        <target>__Printer with SerialNumber %SERIAL% reached Level: Danger</target>
+        <target>Imprimante avec numéro de série% SERIAL% atteint Niveau: Danger</target>
       </trans-unit>
-      <trans-unit id="bkHxdT4" resname="Here comes more information if needed ....">
+      <trans-unit id="bkHxdT4">
         <source>Here comes more information if needed ....</source>
-        <target>__Here comes more information if needed ....</target>
+        <target>Voici plus d'informations si nécessaire ....</target>
       </trans-unit>
-      <trans-unit id="jJoRpWK" resname="More information under &lt;a href=&quot;%URL%&quot;&gt;%URL%&lt;/a&gt;">
+      <trans-unit id="jJoRpWK">
         <source>More information under &lt;a href="%URL%"&gt;%URL%&lt;/a&gt;</source>
-        <target><![CDATA[__More information under <a href="%URL%">%URL%</a>]]></target>
+        <target>Plus d'informations sous &lt;a href="%URL%"&gt;% URL% &lt;/a&gt;</target>
       </trans-unit>
-      <trans-unit id="4WeEsB7" resname="Printer with SerialNumber %SERIAL% reached Level: Warning">
+      <trans-unit id="4WeEsB7">
         <source>Printer with SerialNumber %SERIAL% reached Level: Warning</source>
-        <target>__Printer with SerialNumber %SERIAL% reached Level: Warning</target>
+        <target>Imprimante avec numéro de série% SERIAL% atteint Niveau: avertissement</target>
       </trans-unit>
-      <trans-unit id="B6Bjyrf" resname="Notification Settings">
+      <trans-unit id="B6Bjyrf">
         <source>Notification Settings</source>
-        <target>__Notification Settings</target>
+        <target>Paramètres de notification</target>
       </trans-unit>
-      <trans-unit id="dRwiKDa" resname="* to disable a notification channel set both values to 0">
+      <trans-unit id="dRwiKDa">
         <source>* to disable a notification channel set both values to 0</source>
-        <target>__* to disable a notification channel set both values to 0</target>
+        <target>* pour désactiver un canal de notification, définissez les deux valeurs sur 0</target>
       </trans-unit>
-      <trans-unit id="yFzOCGk" resname="save changes">
+      <trans-unit id="yFzOCGk">
         <source>save changes</source>
-        <target>__save changes</target>
+        <target>Sauvegarder les modifications</target>
       </trans-unit>
-      <trans-unit id="cqYoLXx" resname="New Printer">
+      <trans-unit id="cqYoLXx">
         <source>New Printer</source>
-        <target>__New Printer</target>
+        <target>Nouvelle imprimante</target>
       </trans-unit>
-      <trans-unit id="QzHjal4" resname="Create new Printers">
+      <trans-unit id="QzHjal4">
         <source>Create new Printers</source>
-        <target>__Create new Printers</target>
+        <target>Créer de nouvelles imprimantes</target>
       </trans-unit>
-      <trans-unit id="poshUZJ" resname="Edit Printer">
+      <trans-unit id="poshUZJ">
         <source>Edit Printer</source>
-        <target>__Edit Printer</target>
+        <target>Modifier une imprimante</target>
       </trans-unit>
-      <trans-unit id="5qFCx6_" resname="Printer List">
+      <trans-unit id="5qFCx6_">
         <source>Printer List</source>
-        <target>__Printer List</target>
+        <target>Liste des imprimantes</target>
       </trans-unit>
-      <trans-unit id="EhVukhv" resname="Id">
+      <trans-unit id="EhVukhv">
         <source>Id</source>
-        <target>__Id</target>
+        <target>Id</target>
       </trans-unit>
-      <trans-unit id="C8ggYME" resname="Ip">
+      <trans-unit id="C8ggYME">
         <source>Ip</source>
-        <target>__Ip</target>
+        <target>Ip</target>
       </trans-unit>
-      <trans-unit id=".4BZ3Gd" resname="Actions">
+      <trans-unit id=".4BZ3Gd">
         <source>Actions</source>
-        <target>__Actions</target>
+        <target>Actions</target>
       </trans-unit>
-      <trans-unit id="REE8PZe" resname="Are you sure you want to delete this item?">
+      <trans-unit id="REE8PZe">
         <source>Are you sure you want to delete this item?</source>
-        <target>__Are you sure you want to delete this item?</target>
+        <target>Êtes-vous sûr de bien vouloir supprimer cet élément?</target>
       </trans-unit>
-      <trans-unit id="Qf.Yt2r" resname="details">
+      <trans-unit id="Qf.Yt2r">
         <source>details</source>
-        <target>__details</target>
+        <target>détails</target>
       </trans-unit>
-      <trans-unit id="JiEhxTc" resname="edit">
+      <trans-unit id="JiEhxTc">
         <source>edit</source>
-        <target>__edit</target>
+        <target>modifier</target>
       </trans-unit>
-      <trans-unit id="YZdZVQP" resname="delete">
+      <trans-unit id="YZdZVQP">
         <source>delete</source>
-        <target>__delete</target>
+        <target>effacer</target>
       </trans-unit>
-      <trans-unit id="D5lam8." resname="no records found">
+      <trans-unit id="D5lam8.">
         <source>no records found</source>
-        <target>__no records found</target>
+        <target>Aucun enregistrement trouvé</target>
       </trans-unit>
-      <trans-unit id="ofzb0i0" resname="Bulk Add">
+      <trans-unit id="ofzb0i0">
         <source>Bulk Add</source>
-        <target>__Bulk Add</target>
+        <target>Ajouter en vrac</target>
       </trans-unit>
-      <trans-unit id="nz33U6Q" resname="Create new">
+      <trans-unit id="nz33U6Q">
         <source>Create new</source>
-        <target>__Create new</target>
+        <target>Créer un nouveau</target>
       </trans-unit>
-      <trans-unit id="d7K7Xin" resname="Create new Printer">
+      <trans-unit id="d7K7Xin">
         <source>Create new Printer</source>
-        <target>__Create new Printer</target>
+        <target>Créer une nouvelle imprimante</target>
       </trans-unit>
-      <trans-unit id="U0M9PNE" resname="back to list">
+      <trans-unit id="U0M9PNE">
         <source>back to list</source>
-        <target>__back to list</target>
+        <target>retour à la liste</target>
       </trans-unit>
-      <trans-unit id="wYmEDPf" resname="Log in">
+      <trans-unit id="wYmEDPf">
         <source>Log in</source>
-        <target>__Log in</target>
+        <target>S'identifier</target>
       </trans-unit>
-      <trans-unit id="dDUw20Q" resname="Please sign in">
+      <trans-unit id="dDUw20Q">
         <source>Please sign in</source>
-        <target>__Please sign in</target>
+        <target>Veuillez vous connecter</target>
       </trans-unit>
-      <trans-unit id="47ienTP" resname="Username">
+      <trans-unit id="47ienTP">
         <source>Username</source>
-        <target>__Username</target>
+        <target>Nom d'utilisateur</target>
       </trans-unit>
-      <trans-unit id="588_9PF" resname="Password">
+      <trans-unit id="588_9PF">
         <source>Password</source>
-        <target>__Password</target>
+        <target>Mot de passe</target>
       </trans-unit>
-      <trans-unit id="MfS91Yg" resname="This view is filtered by:">
+      <trans-unit id="MfS91Yg">
         <source>This view is filtered by:</source>
-        <target>__This view is filtered by:</target>
+        <target>Cette vue est filtrée par:</target>
       </trans-unit>
-      <trans-unit id="IbEAgRi" resname="remove this filter">
+      <trans-unit id="IbEAgRi">
         <source>remove this filter</source>
-        <target>__remove this filter</target>
+        <target>enlever ce filtre</target>
       </trans-unit>
-      <trans-unit id="A58pMYR" resname="fUnreachable">
-        <source>fUnreachable</source>
-        <target>__unreachable printer</target>
+      <trans-unit id="A58pMYR">
+        <source>unreachable printer</source>
+        <target>imprimante inaccessible</target>
       </trans-unit>
-      <trans-unit id="GgkCSg." resname="fOkay">
-        <source>fOkay</source>
-        <target>__printer with toner level - okay</target>
+      <trans-unit id="GgkCSg.">
+        <source>printer with toner level - okay</source>
+        <target>imprimante avec niveau de toner - ok</target>
       </trans-unit>
-      <trans-unit id="tLPMqso" resname="fWarning">
-        <source>fWarning</source>
-        <target>__printer with toner level - warning</target>
+      <trans-unit id="tLPMqso">
+        <source>printer with toner level - warning</source>
+        <target>imprimante avec niveau de toner - avertissement</target>
       </trans-unit>
-      <trans-unit id="1D8jcDa" resname="fDanger">
-        <source>fDanger</source>
-        <target>__printer with toner level - danger</target>
+      <trans-unit id="1D8jcDa">
+        <source>printer with toner level - danger</source>
+        <target>imprimante avec niveau de toner - danger</target>
       </trans-unit>
-      <trans-unit id="VyOLFnW" resname="Username cannot changed, provided by LDAP">
+      <trans-unit id="VyOLFnW">
         <source>Username cannot changed, provided by LDAP</source>
-        <target>__Username cannot changed, provided by LDAP</target>
+        <target>Le nom d'utilisateur ne peut pas être changé, fourni par LDAP</target>
       </trans-unit>
-      <trans-unit id="59PnafP" resname="Administrator">
+      <trans-unit id="59PnafP">
         <source>Administrator</source>
-        <target>__Administrator</target>
+        <target>Administrateur</target>
       </trans-unit>
-      <trans-unit id="nTsN5OZ" resname="User activated!">
+      <trans-unit id="nTsN5OZ">
         <source>User activated!</source>
-        <target>__User activated!</target>
+        <target>Utilisateur activé!</target>
       </trans-unit>
-      <trans-unit id="Rz3c4ss" resname="User deactivated!">
+      <trans-unit id="Rz3c4ss">
         <source>User deactivated!</source>
-        <target>__User deactivated!</target>
+        <target>Utilisateur désactivé!</target>
       </trans-unit>
-      <trans-unit id="rG4.xIO" resname="User successfully changed!">
+      <trans-unit id="rG4.xIO">
         <source>User successfully changed!</source>
-        <target>__User successfully changed!</target>
+        <target>Utilisateur changé avec succès!</target>
       </trans-unit>
-      <trans-unit id="Eegd6QZ" resname="User imported successfully.">
+      <trans-unit id="Eegd6QZ">
         <source>User imported successfully.</source>
-        <target>__User imported successfully.</target>
+        <target>Utilisateur importé avec succès.</target>
       </trans-unit>
-      <trans-unit id="Ekk1zM5" resname="Ooops! Something is going wrong!">
+      <trans-unit id="Ekk1zM5">
         <source>Ooops! Something is going wrong!</source>
-        <target>__Ooops! Something is going wrong!</target>
+        <target>Ooops! Quelque chose ne va pas!</target>
       </trans-unit>
-      <trans-unit id="1XImTTG" resname="Printer with SerialNumber %SERIAL% is now marked as unreachable!">
+      <trans-unit id="1XImTTG">
         <source>Printer with SerialNumber %SERIAL% is now marked as unreachable!</source>
-        <target>__Printer with SerialNumber %SERIAL% is now marked as unreachable!</target>
+        <target>Imprimante avec numéro de série% SERIAL% est maintenant marqué comme inaccessible!</target>
       </trans-unit>
-      <trans-unit id="ezuwN7u" resname="User index">
+      <trans-unit id="ezuwN7u">
         <source>User index</source>
-        <target>__User index</target>
+        <target>Index utilisateur</target>
       </trans-unit>
-      <trans-unit id="kjQGlYm" resname="Active">
+      <trans-unit id="kjQGlYm">
         <source>Active</source>
-        <target>__Active</target>
+        <target>actif</target>
       </trans-unit>
-      <trans-unit id="DlcMpvq" resname="Source">
+      <trans-unit id="DlcMpvq">
         <source>Source</source>
-        <target>__Source</target>
+        <target>La source</target>
       </trans-unit>
-      <trans-unit id="lpzL089" resname="Email">
+      <trans-unit id="lpzL089">
         <source>Email</source>
-        <target>__Email</target>
+        <target>Email</target>
       </trans-unit>
-      <trans-unit id="wlM3BVR" resname="Roles">
+      <trans-unit id="wlM3BVR">
         <source>Roles</source>
-        <target>__Roles</target>
+        <target>Les rôles</target>
       </trans-unit>
-      <trans-unit id="Kw3N1AA" resname="actions">
+      <trans-unit id="Kw3N1AA">
         <source>actions</source>
-        <target>__actions</target>
+        <target>Actions</target>
       </trans-unit>
-      <trans-unit id="WwesQPU" resname="deactivate">
+      <trans-unit id="WwesQPU">
         <source>deactivate</source>
-        <target>__deactivate</target>
+        <target>désactiver</target>
       </trans-unit>
-      <trans-unit id="IAx_YiA" resname="activate">
+      <trans-unit id="IAx_YiA">
         <source>activate</source>
-        <target>__activate</target>
+        <target>Activer</target>
       </trans-unit>
-      <trans-unit id="EK3iBBJ" resname="Import from LDAP">
+      <trans-unit id="EK3iBBJ">
         <source>Import from LDAP</source>
-        <target>__Import from LDAP</target>
+        <target>Importer depuis LDAP</target>
       </trans-unit>
-      <trans-unit id="M4ThpvL" resname="Import User from your LDAP Directory">
+      <trans-unit id="M4ThpvL">
         <source>Import User from your LDAP Directory</source>
-        <target>__Import User from your LDAP Directory</target>
+        <target>Importer un utilisateur depuis votre annuaire LDAP</target>
       </trans-unit>
-      <trans-unit id="4QA5pf3" resname="displayName">
-        <source>displayName</source>
-        <target>__displayName</target>
+      <trans-unit id="4QA5pf3">
+        <source>DisplayName</source>
+        <target>Afficher un nom</target>
       </trans-unit>
-      <trans-unit id="43iQd3D" resname="userPrincipalName">
-        <source>userPrincipalName</source>
-        <target>__userPrincipalName</target>
+      <trans-unit id="43iQd3D">
+        <source>UserPrincipalName</source>
+        <target>UserPrincipalName</target>
       </trans-unit>
-      <trans-unit id="ANjT8Rc" resname="mail">
-        <source>mail</source>
-        <target>__mail</target>
+      <trans-unit id="ANjT8Rc">
+        <source>Mail</source>
+        <target>Courrier</target>
       </trans-unit>
-      <trans-unit id="vZOMaI9" resname="action">
+      <trans-unit id="vZOMaI9">
         <source>action</source>
-        <target>__action</target>
+        <target>action</target>
       </trans-unit>
-      <trans-unit id="FelD6dp" resname="import user">
+      <trans-unit id="FelD6dp">
         <source>import user</source>
-        <target>__import user</target>
+        <target>importateur</target>
       </trans-unit>
-      <trans-unit id="X1Qie3T" resname="imported">
+      <trans-unit id="X1Qie3T">
         <source>imported</source>
-        <target>__imported</target>
+        <target>importé</target>
       </trans-unit>
-      <trans-unit id="hVVLud1" resname="incomplete">
+      <trans-unit id="hVVLud1">
         <source>incomplete</source>
-        <target>__incomplete</target>
+        <target>incomplet</target>
       </trans-unit>
-      <trans-unit id="zFmzav_" resname="Can't Import User without UserPrincialName and EMail.">
+      <trans-unit id="zFmzav_">
         <source>Can't Import User without UserPrincialName and EMail.</source>
-        <target>__Can't Import User without UserPrincialName and EMail.</target>
+        <target>Impossible d'importer un utilisateur sans UserPrincialName et EMail.</target>
       </trans-unit>
-      <trans-unit id="2Yaz2gB" resname="The server returned Status-Code %STATUS_CODE% [ &lt;em&gt;%STATUS_TEXT%&lt;/em&gt; ].&lt;br&gt;&#10;                    Please take a look in the log files or contact your administrator.">
-        <source>The server returned Status-Code %STATUS_CODE% [ &lt;em&gt;%STATUS_TEXT%&lt;/em&gt; ].&lt;br&gt;
-                    Please take a look in the log files or contact your administrator.</source>
-        <target><![CDATA[__The server returned Status-Code %STATUS_CODE% [ <em>%STATUS_TEXT%</em> ].<br>
-                    Please take a look in the log files or contact your administrator.]]></target>
+      <trans-unit id="2Yaz2gB">
+        <source>The server returned Status-Code %STATUS_CODE% [ &lt;em&gt;%STATUS_TEXT%&lt;/em&gt; ].&lt;br&gt; Please take a look in the log files or contact your administrator.</source>
+        <target>Le serveur a renvoyé Status-Code% STATUS_CODE% [&lt;em&gt;% STATUS_TEXT% &lt;/ em&gt;]. &lt;br&gt; Consultez les fichiers journaux ou contactez votre administrateur.</target>
       </trans-unit>
-      <trans-unit id="0TTKAlp" resname="Access Denied">
+      <trans-unit id="0TTKAlp">
         <source>Access Denied</source>
-        <target>__Access Denied</target>
+        <target>Accès refusé</target>
       </trans-unit>
-      <trans-unit id="s9824qL" resname="You don't have the permission to access the requested page.">
+      <trans-unit id="s9824qL">
         <source>You don't have the permission to access the requested page.</source>
-        <target>__You don't have the permission to access the requested page.</target>
+        <target>Vous n'êtes pas autorisé à accéder à la page demandée.</target>
       </trans-unit>
-      <trans-unit id="pGmrTKT" resname="Page not found">
+      <trans-unit id="pGmrTKT">
         <source>Page not found</source>
-        <target>__Page not found</target>
+        <target>Page non trouvée</target>
       </trans-unit>
-      <trans-unit id="Mnh9SeB" resname="The requested page couldn't be located. Checkout for any URL&#10;                misspelling or &lt;a href=&quot;%DASHBOARD_URL%&quot;&gt;return to the dashboard&lt;/a&gt;.">
-        <source>The requested page couldn't be located. Checkout for any URL
-                misspelling or &lt;a href="%DASHBOARD_URL%"&gt;return to the dashboard&lt;/a&gt;.</source>
-        <target><![CDATA[__The requested page couldn't be located. Checkout for any URL
-                misspelling or <a href="%DASHBOARD_URL%">return to the dashboard</a>.]]></target>
+      <trans-unit id="Mnh9SeB">
+        <source>The requested page couldn't be located. Checkout for any URL misspelling or &lt;a href="%DASHBOARD_URL%"&gt;return to the dashboard&lt;/a&gt;.</source>
+        <target>La page demandée n'a pas pu être localisée. Commander pour toute URL mal orthographiée ou &lt;a href="%DASHBOARD_URL%"&gt; retourner au tableau de bord &lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>
