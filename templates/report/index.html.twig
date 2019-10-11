@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}Reports{% endtrans %}{% endblock %}
+{% block title %}{% trans %}Report{% endtrans %}{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row page-header">
-        <h1>{% trans %}Reports{% endtrans %}</h1>
+        <h1>{% trans %}Report{% endtrans %}</h1>
     </div>
 
     <div class="row">
-        {% include('report/card_assetreport.html.twig') %}
+        {% include('report/report_card.html.twig') with { 'title': 'Asset Report'|trans, 'description': 'This report generates a full export of monitored printers.'|trans, 'report_name': 'asset'} %}
+        {% include('report/report_card.html.twig') with { 'title': 'Toner Report'|trans, 'description': 'This report generates a list of all toner.'|trans, 'report_name': 'toner'} %}
     </div>
 </div>
 {% endblock %}

@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
      echo "ramfs   /tmp/apc     ramfs   defaults        0       0" >> /etc/fstab
 
      # Install needed stuff
-     apt-get install -y php-cli php-snmp php-xml php-curl php-json php-mysql php-zip php-apcu php-xdebug php-fpm php-ldap mysql-server mysql-client unzip nginx
+     apt-get install -y php-cli php-snmp php-xml php-curl php-json php-mysql php-zip php-apcu php-xdebug php-fpm php-ldap php-mbstring mysql-server mysql-client unzip nginx
 
      # Prepare DB
      sudo mysql -u root -e "CREATE DATABASE IF NOT EXISTS PrinterWatchdog;"

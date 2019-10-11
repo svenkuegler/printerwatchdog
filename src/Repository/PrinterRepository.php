@@ -186,6 +186,23 @@ class PrinterRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
+    /**
+     * @return array
+     */
+    public function getTonerReport()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p.TonerBlackDescription) AS total, 
+               p.Type,
+               p.TonerBlackDescription AS toner_black,
+               p.TonerCyanDescription AS toner_cyan,
+               p.TonerMagentaDescription AS toner_magenta,
+               p.TonerYellowDescription AS toner_yellow')
+            ->groupBy('p.TonerBlackDescription')
+            ->getQuery()
+            ->getArrayResult();
+    }
     // /**
     //  * @return Printer[] Returns an array of Printer objects
     //  */

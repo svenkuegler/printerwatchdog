@@ -27,7 +27,7 @@
                         <a class="nav-link{% if(app.request.attributes.get("_route") starts with "dashboard") %} active{% endif %}" href="{{ path("dashboard") }}">{% trans %}Dashboard{% endtrans %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "report") %} active{% endif %}" href="{{ path("report") }}">{% trans %}Reports{% endtrans %}</a>
+                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "report") %} active{% endif %}" href="{{ path("report") }}">{% trans %}Report{% endtrans %}</a>
                     </li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item">
