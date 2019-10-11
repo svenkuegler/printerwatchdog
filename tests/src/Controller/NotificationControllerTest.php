@@ -11,42 +11,70 @@ class NotificationControllerTest extends WebTestCase
 
     protected function setUp()
     {
-        $this->markTestIncomplete();
+        //$this->markTestIncomplete();
     }
 
     public function testNotificationChanges()
     {
-       /* $client = static::createClient();
-        $client->followRedirects();
+        $client = static::createClient();
 
-        // login
+        // Login
         $crawler = $client->request('GET', '/login');
-        $loginForm = $crawler->selectButton("Sign in")->form();
-        $loginForm["username"] = self::ADMIN_USER;
-        $loginForm["password"] = self::ADMIN_USER_PASSWORD;
-        $crawler = $client->submit($loginForm);
+        $form = $crawler->selectButton('Sign in')->form([
+            "username" => self::ADMIN_USER,
+            "password" => self::ADMIN_USER_PASSWORD
+        ],'POST');
+        $client->submit($form);
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
 
-        $this->assertEquals(200, $client->getResponse()->isOk());
+        // Goto Notification
+        $linkCrawler = $crawler->selectLink('Notification');
+        $crawler = $client->click($linkCrawler->link());
 
-        // change
-        $crawler = $client->request('GET', '/notification');
-        $notifyForm = $crawler->selectButton('__save changes')->form();
-        $notifyForm["webWarning"] = 8;
-        $notifyForm["webDanger"] = 3;
-        $notifyForm["webWarning"] = 8;
-        $notifyForm["webDanger"] = 3;
-        $notifyForm["webWarning"] = 8;
-        $notifyForm["webDanger"] = 3;
+        // Send Notification Form
+        $notificationForm = $crawler->selectButton('save changes')->form([
+            'webWarning' => 30,
+            'webDanger' => 30,
+            'emailWarning' => 30,
+            'emailDanger' => 30,
+            'slackWarning' => 30,
+            'slackDanger' => 30
+        ]);
+        $client->submit($notificationForm);
+        $this->assertSelectorTextContains("div.alert", "notification settings saved!");
 
-        $crawler = $client->submit($notifyForm);
-        var_dump($crawler->html());
-        //$client->submitForm("", );
+    }
 
+    public function testRestoreSettings()
+    {
+        $client = static::createClient();
 
-        // test changes
+        // Login
+        $crawler = $client->request('GET', '/login');
+        $form = $crawler->selectButton('Sign in')->form([
+            "username" => self::ADMIN_USER,
+            "password" => self::ADMIN_USER_PASSWORD
+        ],'POST');
+        $client->submit($form);
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
 
-        // reset*/
+        // Goto Notification
+        $linkCrawler = $crawler->selectLink('Notification');
+        $crawler = $client->click($linkCrawler->link());
 
+        // Send Notification Form
+        $notificationForm = $crawler->selectButton('save changes')->form([
+            'webWarning' => 30,
+            'webDanger' => 10,
+            'emailWarning' => 30,
+            'emailDanger' => 10,
+            'slackWarning' => 30,
+            'slackDanger' => 10
+        ]);
+        $client->submit($notificationForm);
+        $this->assertSelectorTextContains("div.alert", "notification settings saved!");
 
     }
 }

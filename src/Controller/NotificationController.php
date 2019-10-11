@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\ContainerParametersHelper;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,11 +15,12 @@ class NotificationController extends AbstractController
      * @Route("/notification", name="notification")
      *
      * @param ContainerParametersHelper $helper
+     * @param LoggerInterface $logger
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(ContainerParametersHelper $helper)
+    public function index(ContainerParametersHelper $helper, LoggerInterface $logger, Request $request)
     {
-        $request = Request::createFromGlobals();
         $vars = $request->request->all();
         $config = Yaml::parseFile( $helper->getApplicationRootDir()  . "/config/notification.yaml");
 
