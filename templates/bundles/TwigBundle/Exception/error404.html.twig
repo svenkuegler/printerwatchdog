@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Page not found'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mt-5 mb-5">
+                <h1>
+                    <span class="fa-stack fa-2x">
+                      <i class="fas fa-circle fa-stack-2x"></i>
+                      <i class="fas fa-search fa-stack-1x fa-inverse"></i>
+                    </span><br>
+                    {{'Page not found'|trans}}
+                </h1>
+            </div>
+
+            <div class="col-12 text-center mb-5">
+                {% trans with {'%DASHBOARD_URL%': path('dashboard')} %}
+                The requested page couldn't be located. Checkout for any URL
+                misspelling or <a href="%DASHBOARD_URL%">return to the dashboard</a>.
+                {% endtrans %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

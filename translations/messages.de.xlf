@@ -489,6 +489,29 @@
         <source>Can't Import User without UserPrincialName and EMail.</source>
         <target>Benutzer ohne UserPrincialName and EMail können nicht importiert werden.</target>
       </trans-unit>
+      <trans-unit id="2Yaz2gB" resname="The server returned Status-Code %STATUS_CODE% [ &lt;em&gt;%STATUS_TEXT%&lt;/em&gt; ].&lt;br&gt;&#10;                    Please take a look in the log files or contact your administrator.">
+        <source>The server returned Status-Code %STATUS_CODE% [ &lt;em&gt;%STATUS_TEXT%&lt;/em&gt; ].&lt;br&gt;
+                    Please take a look in the log files or contact your administrator.</source>
+        <target><![CDATA[Der Server antwortete mit Status-Code %STATUS_CODE% [ <em>%STATUS_TEXT%</em> ].<br>
+                    Bitte werfen Sie einen Blick in die Logdateien oder kontaktieren Sie Ihren Administrator.]]></target>
+      </trans-unit>
+      <trans-unit id="0TTKAlp" resname="Access Denied">
+        <source>Access Denied</source>
+        <target>Zugang verweigert</target>
+      </trans-unit>
+      <trans-unit id="s9824qL" resname="You don't have the permission to access the requested page.">
+        <source>You don't have the permission to access the requested page.</source>
+        <target>Sie haben nicht die Berechtigung auf diese Seite zuzugreifen.</target>
+      </trans-unit>
+      <trans-unit id="pGmrTKT" resname="Page not found">
+        <source>Page not found</source>
+        <target>Seite nicht gefunden</target>
+      </trans-unit>
+      <trans-unit id="Mnh9SeB" resname="The requested page couldn't be located. Checkout for any URL&#10;                misspelling or &lt;a href=&quot;%DASHBOARD_URL%&quot;&gt;return to the dashboard&lt;/a&gt;.">
+        <source>The requested page couldn't be located. Checkout for any URL
+                misspelling or &lt;a href="%DASHBOARD_URL%"&gt;return to the dashboard&lt;/a&gt;.</source>
+        <target><![CDATA[Die angeforderte Seite konnte nicht gefunden werden.<br>Bitte prüfen Sie die URL auf Rechtschreibfehler oder gehen Sie <a href="%DASHBOARD_URL%"> zum Dashboard zurück.</a>.]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
