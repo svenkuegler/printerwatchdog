@@ -3,18 +3,24 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
+use function foo\func;
 
 class UserControllerTest extends WebTestCase
 {
     const ADMIN_USER = "admin";
     const ADMIN_USER_PASSWORD = "123456";
 
-    const NEW_USER = "new_test_user";
-    const NEW_USER_PASSWORD = "123456";
-    const NEW_USER_EMAIL = "new_test_user@domainname.com";
+    private $NEW_USER = "new_test_user_%s";
+    private $NEW_USER_PASSWORD = "123456";
+    private $NEW_USER_EMAIL = "new_test_user_%s@domainname.com";
 
     protected function setUp(): void
     {
+        $t = time();
+        $this->NEW_USER = sprintf($this->NEW_USER, $t);
+        $this->NEW_USER_EMAIL  = sprintf($this->NEW_USER_EMAIL, $t);
+
         $this->markTestIncomplete();
     }
 
@@ -42,15 +48,28 @@ class UserControllerTest extends WebTestCase
 
         // Send User Form
         $userForm = $crawler->selectButton('Save')->form([
-            "user[username]" => self::NEW_USER,
-            "user[plainPassword]" => self::NEW_USER_PASSWORD,
-            "user[email]" => self::NEW_USER_EMAIL,
+            "user[username]" => $this->NEW_USER,
+            "user[plainPassword]" => $this->NEW_USER_PASSWORD,
+            "user[email]" => $this->NEW_USER_EMAIL,
         ]);
         $client->submit($userForm);
         $this->assertTrue($client->getResponse()->isRedirect());
         $crawler = $client->followRedirect();
-        $this->assertSelectorTextContains('td', self::NEW_USER_EMAIL);
+
+        /*
+         * TODO:
+         *  - check (write is successful? currently it is but unchecked!)
+         *  - activate the new user -> and check
+         *  - deactivate new user -> and check
+         *  - delete new user -> and check
+         */
+
         echo $client->getResponse()->getContent();
+        $this->assertSelectorTextContains('tr', $this->NEW_USER_EMAIL);
+
+
+
+        //var_dump($crawler->filter("td")->children());
 
         // Activate
 
