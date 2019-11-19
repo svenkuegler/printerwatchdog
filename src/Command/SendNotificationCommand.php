@@ -58,6 +58,14 @@ class SendNotificationCommand extends Command
     private $_slackHelper;
 
     /**
+     * @var array MailMessageQueue
+     */
+    private $_queue = [
+        'warning' => [],
+        'danger' => []
+    ];
+
+    /**
      * SendNotificationCommand constructor.
      * @param LoggerInterface $logger
      * @param ContainerInterface $container
@@ -116,13 +124,21 @@ class SendNotificationCommand extends Command
 
             // EMail
             if($config['email']['enabled'] && $input->getOption('email')) {
-                $this->_notifyWithEMail($printer, $config['email']['tonerlevel']['warning'], $config['email']['tonerlevel']['danger']);
+                if($this->_container->getParameter('mailer.send_single_mails')) {
+                    $this->_notifyWithEMail($printer, $config['email']['tonerlevel']['warning'], $config['email']['tonerlevel']['danger']);
+                } else {
+                    $this->_queueMail($printer, $config['email']['tonerlevel']['warning'], $config['email']['tonerlevel']['danger']);
+                }
             }
 
             // Slack
             if($config['slack']['enabled'] && $input->getOption('slack')) {
                 $this->_notifyWithSlack($printer, $config['slack']['tonerlevel']['warning'], $config['slack']['tonerlevel']['danger']);
             }
+        }
+
+        if($config['email']['enabled'] && $input->getOption('email') && !$this->_container->getParameter('mailer.send_single_mails')) {
+            $this->_sendQueuedMails();
         }
 
         $this->_logger->info('Successfully notified!');
@@ -147,6 +163,31 @@ class SendNotificationCommand extends Command
                 ->setMessageTemplate("mails/warning_notification.html.twig", ['printer' => $printer])
                 ->send();
         }
+    }
+
+    /**
+     * @param Printer $printer
+     * @param int $warningLevel
+     * @param int $dangerLevel
+     */
+    private function _queueMail(Printer $printer, int $warningLevel, int $dangerLevel) {
+        if($printer->getTonerBlack() <= $dangerLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$dangerLevel || $printer->getTonerCyan()<=$dangerLevel || $printer->getTonerYellow()<=$dangerLevel))) {
+            $this->_queue['danger'][] = $printer;
+        } elseif($printer->getTonerBlack() <= $warningLevel || ($printer->getisColorPrinter() && ($printer->getTonerMagenta()<=$warningLevel || $printer->getTonerCyan()<=$warningLevel || $printer->getTonerYellow()<=$warningLevel))) {
+            $this->_queue['warning'][] = $printer;
+        }
+    }
+
+    /**
+     *
+     */
+    private function _sendQueuedMails() {
+        $this->_logger->info('Try to send queued Notification via Mail');
+        $this->_mailHelper
+            ->setSubject("Toner Level Notification")
+            ->setRecipients($this->_userRepository->getAllEMailAddresses())
+            ->setMessageTemplate("mails/combined_notification.html.twig", ['printer' => $this->_queue])
+            ->send();
     }
 
     /**

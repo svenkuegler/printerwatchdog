@@ -7,6 +7,7 @@ parameters:
 
     # Mailer settings
     mailer.from: "%env(APP_MAIL_FROM)%"
+    mailer.send_single_mails: "%env(SEND_SINGLE_MAILS)%"
 
     # SnipeIT Settings
     snipeit.url: "%env(nullable:SNIPEIT_API_URL)%"

@@ -513,6 +513,18 @@
         <target><![CDATA[The requested page couldn't be located. Checkout for any URL
                 misspelling or <a href="%DASHBOARD_URL%">return to the dashboard</a>.]]></target>
       </trans-unit>
+      <trans-unit id="fALmFt2" resname="Toner Level Notification">
+        <source>Toner Level Notification</source>
+        <target>Toner Level Notification</target>
+      </trans-unit>
+      <trans-unit id="FVQ97tJ" resname="Printer with Toner Level: &lt;span style=&quot;color:orange&quot;&gt;Warning&lt;/span&gt;">
+        <source>Printer with Toner Level: &lt;span style="color:orange"&gt;Warning&lt;/span&gt;</source>
+        <target><![CDATA[Printer with Toner Level: <span style="color:orange">Warning</span>]]></target>
+      </trans-unit>
+      <trans-unit id="4GlrFUt" resname="Printer with Toner Level: &lt;span style=&quot;color:red&quot;&gt;Danger&lt;/span&gt;">
+        <source>Printer with Toner Level: &lt;span style="color:red"&gt;Danger&lt;/span&gt;</source>
+        <target><![CDATA[Printer with Toner Level: <span style="color:red">Danger</span>]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -512,6 +512,18 @@
                 misspelling or &lt;a href="%DASHBOARD_URL%"&gt;return to the dashboard&lt;/a&gt;.</source>
         <target><![CDATA[Die angeforderte Seite konnte nicht gefunden werden.<br>Bitte prüfen Sie die URL auf Rechtschreibfehler oder gehen Sie <a href="%DASHBOARD_URL%"> zum Dashboard zurück.</a>.]]></target>
       </trans-unit>
+      <trans-unit id="fALmFt2" resname="Toner Level Notification">
+        <source>Toner Level Notification</source>
+        <target>Toner Level Benachrichtigung</target>
+      </trans-unit>
+      <trans-unit id="FVQ97tJ" resname="Printer with Toner Level: &lt;span style=&quot;color:orange&quot;&gt;Warning&lt;/span&gt;">
+        <source>Printer with Toner Level: &lt;span style="color:orange"&gt;Warning&lt;/span&gt;</source>
+        <target><![CDATA[Drucker mit Toner Stand: <span style="color:orange">Warnung</span>]]></target>
+      </trans-unit>
+      <trans-unit id="4GlrFUt" resname="Printer with Toner Level: &lt;span style=&quot;color:red&quot;&gt;Danger&lt;/span&gt;">
+        <source>Printer with Toner Level: &lt;span style="color:red"&gt;Danger&lt;/span&gt;</source>
+        <target><![CDATA[Drucker mit Toner Stand: <span style="color:red">Gefährlich</span>]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

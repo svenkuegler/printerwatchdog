@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{{ 'Toner Level Notification'|trans }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body style='font-family: "Helvetica Neue", Helvetica, Arial, sans-serif'>
+<h1>{{ 'Toner Level Notification'|trans }}</h1>
+<p></p>
+
+<h4>{{ 'Printer with Toner Level: <span style="color:orange">Warning</span>'|trans|raw }}</h4>
+<table style="width: 100%;" border="0" cellpadding="3" cellspacing="0">
+    <thead>
+    <tr style="background-color: #cccccc">
+        <th>{{ 'Name'|trans }}</th>
+        <th>{{ 'IP'|trans }}</th>
+        <th>{{ 'Location'|trans }}</th>
+        <th>{{ 'SerialNumber'|trans }}</th>
+        <th>{{ 'Type'|trans }}</th>
+        <th>{{ 'Toner'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if printer['warning']|length == 0 %}
+        <tr>
+            <td colspan="6">{{ "no records found"|trans}}</td>
+        </tr>
+    {% else %}
+    {% for entry in printer['warning'] %}
+        <tr>
+            <td style="border: solid 1px #cccccc; vertical-align: top;"><a href="{{ absolute_url(path('dashboard_details', {'id': entry.id})) }}">{{ entry.name }}</a></td>
+            <td style="border: solid 1px #cccccc; vertical-align: top;">{{ entry.ip }}</td>
+            <td style="border: solid 1px #cccccc; vertical-align: top;">{{ entry.location }}</td>
+            <td style="border: solid 1px #cccccc; vertical-align: top;">{{ entry.serialnumber }}</td>
+            <td style="border: solid 1px #cccccc; vertical-align: top;">{{ entry.type }}</td>
+            <td style="border: solid 1px #cccccc; vertical-align: top;">{{ 'Black'|trans }} - <strong><em>{{ entry.tonerblack }}</em></strong> % (<strong>{{ entry.tonerBlackDescription }}</strong>)
+                {% if entry.isColorPrinter %}
+                    <br>{{ 'Cyan'|trans }} - <strong><em>{{ entry.tonercyan }}</em></strong> % (<strong>{{ entry.tonerCyanDescription }}</strong>)
+                    <br>{{ 'Magenta'|trans }} - <strong><em>{{ entry.tonermagenta }}</em></strong> % (<strong>{{ entry.tonerMagentaDescription }}</strong>)
+                    <br>{{ 'Yellow'|trans }} - <strong><em>{{ entry.toneryellow }}</em></strong> % (<strong>{{ entry.tonerYellowDescription }}</strong>)
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+</table>
+<p></p>
+<p></p>
+<h4>{{ 'Printer with Toner Level: <span style="color:red">Danger</span>'|trans|raw }}</h4>
+<table style="width: 100%; border: solid 1px #cccccc;" border="0" cellpadding="3" cellspacing="0">
+    <thead>
+    <tr style="background-color: #cccccc">
+        <th>{{ 'Name'|trans }}</th>
+        <th>{{ 'IP'|trans }}</th>
+        <th>{{ 'Location'|trans }}</th>
+        <th>{{ 'SerialNumber'|trans }}</th>
+        <th>{{ 'Type'|trans }}</th>
+        <th>{{ 'Toner'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if printer['danger']|length == 0 %}
+        <tr>
+            <td colspan="6">{{ "no records found"|trans }}</td>
+        </tr>
+    {% else %}
+        {% for entry in printer['danger'] %}
+            <tr>
+                <td style="border: solid 1px #cccccc; vertical-align: top;"><a href="{{ absolute_url(path('dashboard_details', {'id': entry.id})) }}">{{ entry.name }}</a></td>
+                <td style="border: solid 1px #cccccc; vertical-align: top;">{{ entry.ip }}</td>
+                <td style="border: solid 1px #cccccc; vertical-align: top;">{{ entry.location }}</td>
+                <td style="border: solid 1px #cccccc; vertical-align: top;">{{ entry.serialnumber }}</td>
+                <td style="border: solid 1px #cccccc; vertical-align: top;">{{ entry.type }}</td>
+                <td style="border: solid 1px #cccccc; vertical-align: top;">{{ 'Black'|trans }} - <strong><em>{{ entry.tonerblack }}</em></strong> % (<strong>{{ entry.tonerBlackDescription }}</strong>)
+                    {% if entry.isColorPrinter %}
+                        <br>{{ 'Cyan'|trans }} - <strong><em>{{ entry.tonercyan }}</em></strong> % (<strong>{{ entry.tonerCyanDescription }}</strong>)
+                        <br>{{ 'Magenta'|trans }} - <strong><em>{{ entry.tonermagenta }}</em></strong> % (<strong>{{ entry.tonerMagentaDescription }}</strong>)
+                        <br>{{ 'Yellow'|trans }} - <strong><em>{{ entry.toneryellow }}</em></strong> % (<strong>{{ entry.tonerYellowDescription }}</strong>)
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    </tbody>
+</table>
+
+<p></p>
+<p>{% trans with {"%URL%":absolute_url(path('dashboard', {'view': 'card'})) }%}More information under <a href="%URL%">%URL%</a>{% endtrans %}</p>
+</body>
+</html>
