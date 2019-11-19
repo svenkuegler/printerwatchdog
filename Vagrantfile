@@ -146,4 +146,18 @@ Vagrant.configure("2") do |config|
      # symfony server:start -d
 
   SHELL
+
+  config.vm.provision "shell", run: "always", inline: <<-SHELL
+      echo "Restart Nginx ...."
+      service nginx restart
+
+      echo "Restart PHP-FPM ...."
+      service php7.2-fpm restart
+
+      if ! pgrep -x "mailcatcher" > /dev/null
+      then
+        echo "MailCatcher doesnt running ...."
+        mailcatcher --ip 192.168.1.44
+      fi
+  SHELL
 end
