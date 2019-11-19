@@ -172,8 +172,16 @@ If the machine is up and running open: [http://192.168.1.44](http://192.168.1.44
 
 ---
 
-#### E-Mail Tests using Mailslurper
-I use [Mailslurper](https://mailslurper.com/) to test the Mails. Default values in .env file pointed to Mailslurper. 
+#### E-Mail Tests using MailCatcher
+I switched the default TestSMTP Server to MailCatcher (More stable and better to check HTML Mails, Mailslurper is still available). By Default MailCatcher will be installed, configured and started via Vagrant. The values in .env file pointed to MailCatcher.
+
+##### Usage:
+Open your browser and navigate to: [http://192.168.1.44:1080](http://192.168.1.44:1080)
+
+---
+
+#### E-Mail Tests using Mailslurper (deprecated, but still available)
+To use [Mailslurper](https://mailslurper.com/) to test the Mails.  
 
 > MailSlurper is a small SMTP mail server that slurps mail into oblivion! MailSlurper is perfect for individual developers or small teams writing mail-enabled applications that wish to test email functionality without the risk or hassle of installing and configuring a full blown email server. It's simple to use! Simply setup MailSlurper, configure your code and/or application server to send mail through the address where MailSlurper is running, and start sending emails! MailSlurper will capture those emails into a database for you to view at your leisure.
 >
