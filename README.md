@@ -33,7 +33,7 @@ __User Management__
 
 ## Installation / Update
 ### Requirements
- * &gt; PHP 7.1 
+ * &gt; PHP 7.2
  * SNMP Module
  * LDAP Module (if you want to use LDAP Auth)
 
