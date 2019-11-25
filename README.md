@@ -9,6 +9,7 @@ PrinterWatchdog is a small website project to monitor and notify printer in your
  * get notification via EMail
  * configure your own notification level
  * custom printer images
+ * Monitoring API for Nagios
 
 ## Screenshots
 __Dashbord Overview__    
@@ -156,6 +157,37 @@ LDAP_QUERY_STRING='(&(objectCategory=person)(objectClass=user))'
 
 *Again: If you dont want to use LDAP leave __LDAP_SERVER=null__*
 
+---
+
+### Monitoring
+PrinterWatchdog comes with an integrated api for external monitoring tools like Nagios. 
+The page http://mydomain/monitoring/status returns the state of monitored printers in json format. 
+You can define the notification level on Notification page. Define the ip(s) of your monitoring Tool(s) as allowed 
+ip(s) in .env file to increase the security.
+
+#### Configure Nagios
+ * Define the IP address of your Nagios installation in the .env file
+ * Copy check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)
+ * Create a service command template
+ * Create a service check on your host
+
+__Command Template__
+```text
+define command {
+        command_name    check_printerwatchdog
+        command_line    $USER1$/check_printerwatchdog $ARG1$
+        }
+```
+
+__Service Template__
+```text
+define service{
+        use                     generic-service
+        host_name               mydomain.com
+        service_description     My PrinterWatchdog Install
+        check_command           check_printerwatchdog!http://mydomain.com/monitoring/status
+        }
+```
 
 
 ## Development
@@ -216,7 +248,7 @@ $ php bin/phpunit
 ## Credits
 List of used frameworks and libraries.
 
- * Symfony v4.3.2
+ * Symfony v4.3.8
  * Bootstrap v4.3.1
  * Font Awesome Free v5.9.0
  * jQuery v3.4.1

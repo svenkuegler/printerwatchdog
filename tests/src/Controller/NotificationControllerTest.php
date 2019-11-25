@@ -39,7 +39,9 @@ class NotificationControllerTest extends WebTestCase
             'emailWarning' => 30,
             'emailDanger' => 30,
             'slackWarning' => 30,
-            'slackDanger' => 30
+            'slackDanger' => 30,
+            'monitoringWarning' => 30,
+            'monitoringDanger' => 30
         ]);
         $client->submit($notificationForm);
         $this->assertSelectorTextContains("div.alert", "notification settings saved!");
@@ -71,7 +73,9 @@ class NotificationControllerTest extends WebTestCase
             'emailWarning' => 30,
             'emailDanger' => 10,
             'slackWarning' => 30,
-            'slackDanger' => 10
+            'slackDanger' => 10,
+            'monitoringWarning' => 0,
+            'monitoringDanger' => 5
         ]);
         $client->submit($notificationForm);
         $this->assertSelectorTextContains("div.alert", "notification settings saved!");

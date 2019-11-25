@@ -34,6 +34,9 @@
                         <a class="nav-link{% if(app.request.attributes.get("_route") starts with "notification") %} active{% endif %}" href="{{ path("notification") }}">{% trans %}Notification{% endtrans %}</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "monitoring") %} active{% endif %}" href="{{ path("monitoring_index") }}">{% trans %}Monitoring{% endtrans %}</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link{% if(app.request.attributes.get("_route") starts with "user") %} active{% endif %}" href="{{ path("user_index") }}">{% trans %}User{% endtrans %}</a>
                     </li>
                     {% endif %}

@@ -7,3 +7,6 @@ slack:
 email:
     enabled: true
     tonerlevel: { warning: 30, danger: 10 }
+monitoring:
+    enabled: true
+    tonerlevel: { warning: 0, danger: 5 }

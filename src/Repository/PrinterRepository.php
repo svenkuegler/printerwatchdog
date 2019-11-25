@@ -6,6 +6,7 @@ use App\Entity\Printer;
 use App\Entity\PrinterSummary;
 use App\Service\ContainerParametersHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -33,7 +34,7 @@ class PrinterRepository extends ServiceEntityRepository
      * @param RegistryInterface $registry
      * @param ContainerParametersHelper $containerParametersHelper
      */
-    public function __construct(RegistryInterface $registry, ContainerParametersHelper $containerParametersHelper)
+    public function __construct(ManagerRegistry $registry, ContainerParametersHelper $containerParametersHelper)
     {
         $config = Yaml::parseFile( $containerParametersHelper->getApplicationRootDir()  . "/config/notification.yaml");
         $this->lvlWarning = $config['web']['tonerlevel']['warning'];
@@ -186,6 +187,31 @@ class PrinterRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
+    /**
+     * Override default (Web) values
+     *
+     * @param int $lvlDanger
+     * @return PrinterRepository
+     */
+    public function setLvlDanger(int $lvlDanger): PrinterRepository
+    {
+        $this->lvlDanger = $lvlDanger;
+        return $this;
+    }
+
+    /**
+     * Override default (Web) values
+     * @param int $lvlWarning
+     * @return PrinterRepository
+     */
+    public function setLvlWarning(int $lvlWarning): PrinterRepository
+    {
+        $this->lvlWarning = $lvlWarning;
+        return $this;
+    }
+
+
     // /**
     //  * @return Printer[] Returns an array of Printer objects
     //  */

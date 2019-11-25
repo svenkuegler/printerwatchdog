@@ -12,8 +12,8 @@
         <div class="row">
 
             <!-- Web -->
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <h4><i class="fab fa-internet-explorer"></i> Web</h4>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <h4><i class="fab fa-internet-explorer"></i> {{ 'Web'|trans }}</h4>
                 <div class="form-group">
                     <table>
                         <tr>
@@ -32,8 +32,8 @@
             <!--// Web -->
 
             <!-- E-Mail -->
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <h4><i class="fas fa-envelope-open-text"></i> E-Mail</h4>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <h4><i class="fas fa-envelope-open-text"></i> {{ 'E-Mail'|trans }}</h4>
                 <div class="form-group">
                     <table>
                         <tr>
@@ -52,8 +52,8 @@
             <!--// E-Mail -->
 
             <!-- Slack -->
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <h4><i class="fab fa-slack"></i> Slack</h4>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <h4><i class="fab fa-slack"></i> {{ 'Slack'|trans }}</h4>
                 <div class="form-group">
                     <table>
                         <tr>
@@ -70,6 +70,26 @@
                 </div>
             </div>
             <!--// Slack -->
+
+            <!-- Monitoring -->
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <h4><i class="fas fa-tv"></i> {{ "ext. Monitoring"|trans }}</h4>
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td class="bg-warning p-2">
+                                {% trans %}Warning{% endtrans %}
+                                <input type="text" name="monitoringWarning" placeholder="0 - 100" value="{{ notificationConfig.monitoring.tonerlevel.warning }}" class="form-control form-control-sm" />
+                            </td>
+                            <td class="bg-danger text-white p-2">
+                                {% trans %}Danger{% endtrans %}
+                                <input type="text" name="monitoringDanger" placeholder="0 - 100" value="{{ notificationConfig.monitoring.tonerlevel.danger }}" class="form-control form-control-sm" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--// Monitoring -->
         </div>
 
         <div class="row">

@@ -68,6 +68,9 @@ parameters:
     printer.inactive.unreachable_count: '%env(PRINTER_INACTIVE_COUNT)%'
     printer.inactive.notification_enabled: '%env(INACTIVE_PRINTER_NOTIFICATION)%'
 
+    # Monitoring
+    monitoring.allowed_ips: '%env(json:MONITORING_ALLOWED_IPS)%'
+
     # Routing information
     router.request_context.host: '%env(APP_URL)%'
     router.request_context.scheme: '%env(APP_SCHEME)%'
