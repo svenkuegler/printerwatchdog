@@ -601,9 +601,9 @@
         <source>Define the IP address of your Nagios installation in the &lt;code&gt;.env&lt;/code&gt; file</source>
         <target><![CDATA[__Define the IP address of your Nagios installation in the <code>.env</code> file]]></target>
       </trans-unit>
-      <trans-unit id="IR695G." resname="Copy check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)">
-        <source>Copy check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)</source>
-        <target>__Copy check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)</target>
+      <trans-unit id="IR695G." resname="Copy /extras/nagios_plugin/check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)">
+        <source>Copy /extras/nagios_plugin/check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)</source>
+        <target>__Copy /extras/nagios_plugin/check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)</target>
       </trans-unit>
       <trans-unit id="18Ju0.u" resname="Create a service command template">
         <source>Create a service command template</source>

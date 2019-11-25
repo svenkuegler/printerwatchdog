@@ -167,7 +167,7 @@ ip(s) in .env file to increase the security.
 
 #### Configure Nagios
  * Define the IP address of your Nagios installation in the .env file
- * Copy check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)
+ * Copy <code>/extras/nagios_plugin/check_printerwatchdog</code> to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)
  * Create a service command template
  * Create a service check on your host
 

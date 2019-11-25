@@ -1,0 +1,47 @@
+#!/bin/bash
+
+CURL=`which curl`
+CURL_OPTS='--user-agent check-printerwatchdog-nagios-plugin --insecure'
+BASENAME=`which basename`
+PROGNAME=`$BASENAME $0`
+
+# Exit codes
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+
+function print_usage
+{
+	echo "Usage: $PROGNAME <URL>" 
+}
+
+if [ ! $1 ]; then
+	print_usage
+	exit $STATE_CRITICAL
+fi
+
+result=`$CURL $CURL_OPTS -s $1`
+
+if [ $? != 0 ]; then
+	echo 'CRITICAL - Check plugin does not work. Maybe you need to install curl.'
+	exit $STATE_CRITICAL
+else
+	status=`echo $result | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["status"]'`
+	text=`echo $result | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["message"]'`
+	perfdata=`echo $result | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["performanceData"]'`
+
+	echo "$status - $text|$perfdata"
+	
+	case "$status" in
+		CRITICAL)
+			exit $STATE_CRITICAL
+			;;
+		WARNING)
+			exit $STATE_WARNING
+			;;
+		OK)
+			exit $STATE_OK
+			;;
+	esac
+fi

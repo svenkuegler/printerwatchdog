@@ -36,5 +36,5 @@ security:
         - { path: ^/notification, roles: ROLE_ADMIN }
         - { path: ^/printer, roles: ROLE_USER }
         - { path: ^/profile, roles: ROLE_USER }
-        - { path: /monitoring, roles: ROLE_USER }
         - { path: /monitoring/status, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /monitoring, roles: ROLE_USER }
