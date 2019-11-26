@@ -11,14 +11,9 @@ jobs:
           services:
               - mysql
           before_install:
-              - sudo apt-get update
-              - sudo apt-get install -y python-software-properties
-              - LC_ALL=C.UTF-8 sudo add-apt-repository -y ppa:ondrej/php
-              - sudo apt-get update
-              - sudo apt-get install -y apt-transport-https apt-utils curl php7.2-snmp php7.2-ldap
               - mysql -e 'CREATE DATABASE IF NOT EXISTS PrinterWatchdog;'
           install:
-              - travis_retry composer install --no-interaction --prefer-source
+              - travis_retry composer install --ignore-platform-reqs --no-interaction --prefer-source
           script:
             - php bin/console doctrine:schema:create -n --env test
             - php bin/console doctrine:fixtures:load -n -q --env test
@@ -26,7 +21,7 @@ jobs:
 
         - stage: GitHub Release
           install:
-              - APP_ENV=prod composer install --no-interaction --no-dev --optimize-autoloader
+              - APP_ENV=prod composer install --no-interaction --no-dev --optimize-autoloader --ignore-platform-reqs
           script:
             - composer dump-env prod
             - tar cvzf /tmp/release.tar.gz .
