@@ -9,6 +9,10 @@ class ApiControllerTest extends WebTestCase
 
     protected function setUp(): void
     {
+        /**
+         * This test doesnt run on Travis CI, there isn't a printer
+         * @todo Mock SNMP Request to simulate functionality
+         */
         $this->markTestIncomplete();
     }
 
