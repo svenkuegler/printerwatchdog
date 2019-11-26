@@ -12,9 +12,10 @@ jobs:
               - mysql
           before_install:
               - sudo apt-get update
-              - sudo apt-get -y install php-snmp php-ldap
-              - echo "extension=snmp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-              - echo "extension=ldap.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+              - sudo apt-get install -y python-software-properties
+              - LC_ALL=C.UTF-8 sudo add-apt-repository -y ppa:ondrej/php
+              - sudo apt-get update
+              - sudo apt-get install -y apt-transport-https apt-utils curl php7.2-snmp php7.2-ldap
               - mysql -e 'CREATE DATABASE IF NOT EXISTS PrinterWatchdog;'
           install:
               - travis_retry composer install --no-interaction --prefer-source
