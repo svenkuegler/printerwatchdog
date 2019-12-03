@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="Sven Kuegler">
+        {% include 'favicon.html.twig' %}
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset("css/all.min.css") }}" crossorigin="anonymous" />
         <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}" crossorigin="anonymous" />
@@ -31,6 +32,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link{% if(app.request.attributes.get("_route") starts with "notification") %} active{% endif %}" href="{{ path("notification") }}">{% trans %}Notification{% endtrans %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if(app.request.attributes.get("_route") starts with "monitoring") %} active{% endif %}" href="{{ path("monitoring_index") }}">{% trans %}Monitoring{% endtrans %}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link{% if(app.request.attributes.get("_route") starts with "user") %} active{% endif %}" href="{{ path("user_index") }}">{% trans %}User{% endtrans %}</a>

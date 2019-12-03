@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Monitoring{% endtrans %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row page-header">
+        <h1>{% trans %}Monitoring{% endtrans %}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-7">{% trans with {'%URL%': absolute_url(path('monitoring_status')), '%NOTIFICATION_URL%': path('notification')} %}
+            PrinterWatchdog comes with an integrated api for external monitoring tools like Nagios.
+            The page <code>%URL%</code> returns the state of monitored printers in json format.
+            You can define the notification level on <a href="%NOTIFICATION_URL%">Notification</a> page.
+            Define the ip(s) of your monitoring Tool(s) as allowed ip(s) in <code>.env</code> file to increase the security.
+            <br><br>For Nagios see the config example below.
+            {% endtrans %}
+        </div>
+
+        <div class="offset-1 col-4">
+            <div class="alert alert-info">
+            {{'Current state:'|trans}} {{ monitoringState|raw }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h4>{{'Configure Nagios'|trans}}</h4>
+            <p></p>
+                <ol>
+                    <li>{{'Define the IP address of your Nagios installation in the <code>.env</code> file'|trans}}</li>
+                    <li>{{'Copy /extras/nagios_plugin/check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)'|trans}}</li>
+                    <li>{{'Create a service command template'|trans}}</li>
+                    <li>{{'Create a service check on your host'|trans}}</li>
+                </ol>
+            <div class="mt-5">
+            <p><strong>{{'Command Template'|trans}}</strong></p>
+            <pre class="bg-light"><code>
+    define command {
+        command_name    check_printerwatchdog
+        command_line    $USER1$/check_printerwatchdog $ARG1$
+        }
+                </code></pre></div>
+
+            <div class="mt-5">
+                <p><strong>{{'Service Template'|trans}}</strong></p>
+            <pre class="bg-light"><code>
+    define service{
+        use                     generic-service
+        host_name               {{ app.request.gethost }}
+        service_description     My PrinterWatchdog Install
+        check_command           check_printerwatchdog!{{absolute_url(path('monitoring_status'))}}
+        }
+            </code></pre></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

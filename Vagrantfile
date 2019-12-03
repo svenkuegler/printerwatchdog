@@ -30,11 +30,11 @@ Vagrant.configure("2") do |config|
      echo "ramfs   /tmp/apc     ramfs   defaults        0       0" >> /etc/fstab
 
      # Install needed stuff
-     apt-get install -y php-cli php-snmp php-xml php-curl php-json php-mysql php-zip php-apcu php-xdebug php-fpm php-ldap mysql-server mysql-client unzip nginx
+     apt-get install -y php-cli php-snmp php-xml php-curl php-json php-mysql php-zip php-apcu php-xdebug php-fpm php-ldap mysql-server mysql-client unzip nginx build-essential software-properties-common libsqlite3-dev ruby ruby-dev
 
      # Prepare DB
      sudo mysql -u root -e "CREATE DATABASE IF NOT EXISTS PrinterWatchdog;"
-     sudo mysql -u root -e "CREATE USER 'pwdog'@'localhost' IDENTIFIED BY 'pwdog';"
+     sudo mysql -u root -e "CREATE USER 'pwdog'@'localhost' IDENTIFIED BY 'pwdog';"sudo
      sudo mysql -u root -e "GRANT ALL PRIVILEGES ON PrinterWatchdog.* TO 'pwdog'@'localhost';"
 
      # Create a MySql Dev-User
@@ -106,6 +106,10 @@ Vagrant.configure("2") do |config|
      wget https://get.symfony.com/cli/installer -O - | bash
      mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
+     # Install and Configure Mailcatcher
+     gem install mailcatcher
+     mailcatcher --ip 192.168.1.44
+
      # Install and Configure Mailslurper for E-Mail testing
      mkdir /opt/mailslurper
      wget https://github.com/mailslurper/mailslurper/releases/download/1.14.1/mailslurper-1.14.1-linux.zip
@@ -113,7 +117,7 @@ Vagrant.configure("2") do |config|
      sudo chown -R vagrant:vagrant /opt/mailslurper
      sed -i 's/"wwwAddress": "localhost"/"wwwAddress": "192.168.1.44"/g' /opt/mailslurper/config.json
      sed -i 's/"serviceAddress": "localhost"/"serviceAddress": "192.168.1.44"/g' /opt/mailslurper/config.json
-     /opt/mailslurper/mailslurper &>/dev/null &
+     #/opt/mailslurper/mailslurper &>/dev/null &
 
      # Install Composer
      php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -141,5 +145,19 @@ Vagrant.configure("2") do |config|
      # symfony server:ca:install
      # symfony server:start -d
 
+  SHELL
+
+  config.vm.provision "shell", run: "always", inline: <<-SHELL
+      echo "Restart Nginx ...."
+      service nginx restart
+
+      echo "Restart PHP-FPM ...."
+      service php7.2-fpm restart
+
+      if ! pgrep -x "mailcatcher" > /dev/null
+      then
+        echo "MailCatcher doesnt running ...."
+        mailcatcher --ip 192.168.1.44
+      fi
   SHELL
 end

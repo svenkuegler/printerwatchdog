@@ -3,7 +3,7 @@ language: php
 sudo: false
 
 php:
-  - 7.1
+  - 7.2
 
 jobs:
     include:
@@ -13,7 +13,7 @@ jobs:
           before_install:
               - mysql -e 'CREATE DATABASE IF NOT EXISTS PrinterWatchdog;'
           install:
-              - travis_retry composer install --no-interaction --prefer-source
+              - travis_retry composer install --ignore-platform-reqs --no-interaction --prefer-source
           script:
             - php bin/console doctrine:schema:create -n --env test
             - php bin/console doctrine:fixtures:load -n -q --env test
@@ -21,7 +21,7 @@ jobs:
 
         - stage: GitHub Release
           install:
-              - APP_ENV=prod composer install --no-interaction --no-dev --optimize-autoloader
+              - APP_ENV=prod composer install --no-interaction --no-dev --optimize-autoloader --ignore-platform-reqs
           script:
             - composer dump-env prod
             - tar cvzf /tmp/release.tar.gz .

@@ -7,6 +7,7 @@ parameters:
 
     # Mailer settings
     mailer.from: "%env(APP_MAIL_FROM)%"
+    mailer.send_single_mails: "%env(SEND_SINGLE_MAILS)%"
 
     # SnipeIT Settings
     snipeit.url: "%env(nullable:SNIPEIT_API_URL)%"
@@ -66,6 +67,9 @@ parameters:
     # Application Settings
     printer.inactive.unreachable_count: '%env(PRINTER_INACTIVE_COUNT)%'
     printer.inactive.notification_enabled: '%env(INACTIVE_PRINTER_NOTIFICATION)%'
+
+    # Monitoring
+    monitoring.allowed_ips: '%env(json:MONITORING_ALLOWED_IPS)%'
 
     # Routing information
     router.request_context.host: '%env(APP_URL)%'

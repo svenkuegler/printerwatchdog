@@ -7,7 +7,7 @@ use App\Entity\PrinterHistory;
 use App\Entity\PrinterHistoryStatisticData;
 use App\Entity\PrinterHistoryStatistics;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method PrinterHistory|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class PrinterHistoryRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, PrinterHistory::class);
     }

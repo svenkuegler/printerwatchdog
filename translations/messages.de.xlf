@@ -489,6 +489,113 @@
         <source>Can't Import User without UserPrincialName and EMail.</source>
         <target>Benutzer ohne UserPrincialName and EMail können nicht importiert werden.</target>
       </trans-unit>
+      <trans-unit id="2Yaz2gB" resname="The server returned Status-Code %STATUS_CODE% [ &lt;em&gt;%STATUS_TEXT%&lt;/em&gt; ].&lt;br&gt;&#10;                    Please take a look in the log files or contact your administrator.">
+        <source>The server returned Status-Code %STATUS_CODE% [ &lt;em&gt;%STATUS_TEXT%&lt;/em&gt; ].&lt;br&gt;
+                    Please take a look in the log files or contact your administrator.</source>
+        <target><![CDATA[Der Server antwortete mit Status-Code %STATUS_CODE% [ <em>%STATUS_TEXT%</em> ].<br>
+                    Bitte werfen Sie einen Blick in die Logdateien oder kontaktieren Sie Ihren Administrator.]]></target>
+      </trans-unit>
+      <trans-unit id="0TTKAlp" resname="Access Denied">
+        <source>Access Denied</source>
+        <target>Zugang verweigert</target>
+      </trans-unit>
+      <trans-unit id="s9824qL" resname="You don't have the permission to access the requested page.">
+        <source>You don't have the permission to access the requested page.</source>
+        <target>Sie haben nicht die Berechtigung auf diese Seite zuzugreifen.</target>
+      </trans-unit>
+      <trans-unit id="pGmrTKT" resname="Page not found">
+        <source>Page not found</source>
+        <target>Seite nicht gefunden</target>
+      </trans-unit>
+      <trans-unit id="Mnh9SeB" resname="The requested page couldn't be located. Checkout for any URL&#10;                misspelling or &lt;a href=&quot;%DASHBOARD_URL%&quot;&gt;return to the dashboard&lt;/a&gt;.">
+        <source>The requested page couldn't be located. Checkout for any URL
+                misspelling or &lt;a href="%DASHBOARD_URL%"&gt;return to the dashboard&lt;/a&gt;.</source>
+        <target><![CDATA[Die angeforderte Seite konnte nicht gefunden werden.<br>Bitte prüfen Sie die URL auf Rechtschreibfehler oder gehen Sie <a href="%DASHBOARD_URL%"> zum Dashboard zurück.</a>.]]></target>
+      </trans-unit>
+      <trans-unit id="fALmFt2" resname="Toner Level Notification">
+        <source>Toner Level Notification</source>
+        <target>Toner Level Benachrichtigung</target>
+      </trans-unit>
+      <trans-unit id="FVQ97tJ" resname="Printer with Toner Level: &lt;span style=&quot;color:orange&quot;&gt;Warning&lt;/span&gt;">
+        <source>Printer with Toner Level: &lt;span style="color:orange"&gt;Warning&lt;/span&gt;</source>
+        <target><![CDATA[Drucker mit Toner Stand: <span style="color:orange">Warnung</span>]]></target>
+      </trans-unit>
+      <trans-unit id="4GlrFUt" resname="Printer with Toner Level: &lt;span style=&quot;color:red&quot;&gt;Danger&lt;/span&gt;">
+        <source>Printer with Toner Level: &lt;span style="color:red"&gt;Danger&lt;/span&gt;</source>
+        <target><![CDATA[Drucker mit Toner Stand: <span style="color:red">Gefährlich</span>]]></target>
+      </trans-unit>
+      <trans-unit id="Hcg.YF7" resname="Monitoring">
+        <source>Monitoring</source>
+        <target>__Monitoring</target>
+      </trans-unit>
+      <trans-unit id="KXUQR4S" resname="Web">
+        <source>Web</source>
+        <target>__Web</target>
+      </trans-unit>
+      <trans-unit id="L65vsws" resname="E-Mail">
+        <source>E-Mail</source>
+        <target>__E-Mail</target>
+      </trans-unit>
+      <trans-unit id="sn_zi6M" resname="Slack">
+        <source>Slack</source>
+        <target>__Slack</target>
+      </trans-unit>
+      <trans-unit id="BNMv2G1" resname="ext. Monitoring">
+        <source>ext. Monitoring</source>
+        <target>__ext. Monitoring</target>
+      </trans-unit>
+      <trans-unit id="dQgbWT0" resname="Disabled">
+        <source>Disabled</source>
+        <target>__Disabled</target>
+      </trans-unit>
+      <trans-unit id="ksHN.fT" resname="Enabled">
+        <source>Enabled</source>
+        <target>__Enabled</target>
+      </trans-unit>
+      <trans-unit id="s1Nk5gE" resname="PrinterWatchdog comes with an integrated api for external monitoring tools like Nagios.&#10;            The page &lt;code&gt;%URL%&lt;/code&gt; returns the state of monitored printers in json format.&#10;            You can define the notification level on &lt;a href=&quot;%NOTIFICATION_URL%&quot;&gt;Notification&lt;/a&gt; page.&#10;            Define the ip(s) of your monitoring Tool(s) as allowed ip(s) in &lt;code&gt;.env&lt;/code&gt; file to increase the security.&#10;            &lt;br&gt;&lt;br&gt;For Nagios see the config example below.">
+        <source>PrinterWatchdog comes with an integrated api for external monitoring tools like Nagios.
+            The page &lt;code&gt;%URL%&lt;/code&gt; returns the state of monitored printers in json format.
+            You can define the notification level on &lt;a href="%NOTIFICATION_URL%"&gt;Notification&lt;/a&gt; page.
+            Define the ip(s) of your monitoring Tool(s) as allowed ip(s) in &lt;code&gt;.env&lt;/code&gt; file to increase the security.
+            &lt;br&gt;&lt;br&gt;For Nagios see the config example below.</source>
+        <target><![CDATA[__PrinterWatchdog comes with an integrated api for external monitoring tools like Nagios.
+            The page <code>%URL%</code> returns the state of monitored printers in json format.
+            You can define the notification level on <a href="%NOTIFICATION_URL%">Notification</a> page.
+            Define the ip(s) of your monitoring Tool(s) as allowed ip(s) in <code>.env</code> file to increase the security.
+            <br><br>For Nagios see the config example below.]]></target>
+      </trans-unit>
+      <trans-unit id="0Nq7k2N" resname="Current state:">
+        <source>Current state:</source>
+        <target>__Current state:</target>
+      </trans-unit>
+      <trans-unit id="oLPufP5" resname="Configure Nagios">
+        <source>Configure Nagios</source>
+        <target>__Configure Nagios</target>
+      </trans-unit>
+      <trans-unit id="2Ln.om8" resname="Define the IP address of your Nagios installation in the &lt;code&gt;.env&lt;/code&gt; file">
+        <source>Define the IP address of your Nagios installation in the &lt;code&gt;.env&lt;/code&gt; file</source>
+        <target><![CDATA[__Define the IP address of your Nagios installation in the <code>.env</code> file]]></target>
+      </trans-unit>
+      <trans-unit id="IR695G." resname="Copy /extras/nagios_plugin/check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)">
+        <source>Copy /extras/nagios_plugin/check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)</source>
+        <target>__Copy /extras/nagios_plugin/check_printerwatchdog to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)</target>
+      </trans-unit>
+      <trans-unit id="18Ju0.u" resname="Create a service command template">
+        <source>Create a service command template</source>
+        <target>__Create a service command template</target>
+      </trans-unit>
+      <trans-unit id="UQ..coD" resname="Create a service check on your host">
+        <source>Create a service check on your host</source>
+        <target>__Create a service check on your host</target>
+      </trans-unit>
+      <trans-unit id="cFbODtB" resname="Command Template">
+        <source>Command Template</source>
+        <target>__Command Template</target>
+      </trans-unit>
+      <trans-unit id="ccpbbI9" resname="Service Template">
+        <source>Service Template</source>
+        <target>__Service Template</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

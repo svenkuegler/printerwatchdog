@@ -26,3 +26,5 @@
 /.vagrant/
 /.debug/
 /public/apc.php
+
+/*.sql

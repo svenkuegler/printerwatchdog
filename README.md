@@ -9,6 +9,7 @@ PrinterWatchdog is a small website project to monitor and notify printer in your
  * get notification via EMail
  * configure your own notification level
  * custom printer images
+ * Monitoring API for Nagios
 
 ## Screenshots
 __Dashbord Overview__    
@@ -32,7 +33,7 @@ __User Management__
 
 ## Installation / Update
 ### Requirements
- * &gt; PHP 7.1 
+ * &gt; PHP 7.2
  * SNMP Module
  * LDAP Module (if you want to use LDAP Auth)
 
@@ -156,6 +157,37 @@ LDAP_QUERY_STRING='(&(objectCategory=person)(objectClass=user))'
 
 *Again: If you dont want to use LDAP leave __LDAP_SERVER=null__*
 
+---
+
+### Monitoring
+PrinterWatchdog comes with an integrated api for external monitoring tools like Nagios. 
+The page http://mydomain/monitoring/status returns the state of monitored printers in json format. 
+You can define the notification level on Notification page. Define the ip(s) of your monitoring Tool(s) as allowed 
+ip(s) in .env file to increase the security.
+
+#### Configure Nagios
+ * Define the IP address of your Nagios installation in the .env file
+ * Copy <code>/extras/nagios_plugin/check_printerwatchdog</code> to your Nagios plugins folder. (eg. /var/lib/nagios/plugins)
+ * Create a service command template
+ * Create a service check on your host
+
+__Command Template__
+```text
+define command {
+        command_name    check_printerwatchdog
+        command_line    $USER1$/check_printerwatchdog $ARG1$
+        }
+```
+
+__Service Template__
+```text
+define service{
+        use                     generic-service
+        host_name               mydomain.com
+        service_description     My PrinterWatchdog Install
+        check_command           check_printerwatchdog!http://mydomain.com/monitoring/status
+        }
+```
 
 
 ## Development
@@ -172,8 +204,16 @@ If the machine is up and running open: [http://192.168.1.44](http://192.168.1.44
 
 ---
 
-#### E-Mail Tests using Mailslurper
-I use [Mailslurper](https://mailslurper.com/) to test the Mails. Default values in .env file pointed to Mailslurper. 
+#### E-Mail Tests using MailCatcher
+I switched the default TestSMTP Server to MailCatcher (More stable and better to check HTML Mails, Mailslurper is still available). By Default MailCatcher will be installed, configured and started via Vagrant. The values in .env file pointed to MailCatcher.
+
+##### Usage:
+Open your browser and navigate to: [http://192.168.1.44:1080](http://192.168.1.44:1080)
+
+---
+
+#### E-Mail Tests using Mailslurper (deprecated, but still available)
+To use [Mailslurper](https://mailslurper.com/) to test the Mails.  
 
 > MailSlurper is a small SMTP mail server that slurps mail into oblivion! MailSlurper is perfect for individual developers or small teams writing mail-enabled applications that wish to test email functionality without the risk or hassle of installing and configuring a full blown email server. It's simple to use! Simply setup MailSlurper, configure your code and/or application server to send mail through the address where MailSlurper is running, and start sending emails! MailSlurper will capture those emails into a database for you to view at your leisure.
 >
@@ -192,6 +232,9 @@ Now you can open [http://192.168.1.44:8080](http://192.168.1.44:8080) to look in
 ---
 
 #### Translation
+Help to translate on [POEditor](https://poeditor.com/join/project/5C3qSMNOPo).   
+Join the public project: [https://poeditor.com/join/project/5C3qSMNOPo](https://poeditor.com/join/project/5C3qSMNOPo)
+
 Find the Translation files in __/translations/*__ folder.
 
 ---
@@ -205,7 +248,7 @@ $ php bin/phpunit
 ## Credits
 List of used frameworks and libraries.
 
- * Symfony v4.3.2
+ * Symfony v4.3.8
  * Bootstrap v4.3.1
  * Font Awesome Free v5.9.0
  * jQuery v3.4.1

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Access Denied'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mt-5 mb-5">
+                <h1>
+                    <span class="fa-stack fa-2x">
+                      <i class="fas fa-circle fa-stack-2x"></i>
+                      <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                    </span><br>
+                    {{'Access Denied'|trans}}
+                </h1>
+            </div>
+
+            <div class="col-12 text-center mb-5">
+                {% trans with {'%DASHBOARD_URL%': path('dashboard')} %}
+                    You don't have the permission to access the requested page.
+                {% endtrans %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
