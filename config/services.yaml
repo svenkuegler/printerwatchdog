@@ -70,6 +70,7 @@ parameters:
 
     # Monitoring
     monitoring.allowed_ips: '%env(json:MONITORING_ALLOWED_IPS)%'
+    monitoring.last_check_warning_at: '%env(MONITORING_LAST_CHECK_WARNING_AT)%'
 
     # Routing information
     router.request_context.host: '%env(APP_URL)%'

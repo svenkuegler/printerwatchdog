@@ -83,18 +83,27 @@ class MonitoringController extends AbstractController
                 $summary->getPrinterTonerDanger()
             ));
 
-            if($summary->getPrinterTonerDanger() > 0) {
-                $state
-                    ->setStatus('CRITICAL')
-                    ->setMessage(sprintf('%s printer with toner level Danger', $summary->getPrinterTonerDanger()));
+            $lastCheck = new \DateTime($summary->getLastCheck());
+            $maxCheckDelay = (new \DateTime('now'))->sub( new \DateInterval($this->getParameter('monitoring.last_check_warning_at')));
 
-            } elseif ($summary->getPrinterTonerWarning() > 0) {
+            if($lastCheck < $maxCheckDelay) {
                 $state
                     ->setStatus('WARNING')
-                    ->setMessage(sprintf('%s printer with toner level Warning', $summary->getPrinterTonerWarning()));
-
+                    ->setMessage( (new \DateTime('now'))->diff($lastCheck)->format("last check %d days, %H hours %i minutes %s seconds ago"));
             } else {
-                $state->setStatus('OK')->setMessage('everything looks fine');
+                if($summary->getPrinterTonerDanger() > 0) {
+                    $state
+                        ->setStatus('CRITICAL')
+                        ->setMessage(sprintf('%s printer with toner level Danger', $summary->getPrinterTonerDanger()));
+
+                } elseif ($summary->getPrinterTonerWarning() > 0) {
+                    $state
+                        ->setStatus('WARNING')
+                        ->setMessage(sprintf('%s printer with toner level Warning', $summary->getPrinterTonerWarning()));
+
+                } else {
+                    $state->setStatus('OK')->setMessage('everything looks fine');
+                }
             }
         } else {
             $state->setStatus('UNKNOWN')->setMessage("monitoring is disabled");
